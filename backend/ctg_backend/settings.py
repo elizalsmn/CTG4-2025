@@ -11,10 +11,32 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from utils.properties import load_properties, get_mongo_uri
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+PROPS = load_properties(BASE_DIR / "config" / "app.properties")
 
+DB_ENGINE = PROPS.get("db.engine", "sqlite").lower()
+
+if DB_ENGINE in {"mongo", "mongodb", "djongo"}:
+    DATABASES = {
+        "default": {
+            "ENGINE": "djongo",
+            "NAME": PROPS.get("db.name", "ctgdb"),   # logical database
+            "CLIENT": {
+                "host": PROPS.get("db.uri"),         # FULL URI goes here
+            },
+            "ENFORCE_SCHEMA": False,
+        }
+    }
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -67,17 +89,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ctg_backend.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
