@@ -1,0 +1,188 @@
+.login-container {
+  height: 100vh; /* Use viewport height instead of 100% */
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.login-card {
+  background-color: #f5f5f5;
+  border-radius: 0;
+  padding: 60px 40px;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15vh;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  top:-10vh;
+}
+
+.welcome-text {
+  /* margin-top: 2vh; */
+  margin-bottom: 3vh;
+  text-align: left;
+  margin-right: 15vh;
+}
+
+.welcome-text h1 {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.2;
+  color: #333;
+}
+
+.scan-qr-btn {
+  background-color: #6b9b7a;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 18px 40px;
+  font-size: 18px;
+  font-weight: 500;
+  width: 40vw; /* Make it same width as form-section */
+  max-width: none; /* Remove max-width constraint */
+  margin-bottom: 40px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start; /* Align to the left */
+  margin-left: 0; /* Remove any left margin */
+}
+
+.scan-qr-btn:hover {
+  background-color: #5a8a69;
+}
+
+.signup-text {
+  bottom: 25vh;
+  color: #666;
+  font-size: 16px;
+  text-align: center;
+  width: 80vw; /* Match the button width */
+  align-self: center; /* Center it horizontally */
+}
+
+.signup-link {
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+.form-section{
+    margin-top: 20vh;
+    width: 80vw;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+.login-container {
+  height: 100vh; /* Use viewport height instead of 100% */
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  overflow: hidden; /* Prevent scrolling */
+}
+
+.login-card {
+  background-color: #f5f5f5;
+  border-radius: 0;
+  padding: 40px 30px;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15vh;
+  overflow: hidden; /* Prevent scrolling */
+  padding-top: 15vh;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  position: relative;
+  top: -15vh;
+}
+
+.welcome-text {
+  margin-top: 15vh;
+  margin-bottom: 3vh;
+  text-align: left;
+  margin-right: 15vh;
+}
+
+.welcome-text h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.2;
+  color: #333;
+}
+
+.scan-qr-btn {
+  background-color: #6b9b7a;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 16px 30px;
+  font-size: 16px;
+  font-weight: 500;
+  width: 80vw; /* Make it same width as form-section */
+  max-width: none; /* Remove max-width constraint */
+  margin-bottom: 40px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  align-self: flex-start; /* Align to the left */
+  margin-left: 0; /* Remove any left margin */
+}
+
+.scan-qr-btn:hover {
+  background-color: #5a8a69;
+}
+
+.signup-text {
+  bottom: 25vh;
+  color: #666;
+  font-size: 16px;
+  text-align: center;
+  width: 80vw; /* Match the button width */
+  align-self: center; /* Center it horizontally */
+}
+
+.signup-link {
+  color: #333;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
+
+.form-section{
+    margin-top: 5vh;
+    width: 80vw;
+}
+}
