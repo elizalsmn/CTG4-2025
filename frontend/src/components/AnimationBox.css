@@ -1,0 +1,26 @@
+.animationbox-template {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 400px;
+}
+
+.animation-placeholder-box {
+  width: 100%;
+  height: 200px;
+  /* background-color: #e5e5e5;
+  border: 2px dashed #ccc; */
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.animation-placeholder-text {
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+}

@@ -10,6 +10,7 @@ import {
   FaPlay,     
   FaStop,     
 } from "react-icons/fa";
+import AnimationBoxTemplate from "./AnimationBox";
 
 function TakeVideo() {
   const videoRef = useRef(null);
@@ -145,9 +146,16 @@ function TakeVideo() {
       <p className="assignment-label">Assignment Details</p>
       <h3 className="assignment-title">Lesson 1: Speech Syllabus B</h3>
 
+
+      <AnimationBoxTemplate />
+
+      {/* Camera Check */}
+      <p className="camera-check-text">Turn on your camera and microphone!</p>
+
       {/* Camera */}
       <div className="video-box">
         <video ref={videoRef} autoPlay playsInline muted />
+        <p className="video-placeholder">Video Recording</p>
       </div>
 
       {/* Controls */}
@@ -159,7 +167,7 @@ function TakeVideo() {
         {camOn ? <FaVideo /> : <FaVideoSlash />}
       </button>
 
-      {recordState === "idle" && (
+      {/* {recordState === "idle" && (
         <button onClick={startRecording} className="icon-btn">
           <FaCircle />
         </button>
@@ -169,7 +177,7 @@ function TakeVideo() {
         <button onClick={pauseRecording} className="icon-btn">
           <FaPause />
         </button>
-      )}
+      )} */}
 
       {recordState === "paused" && (
         <button onClick={resumeRecording} className="icon-btn">
@@ -201,9 +209,7 @@ function TakeVideo() {
       {/* Footer */}
       <div className="footer-buttons">
         <button className="cancel-btn">Cancel</button>
-        <button className="submit-btn" onClick={uploadVideo}>
-          Submit
-        </button>
+        <button className="start-btn">Start</button>
       </div>
     </div>
   );

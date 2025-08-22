@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Signup from './components/Signup';
 import Signup2 from './components/Signup2';
 import TakeVideo from './components/TakeVideo';
+import AsgInfo from './components/AsgInfo'
+import LessonsLibrary from './components/LessonsLibrary'
 import AsgGraded from './components/AsgGraded'
 import AsgUp from './components/AsgUp'
 import AsgUpVid from './components/AsgUpVid'
@@ -14,9 +16,10 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/AsgUpVid" element={<AsgUpVid />}/>
-          <Route path="/AsgUp" element={<AsgUp />}/>
-          <Route path="/AsgGraded" element={<AsgGraded />} />
+          <Route path="/LessonsLibrary" element={<LessonsLibrary />}/>
+          <Route path="/AsgInfo" element={<AsgInfo status="video" />}/>
+          <Route path="/AsgInfo" element={<AsgInfo status="upload" />}/>
+          <Route path="/AsgInfo" element={<AsgInfo status="graded" />}/>
           <Route path="/TakeVideo" element={<TakeVideo />} />
           <Route path="/" element={<Signup />} />
           <Route path="/signup2" element={<Signup2 />} />
