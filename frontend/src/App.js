@@ -7,6 +7,7 @@ import TakeVideo from './components/TakeVideo';
 import AsgGraded from './components/AsgGraded'
 import AsgUp from './components/AsgUp'
 import AsgUpVid from './components/AsgUpVid'
+import Leaderboard from './components/Leaderboard';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/TakeVideo" element={<TakeVideo />} />
           <Route path="/" element={<Signup />} />
           <Route path="/signup2" element={<Signup2 />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
         </Routes>
       </div>
     </Router>
