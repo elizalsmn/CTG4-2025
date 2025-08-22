@@ -1,13 +1,4 @@
-.upasg-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10% 10%;
-  font-family: "Inter", sans-serif;
-  background: #fff;
-  min-height: 100vh;
-}
-
+/* ==== Common Styles ==== */
 .assignment-label {
   font-size: 12px;
   color: #888;
@@ -24,7 +15,6 @@
 .icon-circle {
   width: 90px;
   height: 90px;
-  background: #ffe1d6;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -88,7 +78,6 @@
   margin-top: auto;
   width: 100%;
   display: flex;
-  justify-content: space-between;
   gap: 12px;
 }
 
@@ -103,6 +92,50 @@
   flex: 1;
 }
 
+/* ==== Graded Page ==== */
+.graded-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10% 10%;
+  font-family: "Inter", sans-serif;
+  background: #fff;
+  min-height: 100vh;
+}
+.grade-box {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 16px;
+}
+.grade-label {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 3px;
+}
+.grade-value {
+  font-size: 18px;
+  font-weight: 600;
+}
+.grade-score {
+  color: #4FA07F;
+}
+.graded-page .footer {
+  justify-content: center;
+}
+.graded-page .cancel-btn {
+  max-width: 320px;
+}
+
+/* ==== Upload Page ==== */
+.upasg-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10% 10%;
+  font-family: "Inter", sans-serif;
+  background: #fff;
+  min-height: 100vh;
+}
 .upload-btn {
   background: #4FA07F;
   color: #fff;
@@ -113,7 +146,31 @@
   padding: 12px;
   flex: 1;
 }
-
 .upload-btn:active {
-  background: #6bc09a; /* lighter green on hover */
+  background: #6bc09a;
+}
+
+/* ==== Video Upload Page ==== */
+.asgupvid-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10% 10%;
+  font-family: "Inter", sans-serif;
+  background: #fff;
+  min-height: 100vh;
+}
+.start-btn {
+  background: #4FA07F;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  flex: 1;
+  transition: background 0.2s ease;
+}
+.start-btn:active {
+  background: #6bc09a;
 }
