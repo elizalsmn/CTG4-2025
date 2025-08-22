@@ -6,9 +6,6 @@ import Signup2 from './components/Signup2';
 import TakeVideo from './components/TakeVideo';
 import AsgInfo from './components/AsgInfo'
 import LessonsLibrary from './components/LessonsLibrary'
-import AsgGraded from './components/AsgGraded'
-import AsgUp from './components/AsgUp'
-import AsgUpVid from './components/AsgUpVid'
 import Leaderboard from './components/Leaderboard';
 
 function App() {
