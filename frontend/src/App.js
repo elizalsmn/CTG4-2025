@@ -14,6 +14,8 @@ function App() {
         <Routes>
           <Route path="/LessonsLibrary" element={<LessonsLibrary />}/>
           <Route path="/AsgInfo" element={<AsgInfo status="video" />}/>
+          <Route path="/AsgInfo" element={<AsgInfo status="upload" />}/>
+          <Route path="/AsgInfo" element={<AsgInfo status="graded" />}/>
           <Route path="/TakeVideo" element={<TakeVideo />} />
           <Route path="/" element={<Signup />} />
           <Route path="/signup2" element={<Signup2 />} />
