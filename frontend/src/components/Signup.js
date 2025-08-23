@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Scanner } from '@yudiel/react-qr-scanner';
 import './Signup.css';
 import reachLogo from '../assets/reach-logo.png';
@@ -10,12 +9,53 @@ function Login() {
   const [camLoading, setCamLoading] = useState(false);
   const [camError, setCamError] = useState(null);
 
-  const handleScan = (result) => {
-    if (result) {
-      console.log('QR:', result[0]?.rawValue || result);
-      setShowCamera(false);
+// ...existing code...
+
+const handleScan = (result) => {
+  if (!result) return;
+  const raw = result[0]?.rawValue || result;
+  
+  try {
+    // Try to parse as JSON
+    const qrData = JSON.parse(raw);
+    
+    // Check if organization matches
+    if(qrData.organization){
+        if (qrData.organization === "REACH_HK") {
+        console.log('Valid REACH QR:', qrData);
+        setShowCamera(false);
+        setCamError(null); // Clear any errors on success
+        
+        // Handle different user types
+        if (qrData.username && qrData.username.startsWith('admin')) {
+          console.log('Admin login:', qrData.username);
+          // TODO: Navigate to admin dashboard
+        } else if (qrData.username && qrData.username.startsWith('teacher')) {
+          console.log('Teacher login:', qrData.username);
+          // TODO: Navigate to teacher dashboard
+        } else {
+          console.log('Student login:', qrData.username);
+          // TODO: Navigate to student dashboard
+        }
+      } else {
+        setShowCamera(false); // Close camera to show error
+        setCamError('Invalid QR code.');
+        console.log('Invalid organization in QR:', qrData.organization);
+      }
+    }else{
+      setShowCamera(false); // Close camera to show error
+      setCamError('Invalid QR code.');
+      console.log('No organization field in QR data');
     }
-  };
+  
+  } catch (error) {
+    // Not valid JSON
+    setShowCamera(false); // Close camera to show error
+    setCamError('Invalid QR code.');
+    console.log('JSON parsing failed:', error);
+  }
+};
+
 
   const handleError = (err) => {
     console.error(err);
@@ -66,8 +106,11 @@ function Login() {
           constraints={{ facingMode: 'environment' }}
           style={{ width: '100%', maxWidth: 500 }}
         />
-        <button
-          onClick={() => setShowCamera(false)}
+         <button
+          onClick={() => {
+            setShowCamera(false);
+            setCamError(null); // Clear errors when manually closing
+          }}
           style={{
             marginTop: 20,
             padding: '12px 28px',
