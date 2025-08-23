@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useTranslation } from 'react-i18next';
 import "./HomePage.css";
 import UserMenu from "./UserMenu";
 import TranslationBubble from "./TranslationBubble";
@@ -79,7 +78,6 @@ const HomePage = () => {
   // ✅ use the custom hook
   const { bubble, handlePressStart, handlePressEnd } = useTranslationBubble();
   const navigate = useNavigate();
-  const { t } = useTranslation();
 
   return (
     <div className="home-page">
@@ -104,32 +102,32 @@ const HomePage = () => {
         {/* Attendance + Submissions */}
         <div className="row-cards">
           <div className="info-card chart-card hover-card">
-            <CircularProgress percentage={85} color="#5f8f78" label={t('attendance')} />
+            <CircularProgress percentage={85} color="#436448ff" label="Attendance" />
             <div className="hover-details">
-              <p>{t('classes_attended', { done: 17, total: 20 })}</p>
+              <p>Classes attended: 17/20</p>
             </div>
           </div>
 
-          <div className="info-card chart-card hover-card">
-            <CircularProgress percentage={(8 / 10) * 100} color="#df8d53" label={t('submissions')} />
+          <div className="info-card-2 chart-card hover-card">
+            <CircularProgress percentage={(8 / 10) * 100} color="#a46131ff" label="Submissions" />
             <div className="hover-details">
-              <p>{t('assignments_submitted', { done: 8, total: 10 })}</p>
+              <p>Assignments submitted: 8/10</p>
             </div>
           </div>
         </div>
 
         {/* Performance Summary */}
         <div className="PerformanceSummary">
-          <h2>{t('performance_summary')}</h2>
+          <h2>Performance Summary</h2>
           <div className="performance-box">
-            <p>{t('ai_placeholder')}</p>
-            <p>{t('ai_placeholder')}</p>
+            <p>place holder for AI analytics :D</p>
+            <p>place holder for AI analytics :D</p>
           </div>
         </div>
 
         {/* Latest Submission */}
         <div className="PerformanceSummary">
-          <h2>{t('latest_submission')}</h2>
+          <h2>Latest Submission</h2>
           <div className="lessons-list">
             {lessons.map((lesson) => (
               <LessonCard

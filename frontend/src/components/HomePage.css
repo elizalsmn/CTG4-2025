@@ -154,7 +154,7 @@ margin: 0 0 12px 0;
 }
 
 .performance-box {
-  background: #fff;              /* white background */
+  background: #000000;              /* white background */
   border-radius: 10px;           /* rounded corners */
   padding: 16px 20px;                 /* spacing inside */
   box-shadow: 0 2px 6px rgba(0,0,0,0.06); /* subtle shadow */
