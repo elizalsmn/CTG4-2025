@@ -11,6 +11,7 @@ import RedeemCoupon from './components/RedeemCoupon';
 import HomeAdmin from './components/HomeAdmin';
 import Profile from './components/Profile';
 import SpeechLesson from './components/SpeechLesson';
+import AsgGraded from './components/AsgGraded';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/HomeAdmin" element={<HomeAdmin />}/>
           <Route path="/SpeechLesson" element={<SpeechLesson />} />
           <Route path="/profile" element={<Profile />}/>
+          <Route path="/AsgGraded" element={<AsgGraded />}/>
         </Routes>
       </div>
     </Router>

@@ -4,7 +4,6 @@ import "./AsgInfo.css";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import Back from "./Back";
-import UserMenu from "./UserMenu";
 
 function AsgInfo({ status }) {
   // status: "graded" | "upload" | "video"

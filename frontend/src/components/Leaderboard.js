@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaArrowLeft, FaCrown } from 'react-icons/fa';
+import {  FaCrown } from 'react-icons/fa';
 import './Leaderboard.css';
 import AvatarPlaceholder from '../assets/avatar-placeholder.jpg';
 import { useNavigate } from "react-router-dom";
