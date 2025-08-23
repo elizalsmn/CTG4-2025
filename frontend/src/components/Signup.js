@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Scanner } from '@yudiel/react-qr-scanner';
 import './Signup.css';
 import reachLogo from '../assets/reach-logo.png';
@@ -10,16 +11,25 @@ function Login() {
   const [camLoading, setCamLoading] = useState(false);
   const [camError, setCamError] = useState(null);
   const navigate = useNavigate();
-
-// ...existing code...
+  const { t, i18n } = useTranslation();
 
 const handleScan = (result) => {
   if (!result) return;
   const raw = result[0]?.rawValue || result;
   
+  // Debug logs to see exactly what we're getting
+  console.log('Raw QR content:', raw);
+  console.log('Raw QR content length:', raw.length);
+  console.log('Raw QR content as bytes:', Array.from(raw).map(c => c.charCodeAt(0)));
+  
   try {
+    // Clean the string - remove any invisible characters
+    const cleanedRaw = raw.trim().replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
+    console.log('Cleaned content:', cleanedRaw);
+    
     // Try to parse as JSON
-    const qrData = JSON.parse(raw);
+    const qrData = JSON.parse(cleanedRaw);
+    console.log('Parsed QR data:', qrData);
     
     // Check if organization matches
     if(qrData.organization){
@@ -31,32 +41,34 @@ const handleScan = (result) => {
         // Handle different user types
         if (qrData.username && qrData.username.startsWith('admin')) {
           console.log('Admin login:', qrData.username);
-          // TODO: Navigate to admin dashboard
+          navigate('/HomeAdmin');
         } else if (qrData.username && qrData.username.startsWith('teacher')) {
           console.log('Teacher login:', qrData.username);
           // TODO: Navigate to teacher dashboard
         } else {
           console.log('Student login:', qrData.username);
-          navigate('/HomePage'); 
+          navigate('/HomePage');
         }
       } else {
         setShowCamera(false); // Close camera to show error
-        setCamError('Invalid QR code.');
+        setCamError('Invalid organization: ' + qrData.organization);
         console.log('Invalid organization in QR:', qrData.organization);
       }
     }else{
       setShowCamera(false); // Close camera to show error
-      setCamError('Invalid QR code.');
+      setCamError('Invalid QR code - missing organization.');
       console.log('No organization field in QR data');
     }
   
   } catch (error) {
     // Not valid JSON
     setShowCamera(false); // Close camera to show error
-    setCamError('Invalid QR code.');
+    setCamError('Invalid QR code format: ' + error.message);
     console.log('JSON parsing failed:', error);
+    console.log('Failed to parse:', raw);
   }
 };
+
 
 
   const handleError = (err) => {
@@ -145,10 +157,32 @@ const handleScan = (result) => {
         maxWidth: 760,
         borderRadius: 48,
         padding: '6vh 6vw 4vh',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  position: 'relative',
       }}>
+        {/* Language toggle */}
+        <button
+          type="button"
+          onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'zh' : 'en')}
+          style={{
+            position: 'absolute',
+            top: 16,
+            right: 20,
+            background: '#e7e9ec',
+            color: '#222',
+            border: 'none',
+            borderRadius: 20,
+            padding: '6px 14px',
+            fontSize: 14,
+            fontWeight: 600,
+            cursor: 'pointer',
+            letterSpacing: '.5px'
+          }}
+        >
+          {i18n.language === 'en' ? '中文' : 'EN'}
+        </button>
         <img
           src={reachLogo}
           alt="Project Reach"
@@ -171,8 +205,8 @@ const handleScan = (result) => {
             letterSpacing: '-0.5px',
             marginBottom: '4vh'
         }}>
-          <div>Welcome</div>
-          <div>Back!</div>
+          <div>{t('welcome_line1')}</div>
+          <div>{t('welcome_line2')}</div>
         </div>
 
         <div style={{
@@ -183,16 +217,16 @@ const handleScan = (result) => {
           flexWrap: 'wrap',
           marginBottom: '3vh'
         }}>
-          {[{ label: 'Login', icon: <FaFingerprint size="34%" /> },
-            { label: 'Add Friend', icon: <FaUser size="34%" /> }].map(btn => (
+          {[{ label: t('login'), key: 'login', icon: <FaFingerprint size="34%" /> },
+            { label: t('add_friend'), key: 'add_friend', icon: <FaUser size="34%" /> }].map(btn => (
             <button
-              key={btn.label}
+              key={btn.key}
               onClick={openCamera}
               disabled={camLoading}
               style={{
                 flex: '0 1 46%',
                 aspectRatio: '1 / 1',
-                background: btn.label === 'Login' ? '#5f8f78' : '#df8d53',
+                background: btn.key === 'login' ? '#5f8f78' : '#df8d53',
                 border: 'none',
                 borderRadius: 12,
                 color: '#fff',
@@ -230,7 +264,7 @@ const handleScan = (result) => {
                 color: '#fff',
                 lineHeight: 1.1
               }}>
-                {camLoading ? 'Opening...' : btn.label}
+                {camLoading ? t('opening') : btn.label}
               </span>
             </button>
           ))}
@@ -254,8 +288,8 @@ const handleScan = (result) => {
           textAlign: 'center',
           fontWeight: 400
         }}>
-          Don't have an account?{' '}
-          <span style={{ fontWeight: 700, cursor: 'pointer' }}>Sign Up</span>
+          {t('signup_prompt')}{' '}
+          <span style={{ fontWeight: 700, cursor: 'pointer' }}>{t('signup_cta')}</span>
         </div>
       </div>
     </div>
