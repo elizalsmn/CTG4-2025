@@ -28,7 +28,7 @@ const lessons = [
   },
 ];
 
-const CircularProgress = ({ size = 100, strokeWidth = 8, percentage = 75, color = "#4fa07f", label = "" }) => {
+const CircularProgress = ({ size = 100, strokeWidth = 8, percentage = 75, color, label = "" }) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const [offset, setOffset] = useState(circumference);
@@ -43,7 +43,7 @@ const CircularProgress = ({ size = 100, strokeWidth = 8, percentage = 75, color 
   return (
     <div className="circular-wrapper">
       <svg width={size} height={size} className="circular-progress">
-        <circle stroke="#e6e6e6" fill="transparent" strokeWidth={strokeWidth} r={radius} cx={size / 2} cy={size / 2} />
+        <circle stroke="#e3e3e3ff" fill="transparent" strokeWidth={strokeWidth} r={radius} cx={size / 2} cy={size / 2} />
         <circle
           stroke={color}
           fill="transparent"
@@ -84,7 +84,10 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <header className="home-header">
-  <h1>{t('welcome_back_learn')}</h1>
+        <div className="home-text">
+          <h1> Shannon Sie 👧🏻 </h1>
+          <p style={{fontSize: "12px", color: "grey"}}> Pre Kindergaten (K2)  </p>
+        </div>
         <div className="profile-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="28" height="28" fill="#4fa07f">
             <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm89.6 
