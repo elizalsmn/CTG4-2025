@@ -2,8 +2,10 @@ import React from 'react';
 import { FaArrowLeft, FaCrown } from 'react-icons/fa';
 import './Leaderboard.css';
 import AvatarPlaceholder from '../assets/avatar-placeholder.jpg';
+import { useNavigate } from "react-router-dom";
 
 function Leaderboard() {
+  const navigate = useNavigate();
   const leaderboardData = [
     { id: 1, name: "Bryan Wolf", points: 43, avatar: AvatarPlaceholder },
     { id: 2, name: "Meghan Jes...", points: 40, avatar: AvatarPlaceholder },
@@ -21,7 +23,7 @@ function Leaderboard() {
     <div className="leaderboard-container">
       {/* Header */}
       <div className="leaderboard-header">
-        <FaArrowLeft className="back-arrow" />
+        <FaArrowLeft onClick={() => navigate("/HomePage")} className="back-arrow" />
         <h1>School Leaderboard</h1>
       </div>
 

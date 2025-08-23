@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import "./RedeemCoupon.css";
+import {FaArrowLeft} from 'react-icons/fa';
 import CouponCard from "./CouponCard";
 import MyCouponCard from "./MyCouponCard";
 import CouponDetail from "./CouponDetail";
+import { useNavigate } from "react-router-dom"; 
 
 function RedeemCoupon() {
+  const navigate = useNavigate();
   const [selectedCoupon, setSelectedCoupon] = useState(null);
 
   // Available coupons (to redeem with points)
@@ -65,6 +68,7 @@ function RedeemCoupon() {
   return (
     <div className="redeem-page">
       {/* Available Coupons */}
+      <FaArrowLeft onClick={() => navigate("/HomePage")} className="back-arrow" />
       <h2 className="page-title">
         Available Coupons
         <p className="page-subtitle">Available to Redeem: {availableCoupons.length}</p>
