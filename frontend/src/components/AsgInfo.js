@@ -95,7 +95,7 @@ function AsgInfo({ status }) {
           </button>
         )}
       </div>
-      <UserMenu />
+      {/* <UserMenu /> */}
     </div>
   );
 }
