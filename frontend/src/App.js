@@ -26,7 +26,6 @@ function App() {
           <Route path="/signup2" element={<Signup2 />} />
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/RedeemCoupon" element={<RedeemCoupon />}/>
-          <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/HomePage" element={<HomePage />}/>
           <Route path="/HomeAdmin" element={<HomeAdmin />}/>
           <Route path="/SpeechLesson" element={<SpeechLesson />} />

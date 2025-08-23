@@ -3,9 +3,11 @@ import "./RedeemCoupon.css";
 import CouponCard from "./CouponCard";
 import MyCouponCard from "./MyCouponCard";
 import CouponDetail from "./CouponDetail";
+import { useTranslation } from 'react-i18next';
 
 function RedeemCoupon() {
   const [selectedCoupon, setSelectedCoupon] = useState(null);
+  const { t } = useTranslation();
 
   // Available coupons (to redeem with points)
   const availableCoupons = [
@@ -66,8 +68,8 @@ function RedeemCoupon() {
     <div className="redeem-page">
       {/* Available Coupons */}
       <h2 className="page-title">
-        Available Coupons
-        <p className="page-subtitle">Available to Redeem: {availableCoupons.length}</p>
+        {t('rc_available_coupons')}
+        <p className="page-subtitle">{t('rc_available_to_redeem', { count: availableCoupons.length })}</p>
       </h2>
 
       <div className="coupons-list">
@@ -82,13 +84,13 @@ function RedeemCoupon() {
       </div>
 
       <div className="points-footer">
-        <p>You have 1500 Points</p>
+        <p>{t('rc_points_you_have', { points: 1500 })}</p>
       </div>
 
       {/* My Coupons */}
       <h2 className="page-title">
-        My Coupons
-        <p className="page-subtitle">Available to Use: {myCoupons.length}</p>
+        {t('rc_my_coupons')}
+        <p className="page-subtitle">{t('rc_available_to_use', { count: myCoupons.length })}</p>
       </h2>
 
       <div className="coupons-list">

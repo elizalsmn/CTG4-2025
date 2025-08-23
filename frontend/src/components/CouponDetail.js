@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./CouponDetail.css";
 import confetti from "canvas-confetti";
+import { useTranslation } from 'react-i18next';
 
 const CouponDetail = ({ coupon, onClose, mode = "redeem" }) => {
   const [redeemed, setRedeemed] = useState(false);
+  const { t } = useTranslation();
 
   if (!coupon) return null;
 
@@ -37,19 +39,18 @@ const CouponDetail = ({ coupon, onClose, mode = "redeem" }) => {
             {/* Redeem Mode */}
             {mode === "redeem" && !redeemed && (
                 <button className="redeem-btn" onClick={handleRedeem}>
-                Redeem
+                {t('coupon_redeem_btn')}
                 </button>
             )}
 
             {mode === "redeem" && redeemed && (
-                <div className="qr-placeholder">[QR]</div>
+                <div className="qr-placeholder">{t('coupon_qr_placeholder')}</div>
             )}
 
             {/* Use Mode → always show QR */}
-            {mode === "use" && <div className="qr-placeholder">[QR]</div>}
+      {mode === "use" && <div className="qr-placeholder">{t('coupon_qr_placeholder')}</div>}
         </div>
-
-        <p className="valid">Valid until {coupon.valid}</p>
+    <p className="valid">{t('coupon_valid_until', { date: coupon.valid })}</p>
       </div>
 
       <button className="close-btn" onClick={onClose}>✕</button>

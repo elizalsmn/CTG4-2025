@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import "./HomePage.css";
 import UserMenu from "./UserMenu";
 import TranslationBubble from "./TranslationBubble";
@@ -78,11 +79,12 @@ const HomePage = () => {
   // ✅ use the custom hook
   const { bubble, handlePressStart, handlePressEnd } = useTranslationBubble();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="home-page">
       <header className="home-header">
-        <h1>Welcome back, let's learn!</h1>
+  <h1>{t('welcome_back_learn')}</h1>
         <div className="profile-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="28" height="28" fill="#4fa07f">
             <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm89.6 
@@ -99,32 +101,32 @@ const HomePage = () => {
         {/* Attendance + Submissions */}
         <div className="row-cards">
           <div className="info-card chart-card hover-card">
-            <CircularProgress percentage={85} color="#5f8f78" label="Attendance" />
+            <CircularProgress percentage={85} color="#5f8f78" label={t('attendance')} />
             <div className="hover-details">
-              <p>Classes attended: 17/20</p>
+              <p>{t('classes_attended', { done: 17, total: 20 })}</p>
             </div>
           </div>
 
           <div className="info-card chart-card hover-card">
-            <CircularProgress percentage={(8 / 10) * 100} color="#df8d53" label="Submissions" />
+            <CircularProgress percentage={(8 / 10) * 100} color="#df8d53" label={t('submissions')} />
             <div className="hover-details">
-              <p>Assignments submitted: 8/10</p>
+              <p>{t('assignments_submitted', { done: 8, total: 10 })}</p>
             </div>
           </div>
         </div>
 
         {/* Performance Summary */}
         <div className="PerformanceSummary">
-          <h2>Performance Summary</h2>
+          <h2>{t('performance_summary')}</h2>
           <div className="performance-box">
-            <p>place holder for AI analytics :D</p>
-            <p>place holder for AI analytics :D</p>
+            <p>{t('ai_placeholder')}</p>
+            <p>{t('ai_placeholder')}</p>
           </div>
         </div>
 
         {/* Latest Submission */}
         <div className="PerformanceSummary">
-          <h2>Latest Submission</h2>
+          <h2>{t('latest_submission')}</h2>
           <div className="lessons-list">
             {lessons.map((lesson) => (
               <LessonCard

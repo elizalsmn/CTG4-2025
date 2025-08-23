@@ -1,9 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { FaArrowLeft, FaCrown } from 'react-icons/fa';
 import './Leaderboard.css';
 import AvatarPlaceholder from '../assets/avatar-placeholder.jpg';
 
 function Leaderboard() {
+  const { t } = useTranslation();
   const leaderboardData = [
     { id: 1, name: "Bryan Wolf", points: 43, avatar: AvatarPlaceholder },
     { id: 2, name: "Meghan Jes...", points: 40, avatar: AvatarPlaceholder },
@@ -22,7 +24,7 @@ function Leaderboard() {
       {/* Header */}
       <div className="leaderboard-header">
         <FaArrowLeft className="back-arrow" />
-        <h1>School Leaderboard</h1>
+  <h1>{t('school_leaderboard')}</h1>
       </div>
 
       {/* Top 3 Podium */}
@@ -34,7 +36,7 @@ function Leaderboard() {
           </div>
           <div className="position-number">2</div>
           <div className="name">{leaderboardData[1].name}</div>
-          <div className="points">{leaderboardData[1].points} pts</div>
+          <div className="points">{t('points_suffix', { count: leaderboardData[1].points })}</div>
         </div>
 
         {/* First Place */}
@@ -45,7 +47,7 @@ function Leaderboard() {
           </div>
           <div className="position-number">1</div>
           <div className="name">{leaderboardData[0].name}</div>
-          <div className="points">{leaderboardData[0].points} pts</div>
+          <div className="points">{t('points_suffix', { count: leaderboardData[0].points })}</div>
         </div>
 
         {/* Third Place */}
@@ -55,7 +57,7 @@ function Leaderboard() {
           </div>
           <div className="position-number">3</div>
           <div className="name">{leaderboardData[2].name}</div>
-          <div className="points">{leaderboardData[2].points} pts</div>
+          <div className="points">{t('points_suffix', { count: leaderboardData[2].points })}</div>
         </div>
       </div>
 
@@ -71,14 +73,14 @@ function Leaderboard() {
               <img src={user.avatar} alt={user.name} className="avatar" />
               <span className="name">{user.name}</span>
             </div>
-            <div className="points">{user.points} pts</div>
+            <div className="points">{t('points_suffix', { count: user.points })}</div>
           </div>
         ))}
       </div>
 
       {/* Redeem Button */}
       <button className="redeem-button">
-        Redeem your Points
+        {t('redeem_points')}
       </button>
     </div>
   );

@@ -3,12 +3,14 @@ import "./SpeechLesson.css";
 import { useNavigate } from "react-router-dom";
 import AnimationBoxTemplate from "./AnimationBox";
 import { Mic } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 // === List of words for the practice flow ===
 const practiceWords = ["banana", "apple", "orange", "grape"];
 
 function TakeVoice() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // Step/word flow state
   const [step, setStep] = useState(0); // 0 = "start", 1...N = words, N+1 = "finish"
@@ -106,7 +108,7 @@ function TakeVoice() {
   // Only greet at the very beginning (before any step)
   useEffect(() => {
     if (step === 0) {
-      speakText("Welcome! Click Start to begin practicing your words.");
+  speakText(t('sl_welcome_intro'));
     }
     // eslint-disable-next-line
   }, [step]);
@@ -156,9 +158,9 @@ function TakeVoice() {
     const textLower = text.toLowerCase();
     const containsKeyword = keywords.some(keyword => textLower.includes(keyword));
     if (containsKeyword && confidence >= 70){
-      speakText("Good job! You pronounced the word correctly.");
+  speakText(t('sl_good_job'));
     } else {
-      speakText("Please try again. Make sure to say it correctly!");
+  speakText(t('sl_try_again'));
     }
     return;
   };
@@ -175,16 +177,16 @@ function TakeVoice() {
         method: "POST",
         body: formData,
       });
-      alert("Audio uploaded successfully");
+  alert(t('sl_audio_upload_success'));
     } catch (err) {
-      alert("Upload failed");
+  alert(t('sl_upload_fail'));
     }
   };
 
   // Button label and logic
-  let buttonLabel = "Start";
-  if (step > 0 && step < practiceWords.length) buttonLabel = "Next";
-  else if (step === practiceWords.length) buttonLabel = "Finish";
+  let buttonLabel = t('sl_start');
+  if (step > 0 && step < practiceWords.length) buttonLabel = t('sl_next');
+  else if (step === practiceWords.length) buttonLabel = t('sl_finish');
 
   const handleStepButton = () => {
     // If not started, begin with first word
@@ -194,7 +196,7 @@ function TakeVoice() {
       setConfidence(null);
     } else {
       // Finished all words
-      speakText("Congratulations! You finished all the words.");
+  speakText(t('sl_congrats_done'));
       // Optionally upload, or go to next page:
       // navigate("/done");
     }
@@ -205,8 +207,8 @@ function TakeVoice() {
   return (
     <div className="takevideo-page">
       {/* Header */}
-      <p className="assignment-label">Assignment Details</p>
-      <h3 className="assignment-title">Lesson 1: Speech Syllabus B</h3>
+  <p className="assignment-label">{t('sl_assignment_details')}</p>
+  <h3 className="assignment-title">{t('sl_lesson1_speechB')}</h3>
 
       <AnimationBoxTemplate />
 
@@ -214,8 +216,7 @@ function TakeVoice() {
         <div className="flex flex-col items-center space-y-4 justify-center">
           {step === 0 && (
             <div className="container-text">
-              <p className="assignment-label">Welcome, Word Explorer!
-Are you ready to start practicing your words? Click Start and let the adventure begin! 🎉</p>
+              <p className="assignment-label">{t('sl_welcome_block')}</p>
             </div>
           )}
           {step > 0 && step <= practiceWords.length && (
@@ -231,7 +232,7 @@ Are you ready to start practicing your words? Click Start and let the adventure 
                 {currentWord.charAt(0).toUpperCase() + currentWord.slice(1)}
                 </span>              
                 </p>
-              <p className="assignment-title">{transcript && <>You said: <strong>{transcript}</strong></>}</p>
+              <p className="assignment-title">{transcript && <>{t('sl_you_said')} <strong>{transcript}</strong></>}</p>
             </div>
           )}
           <div className="center-container">
@@ -250,7 +251,7 @@ Are you ready to start practicing your words? Click Start and let the adventure 
 
       {/* Footer */}
       <div className="footer-buttons">
-        <button onClick={() => navigate("/AsgUpVideo")} className="cancel-btn">Cancel</button>
+  <button onClick={() => navigate("/AsgUpVideo")} className="cancel-btn">{t('sl_cancel')}</button>
         <button
           onClick={handleStepButton}
           className="start-btn"

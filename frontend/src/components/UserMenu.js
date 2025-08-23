@@ -1,6 +1,7 @@
 import React, { useState} from "react";
 import "./UserMenu.css";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 
 const HomeIcon = ({ color = "#565D6D", size = 20 }) => (
@@ -70,31 +71,32 @@ const CommunicateIcon = ({ color = "#565D6D", size = 20 }) => (
 );
 
 const UserMenu = () => {
-  const [active, setActive] = useState("Home");
-  const navigate = useNavigate(); // <-- hook for navigation
+  const { t } = useTranslation();
+  const [active, setActive] = useState('home');
+  const navigate = useNavigate();
 
   const menuItems = [
-    { name: "Home", icon: <HomeIcon />, path: "/HomePage" },
-    { name: "Assignments", icon: <AssignmentsIcon />, path: "/LessonsLibrary" },
-    { name: "Leaderboard", icon: <LeaderboardIcon />, path: "/leaderboard" },
-    { name: "Voucher", icon: <VoucherIcon />, path: "/RedeemCoupon" },
-    { name: "Communicate", icon: <CommunicateIcon />, path: "/Communication" }
+    { id: 'home', tKey: 'menu_home', icon: <HomeIcon />, path: '/HomePage' },
+    { id: 'assignments', tKey: 'menu_assignments', icon: <AssignmentsIcon />, path: '/LessonsLibrary' },
+    { id: 'leaderboard', tKey: 'menu_leaderboard', icon: <LeaderboardIcon />, path: '/leaderboard' },
+    { id: 'voucher', tKey: 'menu_voucher', icon: <VoucherIcon />, path: '/RedeemCoupon' },
+    { id: 'communicate', tKey: 'menu_communicate', icon: <CommunicateIcon />, path: '/Communication' }
   ];
 
   return (
     <nav className="user-footer-navbar">
       <ul>
-        {menuItems.map((item) => (
+        {menuItems.map(item => (
           <li
-            key={item.name}
-            className={active === item.name ? "active" : ""}
+            key={item.id}
+            className={active === item.id ? 'active' : ''}
             onClick={() => {
-              setActive(item.name);
-              navigate(item.path); // <-- navigate to route
+              setActive(item.id);
+              navigate(item.path);
             }}
           >
             <span className="icon">{item.icon}</span>
-            <p>{item.name}</p>
+            <p>{t(item.tKey)}</p>
           </li>
         ))}
       </ul>

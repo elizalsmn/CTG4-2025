@@ -1,7 +1,9 @@
 import React from "react";
 import "./MyCouponCard.css";
+import { useTranslation } from 'react-i18next';
 
 const MyCouponCard = ({ coupon, onUse }) => {
+  const { t } = useTranslation();
   return (
     <div className="my-coupon-card">
       <div className="coupon-content">
@@ -14,9 +16,9 @@ const MyCouponCard = ({ coupon, onUse }) => {
 
         <div className="coupon-right">
           <button className="use-btn" onClick={() => onUse(coupon, "use")}>
-            Use
+            {t('coupon_use')}
           </button>
-          <p className="valid-date"> Exp: {coupon.valid}</p>
+          <p className="valid-date"> {t('coupon_exp')} {coupon.valid}</p>
         </div>
       </div>
     </div>

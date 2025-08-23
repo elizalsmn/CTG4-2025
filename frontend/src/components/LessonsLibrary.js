@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 import "./LessonsLibrary.css";
 import { FaArrowLeft} from 'react-icons/fa';
 import TranslationBubble from "./TranslationBubble";
@@ -9,47 +10,19 @@ import UserMenu from "./UserMenu";
 function LessonsLibrary() {
   const [bubble, setBubble] = useState(null);
   const timerRef = useRef(null);
+  const { t, i18n } = useTranslation();
 
   const navigate = useNavigate();
 
-  const lessons = [
-    {
-      id: 1,
-      title: "Lesson 1: Writing A",
-      type: "Video",
-      due: "25 Aug 2025, at 23:59",
-      desc: "Writing materials for group A, age xx to xx",
-      translation: "第 1 课: 写作",
-      path: "/AsgUpVideo",
-    },
-    {
-      id: 2,
-      title: "Lesson 2: Writing A",
-      type: "Photo",
-      due: "25 Aug 2025, at 23:59",
-      desc: "Writing materials for group A, age xx to xx",
-      translation: "第 2 课: 写作",
-      path: "/AsgUp",
-    },
-    {
-      id: 3,
-      title: "Lesson 3: Writing A",
-      type: "Video",
-      due: "25 Aug 2025, at 23:59",
-      desc: "Writing materials for group A, age xx to xx",
-      translation: "第 3 课: 写作",
-      path: "/AsgUpVideoLesson3",
-    },
-    {
-      id: 4,
-      title: "Lesson 4: Writing A",
-      type: "Photo",
-      due: "25 Aug 2025, at 23:59",
-      desc: "Writing materials for group A, age xx to xx",
-      translation: "第 4 课: 写作",
-      path: "/AsgUpPhotoLesson4",
-    },
-  ];
+  const lessons = [1,2,3,4].map(n => ({
+    id: n,
+    title: `${t('lesson_prefix')} ${n}: ${t('writing_a')}`,
+    type: n % 2 === 0 ? t('type_photo') : t('type_video'),
+    due: '25 Aug 2025, at 23:59',
+    desc: 'Writing materials for group A, age xx to xx',
+    translation: i18n.language === 'zh' ? `第 ${n} 课: 写作` : `${t('lesson_prefix')} ${n}: ${t('writing_a')}`,
+    path: n === 1 || n === 3 ? '/AsgUpVideo' + (n===3 ? 'Lesson3' : '') : (n===2 ? '/AsgUp' : '/AsgUpPhotoLesson4')
+  }));
 
   const handlePressStart = (lesson, e) => {
     e.preventDefault();
@@ -90,7 +63,7 @@ function LessonsLibrary() {
     <div className="lessons-library">
         <div className="header">
             <FaArrowLeft onClick={() => navigate("/HomePage")}className="back-arrow" />
-            <h2 className="page-title">Lessons Library</h2>
+            <h2 className="page-title">{t('lessons_library_title')}</h2>
         </div>
       
       <div className="lessons-list">
