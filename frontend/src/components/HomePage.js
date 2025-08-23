@@ -27,7 +27,7 @@ const lessons = [
   },
 ];
 
-const CircularProgress = ({ size = 100, strokeWidth = 8, percentage = 75, color = "#4fa07f", label = "" }) => {
+const CircularProgress = ({ size = 100, strokeWidth = 8, percentage = 75, color, label = "" }) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const [offset, setOffset] = useState(circumference);
@@ -42,7 +42,7 @@ const CircularProgress = ({ size = 100, strokeWidth = 8, percentage = 75, color 
   return (
     <div className="circular-wrapper">
       <svg width={size} height={size} className="circular-progress">
-        <circle stroke="#e6e6e6" fill="transparent" strokeWidth={strokeWidth} r={radius} cx={size / 2} cy={size / 2} />
+        <circle stroke="#e3e3e3ff" fill="transparent" strokeWidth={strokeWidth} r={radius} cx={size / 2} cy={size / 2} />
         <circle
           stroke={color}
           fill="transparent"
@@ -82,8 +82,11 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <header className="home-header">
-        <h1>Welcome back, let's learn!</h1>
-        <div onClick={() => navigate("/profile")} className="profile-icon">
+        <div className="home-text">
+          <h1> Shannon Sie 👧🏻 </h1>
+          <p style={{fontSize: "12px", color: "grey"}}> Pre Kindergaten (K2)  </p>
+        </div>
+        <div className="profile-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="28" height="28" fill="#4fa07f">
             <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm89.6 
             32h-11.8c-22.2 10.2-46.9 16-73.8 
@@ -99,14 +102,14 @@ const HomePage = () => {
         {/* Attendance + Submissions */}
         <div className="row-cards">
           <div className="info-card chart-card hover-card">
-            <CircularProgress percentage={85} color="#5f8f78" label="Attendance" />
+            <CircularProgress percentage={85} color="#436448ff" label="Attendance" />
             <div className="hover-details">
               <p>Classes attended: 17/20</p>
             </div>
           </div>
 
-          <div className="info-card chart-card hover-card">
-            <CircularProgress percentage={(8 / 10) * 100} color="#df8d53" label="Submissions" />
+          <div className="info-card-2 chart-card hover-card">
+            <CircularProgress percentage={(8 / 10) * 100} color="#a46131ff" label="Submissions" />
             <div className="hover-details">
               <p>Assignments submitted: 8/10</p>
             </div>

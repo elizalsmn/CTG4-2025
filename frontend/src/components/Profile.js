@@ -14,8 +14,9 @@ function Profile() {
 
   const langMap = { en: 'english', zh: 'chinese' };
   const revLangMap = { english: 'en', chinese: 'zh' };
-  const [language, setLanguage] = useState(langMap[i18n.language] || 'english');
-
+  const initialLang = typeof window !== 'undefined' ? (localStorage.getItem('lang') || i18n.language) : i18n.language;
+  const [language, setLanguage] = useState(langMap[initialLang] || 'english');
+  // keep local state in sync if language toggled elsewhere
   useEffect(() => {
     setLanguage(langMap[i18n.language] || 'english');
   }, [i18n.language]);
@@ -135,12 +136,18 @@ function Profile() {
                     <li key={opt.value}>
                       <button
                         type="button"
-                        onClick={() => {
-                          setLanguage(opt.value);
-                          i18n.changeLanguage(revLangMap[opt.value] || 'en');
-                          setLanguageOpen(false);
+                        onClick={() => { setLanguage(opt.value); const newLng = revLangMap[opt.value] || 'en'; i18n.changeLanguage(newLng); try { localStorage.setItem('lang', newLng); } catch(e){} setLanguageOpen(false); }}
+                        style={{
+                          width: '100%',
+                          textAlign: 'left',
+                          padding: '10px 14px',
+                          background: language === opt.value ? '#eef4ff' : 'transparent',
+                          border: 'none',
+                          fontSize: 15,
+                          cursor: 'pointer',
+                          fontWeight: language === opt.value ? 600 : 400,
+                          color: '#1f2731'
                         }}
-                        className={`dropdown-item ${language === opt.value ? 'active' : ''}`}
                       >
                         {opt.label}
                       </button>

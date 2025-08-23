@@ -12,9 +12,11 @@ import {
 } from "react-icons/fa";
 import AnimationBoxTemplate from "./AnimationBox";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 function TakeVideo() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const videoRef = useRef(null);
   const mediaRecorderRef = useRef(null);
@@ -136,29 +138,29 @@ function TakeVideo() {
         method: "POST",
         body: formData,
       });
-      alert("Video uploaded successfully");
+  alert(t('tv_upload_success'));
     } catch (err) {
       console.error(err);
-      alert("Upload failed");
+  alert(t('tv_upload_fail'));
     }
   };
 
   return (
     <div className="takevideo-page">
       {/* Header */}
-      <p className="assignment-label">Assignment Details</p>
-      <h3 className="assignment-title">Lesson 1: Speech Syllabus B</h3>
+  <p className="assignment-label">{t('tv_assignment_details')}</p>
+  <h3 className="assignment-title">{t('tv_lesson1_speechB')}</h3>
 
 
       <AnimationBoxTemplate />
 
       {/* Camera Check */}
-      <p className="camera-check-text">Turn on your camera and microphone!</p>
+  <p className="camera-check-text">{t('tv_camera_check')}</p>
 
       {/* Camera */}
       <div className="video-box">
         <video ref={videoRef} autoPlay playsInline muted />
-        <p className="video-placeholder">Video Recording</p>
+  <p className="video-placeholder">{t('tv_video_recording')}</p>
       </div>
 
       {/* Controls */}
@@ -204,15 +206,15 @@ function TakeVideo() {
           value={seconds}
           readOnly
         />
-        <p>{seconds} sec</p>
+  <p>{seconds} {t('tv_seconds_suffix')}</p>
       </div>
     )}
       
 
       {/* Footer */}
       <div className="footer-buttons">
-        <button onClick={() => navigate("/AsgUpVideo")} className="cancel-btn">Cancel</button>
-        <button className="start-btn">Start</button>
+  <button onClick={() => navigate("/AsgUpVideo")} className="cancel-btn">{t('tv_cancel')}</button>
+  <button className="start-btn">{t('tv_start')}</button>
       </div>
     </div>
   );

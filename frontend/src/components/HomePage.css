@@ -1,10 +1,8 @@
-
-
 .home-page {
-  margin: auto;
+  /* margin: auto; */
   min-height: 100vh;
   background: #fff;
-  margin: 5% 0;
+  /* margin: 5% 0; */
   padding: 5%;
   font-family: "poppins";
   color: #333;
@@ -12,7 +10,7 @@
 }
 
 .home-page .lesson-card {
-  background: white;
+  background: #F1F5E8;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
@@ -30,14 +28,25 @@
 /* Header */
 .home-header {
   display: flex;
+  flex-direction: row;
+  margin-top: 10%;
   justify-content: space-between;
-  align-items: center;
+  align-items: left;
+  margin-bottom: 20px;
+  padding: 0 2%;
+}
+
+.home-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
   margin-bottom: 20px;
   padding: 0 2%;
 }
 
 .home-header h1 {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: bold;
   color: black;
   margin: 0;
@@ -52,6 +61,8 @@
   justify-content: center;
   cursor: pointer;
   transition: background 0.2s ease;
+  position: relative;
+  height: 25%;
 }
 
 .profile-icon:hover {
@@ -69,7 +80,15 @@
 
 /* Cards */
 .info-card {
-  background: #F1F5E8;
+  background: #5c9a81;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.info-card-2 {
+  background: #F88B47;
   border-radius: 10px;
   padding: 18px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
@@ -121,9 +140,9 @@
 
 /* Quick Menu */
 .PerformanceSummary {
-  background: #F1F5E8;
+  /* background: #F1F5E8; */
   border-radius: 10px;
-  padding: 18px;
+  /* padding: 18px; */
   font-size: 15px;
 }
 
@@ -135,7 +154,7 @@ margin: 0 0 12px 0;
 }
 
 .performance-box {
-  background: #fff;              /* white background */
+  background: #000000;              /* white background */
   border-radius: 10px;           /* rounded corners */
   padding: 16px 20px;                 /* spacing inside */
   box-shadow: 0 2px 6px rgba(0,0,0,0.06); /* subtle shadow */
@@ -214,7 +233,7 @@ margin: 0 0 12px 0;
   transform: translate(-50%, -50%);
   font-size: 16px;
   font-weight: bold;
-  color: #333;
+  color: white;
 }
 
 
@@ -248,7 +267,7 @@ margin: 0 0 12px 0;
 .chart-label {
   margin-top: 8px;
   font-weight: bold;
-  color: #333;
+  color: white;
 }
 
 .circular-progress circle.progress {

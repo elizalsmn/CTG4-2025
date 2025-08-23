@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { setAppLanguage } from '../i18n';
 import { Scanner } from '@yudiel/react-qr-scanner';
 import './Signup.css';
 import reachLogo from '../assets/reach-logo.png';
@@ -165,7 +166,7 @@ const handleScan = (result) => {
         {/* Language toggle */}
         <button
           type="button"
-          onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'zh' : 'en')}
+          onClick={() => setAppLanguage(i18n.language === 'en' ? 'zh' : 'en')}
           style={{
             position: 'absolute',
             top: 16,
