@@ -14,10 +14,10 @@
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
 
-.home-page .lesson-tag {
+/* .home-page .lesson-tag {
   background: #4fa07f;
   color: white;
-}
+} */
 
 /* Maybe tweak hover only for homepage */
 .home-page .lesson-card:hover {
