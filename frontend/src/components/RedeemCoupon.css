@@ -1,0 +1,31 @@
+.redeem-page {
+  padding: 16px;
+  background: #e5f1e5;
+  min-height: 100vh;
+}
+
+.page-title {
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+.page-subtitle {
+  font-size: 13px;
+  color: #888;
+  font-weight: 100;
+    
+}
+
+.coupons-list {
+  margin-bottom: 24px;
+}
+
+.points-footer {
+  text-align: center;
+  background: white;
+  padding: 12px;
+  border-radius: 25px;
+  font-weight: bold;
+  margin: 20px auto 10%;
+  width: 75%;
+}

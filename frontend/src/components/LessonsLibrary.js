@@ -1,11 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./LessonsLibrary.css";
-import { FaRegClock } from "react-icons/fa";
 import TranslationBubble from "./TranslationBubble";
+import { useNavigate } from "react-router-dom";
+import LessonCard from "./LessonCard";
 
 function LessonsLibrary() {
-  const [bubble, setBubble] = useState(null); // { text, x, y }
+  const [bubble, setBubble] = useState(null);
   const timerRef = useRef(null);
+
+  const navigate = useNavigate();
 
   const lessons = [
     {
@@ -15,6 +18,7 @@ function LessonsLibrary() {
       due: "25 Aug 2025, at 23:59",
       desc: "Writing materials for group A, age xx to xx",
       translation: "第 1 课: 写作",
+      path: "/AsgUpVideo",
     },
     {
       id: 2,
@@ -23,6 +27,7 @@ function LessonsLibrary() {
       due: "25 Aug 2025, at 23:59",
       desc: "Writing materials for group A, age xx to xx",
       translation: "第 2 课: 写作",
+      path: "/AsgUp",
     },
     {
       id: 3,
@@ -31,6 +36,7 @@ function LessonsLibrary() {
       due: "25 Aug 2025, at 23:59",
       desc: "Writing materials for group A, age xx to xx",
       translation: "第 3 课: 写作",
+      path: "/AsgUpVideoLesson3",
     },
     {
       id: 4,
@@ -39,32 +45,31 @@ function LessonsLibrary() {
       due: "25 Aug 2025, at 23:59",
       desc: "Writing materials for group A, age xx to xx",
       translation: "第 4 课: 写作",
+      path: "/AsgUpPhotoLesson4",
     },
   ];
 
-const handlePressStart = (lesson, e) => {
-  e.preventDefault();
+  const handlePressStart = (lesson, e) => {
+    e.preventDefault();
 
-  const isTouch = e.type === "touchstart";
-  const clientX = isTouch ? e.touches[0].clientX : e.clientX;
-  const clientY = isTouch ? e.touches[0].clientY : e.clientY;
+    const isTouch = e.type === "touchstart";
+    const clientX = isTouch ? e.touches[0].clientX : e.clientX;
+    const clientY = isTouch ? e.touches[0].clientY : e.clientY;
 
-  timerRef.current = setTimeout(() => {
-    setBubble({
-      text: lesson.translation,
-      x: clientX,
-      y: clientY, // will adjust in bubble CSS
-    });
-  }, 2000);
-};
+    timerRef.current = setTimeout(() => {
+      setBubble({
+        text: lesson.translation,
+        x: clientX,
+        y: clientY,
+      });
+    }, 600);
+  };
 
   const handlePressEnd = () => {
     clearTimeout(timerRef.current);
     timerRef.current = null;
-    // ❌ Do not hide bubble here — it stays until another tap
   };
 
-  // Hide bubble when clicking anywhere else
   useEffect(() => {
     const handleGlobalClick = () => setBubble(null);
 
@@ -85,35 +90,13 @@ const handlePressStart = (lesson, e) => {
 
       <div className="lessons-list">
         {lessons.map((lesson) => (
-          <div className="lesson-card" key={lesson.id}>
-            <div className="lesson-header">
-              <span
-                className={`lesson-tag ${
-                  lesson.type === "Video" ? "video" : "photo"
-                }`}
-              >
-                {lesson.type}
-              </span>
-
-              <h3
-                className="lesson-title"
-                onMouseDown={(e) => handlePressStart(lesson, e)}
-                onMouseUp={handlePressEnd}
-                onMouseLeave={handlePressEnd}
-                onTouchStart={(e) => handlePressStart(lesson, e)}
-                onTouchEnd={handlePressEnd}
-              >
-                {lesson.title}
-              </h3>
-            </div>
-
-            <div className="lesson-info">
-              <FaRegClock className="clock-icon" />
-              <p className="due-text">{lesson.due}</p>
-            </div>
-
-            <p className="lesson-desc">{lesson.desc}</p>
-          </div>
+          <LessonCard
+            key={lesson.id}
+            lesson={lesson}
+            onNavigate={() => navigate(lesson.path)}
+            onPressStart={handlePressStart}
+            onPressEnd={handlePressEnd}
+          />
         ))}
       </div>
 

@@ -11,65 +11,10 @@
   font-weight: 600;
   margin-bottom: 20px;
   padding: 5% 5%;
-
 }
 
 .lessons-list {
   display: flex;
   flex-direction: column;
   gap: 14px;
-}
-
-.lesson-card {
-  background: #F1F5E8;
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-.lesson-header {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; 
-  gap: 6px; 
-}
-
-.lesson-tag {
-  align-self: flex-start; 
-  font-size: 12px;
-  font-weight: 500;
-  padding: 4px 10px;
-  border-radius: 12px;
-  background: #FFFFFF;
-  color: #4FA07F;
-}
-
-.lesson-title {
-  font-size: 15px;
-  font-weight: 600;
-  margin: 0;
-}
-
-.lesson-info {
-  display: flex;
-  align-items: center;
-  margin-top: 8px;
-  gap: 6px;
-  font-size: 13px;
-  color: #444;
-}
-
-.clock-icon {
-  font-size: 14px;
-  color: #666;
-}
-
-.due-text {
-  margin: 0;
-}
-
-.lesson-desc {
-  font-size: 13px;
-  color: #555;
-  margin-top: 6px;
 }

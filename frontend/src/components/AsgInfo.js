@@ -1,9 +1,13 @@
 import React from "react";
 import { FaFilePdf } from "react-icons/fa";
 import "./AsgInfo.css";
+import { useNavigate } from "react-router-dom";
+
 
 function AsgInfo({ status }) {
   // status: "graded" | "upload" | "video"
+
+  const navigate = useNavigate();
 
   const assignment = {
     title:
@@ -82,12 +86,13 @@ function AsgInfo({ status }) {
 
       {/* Footer */}
       <div className="footer">
-        <button className="cancel-btn">Cancel</button>
+        <button onClick={() => navigate("/LessonsLibrary")}className="cancel-btn">Cancel</button>
         {status === "upload" && (
           <button className="upload-btn">Upload</button>
         )}
         {status === "video" && (
-          <button className="start-btn">Start Video</button>
+          <button onClick={() => navigate("/TakeVideo")} className="start-btn">Start Video </button>
+
         )}
       </div>
     </div>

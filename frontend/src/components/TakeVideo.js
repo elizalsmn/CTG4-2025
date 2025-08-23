@@ -11,8 +11,11 @@ import {
   FaStop,     
 } from "react-icons/fa";
 import AnimationBoxTemplate from "./AnimationBox";
+import { useNavigate } from "react-router-dom";
 
 function TakeVideo() {
+  const navigate = useNavigate();
+
   const videoRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const [stream, setStream] = useState(null);
@@ -208,7 +211,7 @@ function TakeVideo() {
 
       {/* Footer */}
       <div className="footer-buttons">
-        <button className="cancel-btn">Cancel</button>
+        <button onClick={() => navigate("/AsgUpVideo")} className="cancel-btn">Cancel</button>
         <button className="start-btn">Start</button>
       </div>
     </div>
