@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./LessonsLibrary.css";
+import { FaArrowLeft} from 'react-icons/fa';
 import TranslationBubble from "./TranslationBubble";
 import { useNavigate } from "react-router-dom";
 import LessonCard from "./LessonCard";
+import UserMenu from "./UserMenu";
 
 function LessonsLibrary() {
   const [bubble, setBubble] = useState(null);
@@ -86,8 +88,11 @@ function LessonsLibrary() {
 
   return (
     <div className="lessons-library">
-      <h2 className="page-title">Lessons Library</h2>
-
+        <div className="header">
+            <FaArrowLeft onClick={() => navigate("/HomePage")}className="back-arrow" />
+            <h2 className="page-title">Lessons Library</h2>
+        </div>
+      
       <div className="lessons-list">
         {lessons.map((lesson) => (
           <LessonCard
@@ -103,6 +108,8 @@ function LessonsLibrary() {
       {bubble && (
         <TranslationBubble text={bubble.text} x={bubble.x} y={bubble.y} />
       )}
+
+      <UserMenu/>
     </div>
   );
 }
