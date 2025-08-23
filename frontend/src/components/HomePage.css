@@ -99,7 +99,21 @@
   transform: translateY(-3px);
 }
 
+.info-card-2:hover {
+  transform: translateY(-3px);
+}
+
 .info-card h2 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-card-2 h2 {
   font-size: 16px;
   font-weight: bold;
   color: #333;
