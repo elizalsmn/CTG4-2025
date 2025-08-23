@@ -1,12 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Signup from './components/Signup';
 import Signup2 from './components/Signup2';
 import TakeVideo from './components/TakeVideo';
-import AsgInfo from './components/AsgInfo'
-import LessonsLibrary from './components/LessonsLibrary'
+import AsgInfo from './components/AsgInfo';
+import LessonsLibrary from './components/LessonsLibrary';
 import Leaderboard from './components/Leaderboard';
+import HomePage from './components/HomePage';
 import RedeemCoupon from './components/RedeemCoupon';
 
 function App() {
