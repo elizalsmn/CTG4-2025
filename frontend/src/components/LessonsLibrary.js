@@ -6,6 +6,7 @@ import TranslationBubble from "./TranslationBubble";
 import { useNavigate } from "react-router-dom";
 import LessonCard from "./LessonCard";
 import UserMenu from "./UserMenu";
+import Back from "./Back";
 
 function LessonsLibrary() {
   const [bubble, setBubble] = useState(null);
@@ -62,7 +63,7 @@ function LessonsLibrary() {
   return (
     <div className="lessons-library">
         <div className="header">
-            <FaArrowLeft onClick={() => navigate("/HomePage")}className="back-arrow" />
+            <Back/>
             <h2 className="page-title">{t('lessons_library_title')}</h2>
         </div>
       

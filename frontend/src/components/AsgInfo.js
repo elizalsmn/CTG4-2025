@@ -3,7 +3,8 @@ import { FaFilePdf } from "react-icons/fa";
 import "./AsgInfo.css";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-
+import Back from "./Back";
+import UserMenu from "./UserMenu";
 
 function AsgInfo({ status }) {
   // status: "graded" | "upload" | "video"
@@ -12,7 +13,7 @@ function AsgInfo({ status }) {
 
   const assignment = {
     title: status === 'video' ? t('asg_lesson1_speechB') : t('asg_lesson1_writingA'),
-    due: '25 Aug 2025 23:59', // date left literal; could be localized separately
+    due: '25 Aug 2025 23:59',
     submissionType: status === 'video' ? t('asg_video_upload') : t('asg_photo_video_upload'),
     grade: status === 'graded' ? '87/100' : null,
     icon: status === 'video' ? '💬' : '✍️',
@@ -29,15 +30,15 @@ function AsgInfo({ status }) {
           : "asgupvid-page"
       }
     >
+      {/* Always-visible back button in a consistent position */}
+      <Back to="/LessonsLibrary" />
+
       {/* Header */}
-  <p className="assignment-label">{t('asg_details')}</p>
+      <p className="assignment-label">{t('asg_details')}</p>
       <h3 className="assignment-title">{assignment.title}</h3>
 
       {/* Icon Circle */}
-      <div
-        className="icon-circle"
-        style={{ background: assignment.iconBg }}
-      >
+      <div className="icon-circle" style={{ background: assignment.iconBg }}>
         <span role="img" aria-label="icon">
           {assignment.icon}
         </span>
@@ -55,13 +56,13 @@ function AsgInfo({ status }) {
 
       {/* Due Date */}
       <div className="info-box">
-  <p className="info-label">{t('asg_due')}</p>
+        <p className="info-label">{t('asg_due')}</p>
         <p className="info-value">{assignment.due}</p>
       </div>
 
       {/* Submission Type */}
       <div className="info-box">
-  <p className="info-label">{t('asg_submission_type')}</p>
+        <p className="info-label">{t('asg_submission_type')}</p>
         <p className="info-value">{assignment.submissionType}</p>
       </div>
 
@@ -69,27 +70,32 @@ function AsgInfo({ status }) {
 
       {/* Attachments */}
       <div className="attachments">
-    <p className="info-label">{t('asg_attachments')}</p>
+        <p className="info-label">{t('asg_attachments')}</p>
         <div className="attachment-item">
           <FaFilePdf className="pdf-icon" />
           <div className="attachment-text">
-      <p className="attachment-name">{t('asg_instruction_file')}_LessonA</p>
-      <p className="attachment-type">{t('asg_pdf')}</p>
+            <p className="attachment-name">{t('asg_instruction_file')}_LessonA</p>
+            <p className="attachment-type">{t('asg_pdf')}</p>
           </div>
         </div>
       </div>
 
       {/* Footer */}
       <div className="footer">
-        <button onClick={() => navigate("/LessonsLibrary")}className="cancel-btn">{t('asg_cancel')}</button>
+        {/* Keep your existing navigation buttons */}
+        <button onClick={() => navigate("/LessonsLibrary")} className="cancel-btn">
+          {t('asg_cancel')}
+        </button>
         {status === "upload" && (
           <button className="upload-btn">{t('asg_upload')}</button>
         )}
         {status === "video" && (
-          <button onClick={() => navigate("/TakeVideo")} className="start-btn">{t('asg_start_video')}</button>
-
+          <button onClick={() => navigate("/TakeVideo")} className="start-btn">
+            {t('asg_start_video')}
+          </button>
         )}
       </div>
+      <UserMenu />
     </div>
   );
 }

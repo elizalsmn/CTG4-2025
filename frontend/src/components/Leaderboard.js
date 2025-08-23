@@ -4,13 +4,15 @@ import { FaArrowLeft, FaCrown } from 'react-icons/fa';
 import './Leaderboard.css';
 import AvatarPlaceholder from '../assets/avatar-placeholder.jpg';
 import { useNavigate } from "react-router-dom";
+import Back from "./Back"
+import UserMenu from "./UserMenu";
 
 function Leaderboard() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const leaderboardData = [
     { id: 1, name: "Bryan Wolf", points: 43, avatar: AvatarPlaceholder },
-    { id: 2, name: "Meghan Jes...", points: 40, avatar: AvatarPlaceholder },
+    { id: 2, name: "Meghan Jes", points: 40, avatar: AvatarPlaceholder },
     { id: 3, name: "Alex Turner", points: 38, avatar: AvatarPlaceholder },
     { id: 4, name: "Marsha Fisher", points: 36, avatar: AvatarPlaceholder },
     { id: 5, name: "Juanita Cormier", points: 35, avatar: AvatarPlaceholder },
@@ -25,7 +27,7 @@ function Leaderboard() {
     <div className="leaderboard-container">
       {/* Header */}
       <div className="leaderboard-header">
-        <FaArrowLeft onClick={() => navigate("/HomePage")} className="back-arrow" />
+        <Back />
         <h1>School Leaderboard</h1>
       </div>
 
@@ -81,9 +83,11 @@ function Leaderboard() {
       </div>
 
       {/* Redeem Button */}
-      <button className="redeem-button">
+      <button className="redeem-button" onClick={() => navigate("/RedeemCoupon")}>
         {t('redeem_points')}
       </button>
+
+      <UserMenu />
     </div>
   );
 }

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "./RedeemCoupon.css";
-import {FaArrowLeft} from 'react-icons/fa';
 import { useTranslation } from "react-i18next";
 import CouponCard from "./CouponCard";
 import MyCouponCard from "./MyCouponCard";
 import CouponDetail from "./CouponDetail";
 import { useNavigate } from "react-router-dom"; 
+import Back from "./Back"
+import UserMenu from "./UserMenu";
 
 function RedeemCoupon() {
   const navigate = useNavigate();
@@ -70,7 +71,7 @@ function RedeemCoupon() {
   return (
     <div className="redeem-page">
       {/* Available Coupons */}
-      <FaArrowLeft onClick={() => navigate("/HomePage")} className="back-arrow" />
+      <Back/>
       <h2 className="page-title">
         {t('rc_available_coupons')}
         <p className="page-subtitle">{t('rc_available_to_redeem', { count: availableCoupons.length })}</p>
@@ -115,7 +116,9 @@ function RedeemCoupon() {
             onClose={() => setSelectedCoupon(null)}
         />
         )}
+    <UserMenu/>
     </div>
+    
   );
 }
 
