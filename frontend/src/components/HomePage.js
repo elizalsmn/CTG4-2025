@@ -83,7 +83,7 @@ const HomePage = () => {
     <div className="home-page">
       <header className="home-header">
         <h1>Welcome back, let's learn!</h1>
-        <div className="profile-icon">
+        <div onClick={() => navigate("/profile")} className="profile-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="28" height="28" fill="#4fa07f">
             <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm89.6 
             32h-11.8c-22.2 10.2-46.9 16-73.8 
