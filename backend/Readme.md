@@ -18,5 +18,5 @@ python manage.py runserver
 http://127.0.0.1:8000/admin
 
 ## For schema change
-1. python manage.py makemigrations
+1. python manage.py makemigrations app
 2. python manage.py migrate
