@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Scanner } from '@yudiel/react-qr-scanner';
 import './Signup.css';
 import reachLogo from '../assets/reach-logo.png';
+import { useNavigate } from 'react-router-dom';
 import { FaFingerprint, FaUser } from 'react-icons/fa';
 
 function Login() {
   const [showCamera, setShowCamera] = useState(false);
   const [camLoading, setCamLoading] = useState(false);
   const [camError, setCamError] = useState(null);
+  const navigate = useNavigate();
 
 // ...existing code...
 
@@ -35,7 +37,7 @@ const handleScan = (result) => {
           // TODO: Navigate to teacher dashboard
         } else {
           console.log('Student login:', qrData.username);
-          // TODO: Navigate to student dashboard
+          navigate('/HomePage'); 
         }
       } else {
         setShowCamera(false); // Close camera to show error
