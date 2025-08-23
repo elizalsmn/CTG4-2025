@@ -25,6 +25,11 @@
   gap: 20px;
 }
 
+.title{
+  text-align: center;
+  margin: auto;
+}
+
 .info-card {
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);

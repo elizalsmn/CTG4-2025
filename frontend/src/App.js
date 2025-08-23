@@ -8,6 +8,7 @@ import LessonsLibrary from './components/LessonsLibrary';
 import Leaderboard from './components/Leaderboard';
 import HomePage from './components/HomePage';
 import RedeemCoupon from './components/RedeemCoupon';
+import HomeAdmin from './components/HomeAdmin';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/RedeemCoupon" element={<RedeemCoupon />}/>
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/HomePage" element={<HomePage />}/>
+          <Route path="/HomeAdmin" element={<HomeAdmin />}/>
         </Routes>
       </div>
     </Router>
