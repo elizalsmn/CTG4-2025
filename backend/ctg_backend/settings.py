@@ -11,32 +11,19 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-from utils.properties import load_properties, get_mongo_uri
+# import certifi
+# from mongoengine import connect
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-PROPS = load_properties(BASE_DIR / "config" / "app.properties")
+# PROPS = load_properties(BASE_DIR / "config" / "app.properties")
 
-DB_ENGINE = PROPS.get("db.engine", "sqlite").lower()
-
-if DB_ENGINE in {"mongo", "mongodb", "djongo"}:
-    DATABASES = {
-        "default": {
-            "ENGINE": "djongo",
-            "NAME": PROPS.get("db.name", "ctgdb"),   # logical database
-            "CLIENT": {
-                "host": PROPS.get("db.uri"),         # FULL URI goes here
-            },
-            "ENFORCE_SCHEMA": False,
-        }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
+}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -53,6 +40,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -108,6 +96,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_USER_MODEL = "app.User"
 
 
 # Internationalization
