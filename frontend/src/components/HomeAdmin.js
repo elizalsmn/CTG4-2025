@@ -1,5 +1,6 @@
 import React from "react";
 import "./HomeAdmin.css";
+import AdminMenu from "./AdminMenu";
 import { FaExclamationTriangle } from "react-icons/fa";
 
 // Custom SVG Icons
@@ -113,15 +114,7 @@ const HomeAdmin = () => {
       </section>
 
       {/* Sticky Bottom Navbar */}
-      <nav className="footer-navbar">
-        <ul>
-          <li className="active"><span className="icon">🏠</span><p>Home</p></li>
-          <li><span className="icon">👨‍🎓</span><p>Students</p></li>
-          <li><span className="icon">📄</span><p>Assignments</p></li>
-          <li><span className="icon">📘</span><p>Classes</p></li>
-          <li><span className="icon">💬</span><p>Communicate</p></li>
-        </ul>
-      </nav>
+      <AdminMenu />
     </div>
   );
 };

@@ -1,81 +1,107 @@
+
+
 .home-page {
+  margin: auto;
   min-height: 100vh;
-  background: white;
-  padding: 20px;
-  font-family: 'Poppins';
+  background: #fff;
+  margin: 5% 0;
+  padding: 5%;
+  font-family: "poppins";
+  color: #333;
+  padding-bottom: 70px; /* space for sticky bottom menu */
 }
 
+.home-page .lesson-card {
+  background: white;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.home-page .lesson-tag {
+  background: #4fa07f;
+  color: white;
+}
+
+/* Maybe tweak hover only for homepage */
+.home-page .lesson-card:hover {
+  background: #f1f5e8;
+  transform: scale(1.02);
+}
+
+/* Header */
 .home-header {
-  text-align: left;
-  font-size: 0.8em;
-  padding: 8px;
-  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 0 2%;
 }
 
 .home-header h1 {
-  font-size: 2.5em;
+  font-size: 20px;
   font-weight: bold;
-  color: #333;
+  color: black;
   margin: 0;
 }
 
+.profile-icon {
+  background: #F1F5E8;
+  border-radius: 50%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.profile-icon:hover {
+  background: #e0ebdc; /* slightly darker hover */
+}
+
+/* Card container */
 .content-container {
-  max-width: 400px;
+  max-width: 600px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.title{
-  text-align: center;
-  margin: auto;
-}
-
+/* Cards */
 .info-card {
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 25px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #F1F5E8;
+  border-radius: 10px;
+  padding: 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
 }
 
 .info-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
 }
 
 .info-card h2 {
-  font-size: 1.4em;
+  font-size: 16px;
   font-weight: bold;
   color: #333;
-  margin: 0 0 15px 0;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 8px;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .card-content {
   color: #555;
-  line-height: 1.6;
+  font-size: 14px;
 }
 
-.card-content p {
-  margin: 8px 0;
-  font-size: 0.95em;
-}
-
+/* Task items */
 .task-item {
-  background: rgba(240, 240, 240, 0.5);
-  border-radius: 10px;
+  background: #fff;
+  border-radius: 8px;
   padding: 12px;
-  margin: 10px 0;
-  border-left: 4px solid #007bff;
-}
-
-.task-item p {
-  margin: 4px 0;
+  margin: 8px 0;
+  border-left: 4px solid #4fa07f;
 }
 
 .task-item strong {
@@ -84,111 +110,155 @@
 
 .status {
   display: inline-block;
-  padding: 4px 12px;
-  border-radius: 15px;
-  font-size: 0.8em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 12px;
   font-weight: bold;
-  margin-top: 8px;
-}
-
-.status.pending {
+  margin-top: 6px;
   background: #ffeaa7;
   color: #d63031;
 }
 
-.quick-menu {
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 25px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/* Quick Menu */
+.PerformanceSummary {
+  background: #F1F5E8;
+  border-radius: 10px;
+  padding: 18px;
+  font-size: 15px;
 }
 
-.quick-menu h2 {
-  font-size: 1.4em;
-  font-weight: bold;
-  color: #333;
-  margin: 0 0 20px 0;
-  border-bottom: 2px solid #ddd;
-  padding-bottom: 8px;
+.PerformanceSummary h2 {
+font-size: 16px;
+font-weight: bold;
+margin: 0 0 12px 0;
+
+}
+
+.performance-box {
+  background: #fff;              /* white background */
+  border-radius: 10px;           /* rounded corners */
+  padding: 16px 20px;                 /* spacing inside */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06); /* subtle shadow */
+  border: 1px solid #eee;        /* light border */
+  min-height: 80px;              /* give it some height */
+  display: flex;                 
+  align-items: center;           /* vertically center placeholder text */
+  justify-content: center;       /* horizontally center */
+  color: #aaa;                   /* grey placeholder text */
+  font-size: 14px;
+  font-style: italic;
 }
 
 .menu-buttons {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 15px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
-
+.lessons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
 .menu-btn {
-  background: rgba(240, 240, 240, 0.6);
-  border: none;
-  border-radius: 15px;
-  padding: 20px 15px;
-  font-size: 1.1em;
-  font-weight: 600;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 13px;
+  font-weight: 500;
   color: #333;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  min-height: 80px;
+  transition: all 0.2s ease;
+  min-height: 70px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 .menu-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  background: rgba(255, 255, 255, 0.8);
+  background: #f9f9f9;
+  border-color: #4fa07f;
+  color: #2e7d32;
 }
 
-.menu-btn:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+.menu-btn svg {
+  margin-bottom: 6px;
+  fill: #4fa07f;
 }
 
-.menu-btn.community {
-  background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+/* Row for Attendance + Submissions */
+.row-cards {
+  display: flex;
+  gap: 16px;
 }
 
-.menu-btn.coupons {
-  background: linear-gradient(135deg, #ffd3a5, #fd9853);
+.row-cards .info-card {
+  flex: 1;
+  text-align: center;
+  position: relative;
 }
 
-.menu-btn.community:hover {
-  background: linear-gradient(135deg, #88d8a3, #c8e6c9);
+/* Wrapper for chart */
+.circular-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.menu-btn.coupons:hover {
-  background: linear-gradient(135deg, #ffb74d, #ff8a65);
+.circle-text {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
 }
 
-/* Responsive design */
-@media (max-width: 480px) {
-  .home-page {
-    padding: 15px;
-  }
-  
-  .content-container {
-    max-width: 100%;
-  }
-  
-  .home-header h1 {
-    font-size: 2em;
-  }
-  
-  .info-card, .quick-menu {
-    padding: 20px;
-  }
-  
-  .menu-buttons {
-    gap: 10px;
-  }
-  
-  .menu-btn {
-    padding: 15px 10px;
-    font-size: 1em;
-    min-height: 70px;
-  }
+
+/* Hover details hidden by default */
+.hover-details {
+  opacity: 0;
+  pointer-events: none;
+  font-size: 13px;
+  color: #555;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: opacity 0.3s ease;
+}
+
+/* Show on hover */
+.hover-card:hover .hover-details {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Circular progress animation */
+.circular-progress {
+  display: block;
+}
+.chart-label {
+  margin-top: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.circular-progress circle.progress {
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+  animation: progressAnim 1.5s ease-out forwards;
+}
+@keyframes progressAnim {
+  from { stroke-dashoffset: 283; }
+}
+.circular-progress text {
+  transform: rotate(90deg);
 }
