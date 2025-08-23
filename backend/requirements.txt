@@ -2,6 +2,7 @@
 django
 
 # Data science stack (optional for your app code)
+polar
 pandas
 numpy
 
