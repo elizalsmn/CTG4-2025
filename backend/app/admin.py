@@ -10,21 +10,21 @@ class ChildInline(admin.TabularInline):
 
 @admin.register(User)
 class UserAdmin(UserAdmin):
-    list_display = ("username", "userid", "full_name", "role", "email", "phone_number", "is_active", "last_login")
+    list_display = ("username", "id", "full_name", "role", "email", "phone_number", "is_active", "last_login")
     list_filter = ("role", "is_active", "is_staff", "is_superuser", "groups")
-    search_fields = ("username", "userid", "full_name", "email")
+    search_fields = ("username", "id", "full_name", "email")
     ordering = ("username",)
 
     fieldsets = (
         (None, {"fields": ("username", "password")}),
-        ("Identity", {"fields": ("userid", "full_name", "email", "phone_number", "role")}),
+        ("Identity", {"fields": ("id", "full_name", "email", "phone_number", "role")}),
         ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
         ("Important dates", {"fields": ("last_login", "date_joined")}),
     )
     add_fieldsets = (
         (None, {
             "classes": ("wide",),
-            "fields": ("username", "userid", "full_name", "email", "phone_number", "role", "password1", "password2"),
+            "fields": ("username", "id", "full_name", "email", "phone_number", "role", "password1", "password2"),
         }),
     )
 

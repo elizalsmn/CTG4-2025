@@ -1,63 +1,117 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.db import models
 from django.core.exceptions import ValidationError
+from django.db import models
 from django.utils import timezone
 
 
-# Create your models here.
-
 class User(AbstractUser):
-    """Single user object with a role and shared fields."""
     ROLE_CHOICES = [
         ("admin", "Admin"),
         ("teacher", "Teacher"),
         ("parent", "Parent"),
     ]
-
-    # You can keep AbstractUser.username as your "userid", or add a separate one:
-    userid = models.CharField(
-        max_length=30, unique=True, help_text="External/user-facing ID"
-    )
-
+    # id is auto-added by Django as primary key
     full_name = models.CharField(max_length=150)
     phone_number = models.CharField(max_length=20, blank=True)
-    # email is on AbstractUser; we’ll make it optional for parents via clean()
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default="parent")
-
-    # Built-ins that already satisfy your requirements:
-    # - date_joined (AbstractUser)
-    # - last_login (AbstractUser)  ← this is effectively "last access date"
 
     def clean(self):
         super().clean()
-        # Require email for Admin/Teacher, allow empty for Parent
         if self.role in {"admin", "teacher"} and not self.email:
             raise ValidationError({"email": "Email is required for admins and teachers."})
+        if self.role in {"admin", "teacher"} and not self.phone_number:
+            raise ValidationError({"phone_number": "Phone is required for admins and teachers."})
 
     def __str__(self):
-        return f"{self.username} ({self.role})"
+        return f"{self.full_name} ({self.role})"
+    
+class LoginLog(models.Model):
+    """Tracks user login events."""
+    user = models.ForeignKey(
+        'User',
+        on_delete=models.CASCADE,
+        related_name='login_logs'
+    )
+    timestamp = models.DateTimeField(auto_now_add=True)
+    ip_address = models.GenericIPAddressField(null=True, blank=True)
+    user_agent = models.TextField(blank=True)
+    
+    class Meta:
+        ordering = ['-timestamp']
+        
+    def __str__(self):
+        return f"{self.user.username} - {self.timestamp}"
 
 
 class ClassRoom(models.Model):
-    """A school class (e.g., 3A, 5B)."""
-    name = models.CharField(max_length=50, unique=True)  # e.g., "3A"
-    grade = models.PositiveSmallIntegerField(null=True, blank=True)  # optional
-    homeroom_teacher = models.ForeignKey(
-        User,
+    """A school class (e.g., 3A), owned by exactly one teacher."""
+    name = models.CharField(max_length=50, unique=True)          # e.g., "3A"
+    grade = models.PositiveSmallIntegerField(null=True, blank=True)
+
+    # Each teacher can be a homeroom teacher of at most one classroom.
+    homeroom_teacher = models.OneToOneField(
+        'User',
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="homerooms",
+        related_name='homeroom_of',          # access via teacher.homeroom_of
         limit_choices_to={"role": "teacher"},
+        help_text="The teacher who owns this classroom."
     )
 
     def __str__(self):
         return self.name
 
 
+class Child(models.Model):
+    """A child linked to a parent; optionally assigned to a classroom."""
+    parent = models.ForeignKey(
+        'User',
+        on_delete=models.CASCADE,
+        related_name='children',
+        limit_choices_to={'role': 'parent'},
+    )
+    name = models.CharField(max_length=120)
+    dob = models.DateField()
+
+    # Use a string ref so order doesn’t matter
+    class_room = models.ForeignKey(
+        'ClassRoom', on_delete=models.SET_NULL, null=True, blank=True,
+        related_name='students'
+    )
+
+    @property
+    def age_years(self):
+        today = timezone.now().date()
+        return today.year - self.dob.year - (
+            (today.month, today.day) < (self.dob.month, self.dob.day)
+        )
+
+    def __str__(self):
+        return f"{self.name} ({self.parent.username})"
+
+
+class ParentProfile(models.Model):
+    """Extra fields/relations for parents."""
+    user = models.OneToOneField(
+        'User',
+        on_delete=models.CASCADE,
+        related_name='parent_profile',
+        limit_choices_to={'role': 'parent'},
+    )
+    # Friends list: other users they are connected to (could be parents/teachers)
+    friends = models.ManyToManyField(
+        'User',
+        related_name='friend_of_parents',
+        blank=True,
+    )
+
+    def __str__(self):
+        return f"ParentProfile({self.user.username})"
+
+
 class Lesson(models.Model):
-    """Individual lesson (period) delivered by a teacher to a class."""
+    """Individual lesson delivered by a teacher to a classroom."""
     SUBJECT_CHOICES = [
         ("math", "Math"),
         ("english", "English"),
@@ -65,13 +119,13 @@ class Lesson(models.Model):
         ("other", "Other"),
     ]
 
-    class_room = models.ForeignKey(ClassRoom, on_delete=models.CASCADE, related_name="lessons")
+    class_room = models.ForeignKey('ClassRoom', on_delete=models.CASCADE, related_name='lessons')
     teacher = models.ForeignKey(
-        User,
+        'User',
         on_delete=models.SET_NULL,
         null=True,
-        related_name="lessons",
-        limit_choices_to={"role": "teacher"},
+        related_name='lessons',
+        limit_choices_to={'role': 'teacher'},
     )
     subject = models.CharField(max_length=50, choices=SUBJECT_CHOICES, default="other")
     start_time = models.DateTimeField()
@@ -88,44 +142,19 @@ class Lesson(models.Model):
         return f"{self.class_room} - {self.subject} ({self.start_time:%Y-%m-%d %H:%M})"
 
 
-class ParentProfile(models.Model):
-    """Extra fields/relations for parents."""
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        related_name="parent_profile",
-        limit_choices_to={"role": "parent"},
-    )
-    # Friends list: other users they are connected to (you can restrict to parents if you want)
-    friends = models.ManyToManyField(
-        User,
-        related_name="friend_of_parents",
-        blank=True,
-    )
+# Add to the bottom of models.py
+from django.contrib.auth.signals import user_logged_in
+from django.dispatch import receiver
 
-    def __str__(self):
-        return f"ParentProfile({self.user.username})"
-
-
-class Child(models.Model):
-    """A child record linked to a parent; optionally assigned to a class."""
-    parent = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        related_name="children",
-        limit_choices_to={"role": "parent"},
-    )
-    name = models.CharField(max_length=120)
-    dob = models.DateField()
-    class_room = models.ForeignKey(
-        ClassRoom, on_delete=models.SET_NULL, null=True, blank=True, related_name="students"
-    )
-
-    # Optional: quick helper property for age
-    @property
-    def age_years(self):
-        today = timezone.now().date()
-        return today.year - self.dob.year - ((today.month, today.day) < (self.dob.month, self.dob.day))
-
-    def __str__(self):
-        return f"{self.name} ({self.parent.username})"
+@receiver(user_logged_in)
+def log_user_login(sender, request, user, **kwargs):
+    """Create a login log entry when a user logs in."""
+    if request:
+        LoginLog.objects.create(
+            user=user,
+            ip_address=request.META.get('REMOTE_ADDR', None),
+            user_agent=request.META.get('HTTP_USER_AGENT', '')
+        )
+    else:
+        # For logins without a request object
+        LoginLog.objects.create(user=user)
