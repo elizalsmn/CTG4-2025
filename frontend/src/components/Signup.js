@@ -218,8 +218,8 @@ const handleScan = (result) => {
           flexWrap: 'wrap',
           marginBottom: '3vh'
         }}>
-          {[{ label: t('login'), key: 'login', icon: <FaFingerprint size="34%" /> },
-            { label: t('add_friend'), key: 'add_friend', icon: <FaUser size="34%" /> }].map(btn => (
+          {[{ label: t('login'), key: 'login', icon: '🫆'},
+            { label: t('add_friend'), key: 'add_friend', icon: '👤' }].map(btn => (
             <button
               key={btn.key}
               onClick={openCamera}
@@ -251,10 +251,10 @@ const handleScan = (result) => {
                 alignItems: 'center',
                 justifyContent: 'center',
                 color: '#2b2b2b',
-                background: 'linear-gradient(#ffffff,#f0f0f0)',
+                // background: 'linear-gradient(#ffffff,#f0f0f0)',
                 borderRadius: '50%',
                 marginBottom: '1.2vh',
-                fontSize: 0
+                fontSize: '50px',
               }}>
                 {btn.icon}
               </div>
