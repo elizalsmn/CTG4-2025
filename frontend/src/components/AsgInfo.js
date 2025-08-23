@@ -90,12 +90,12 @@ function AsgInfo({ status }) {
           <button className="upload-btn">{t('asg_upload')}</button>
         )}
         {status === "video" && (
-          <button onClick={() => navigate("/TakeVideo")} className="start-btn">
+          <button onClick={() => navigate("/SpeechLesson")} className="start-btn">
             {t('asg_start_video')}
           </button>
         )}
       </div>
-      <UserMenu />
+      {/* <UserMenu /> */}
     </div>
   );
 }

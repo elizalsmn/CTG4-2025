@@ -3,6 +3,7 @@
   font-size: 12px;
   color: #888;
   margin-bottom: 4px;
+  padding-top: 32px;
 }
 
 .assignment-title {
@@ -13,6 +14,7 @@
 }
 
 .icon-circle {
+  margin-top: 16px;
   width: 90px;
   height: 90px;
   border-radius: 50%;
@@ -20,7 +22,7 @@
   align-items: center;
   justify-content: center;
   font-size: 40px;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 
 .info-box {
@@ -101,6 +103,7 @@
   font-family: "Inter", sans-serif;
   background: #fff;
   min-height: 100vh;
+  margin-top: 46px;
 }
 .grade-box {
   width: 100%;

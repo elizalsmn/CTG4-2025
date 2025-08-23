@@ -87,6 +87,7 @@ const HomePage = () => {
           <p style={{fontSize: "12px", color: "grey"}}> Pre Kindergaten (K2)  </p>
         </div>
         <div className="profile-icon">
+          <button onClick={() => navigate("/profile")} className="profile-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="28" height="28" fill="#4fa07f">
             <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm89.6 
             32h-11.8c-22.2 10.2-46.9 16-73.8 
@@ -95,6 +96,7 @@ const HomePage = () => {
             80 80 80h288c44.2 0 80-35.8 
             80-80 0-79.5-64.5-144-134.4-144z"/>
           </svg>
+          </button>
         </div>
       </header>
 
