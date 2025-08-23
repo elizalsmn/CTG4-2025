@@ -1,6 +1,6 @@
 import React from "react";
 import "./AnimationBox.css";
-import SpeechVideo from '../assets/Unitylogo.mp4';
+import SpeechVideo from '../assets/Fox_OP.MOV';
 
 function AnimationBoxTemplate() {
   return (
@@ -10,7 +10,8 @@ function AnimationBoxTemplate() {
           className="animation-element"
         //   controls
           width="100%"
-          poster="/thumbnail.jpg"
+          height="100%"
+          // poster="/thumbnail.jpg"
           autoPlay={true}
           muted
           loop

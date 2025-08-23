@@ -10,6 +10,7 @@ import HomePage from './components/HomePage';
 import RedeemCoupon from './components/RedeemCoupon';
 import HomeAdmin from './components/HomeAdmin';
 import Profile from './components/Profile';
+import SpeechLesson from './components/SpeechLesson';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/leaderboard" element={<Leaderboard />} />
           <Route path="/HomePage" element={<HomePage />}/>
           <Route path="/HomeAdmin" element={<HomeAdmin />}/>
+          <Route path="/SpeechLesson" element={<SpeechLesson />} />
           <Route path="/profile" element={<Profile />}/>
         </Routes>
       </div>
