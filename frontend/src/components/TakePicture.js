@@ -130,7 +130,7 @@ function TakePicture() {
 			)}
 
 			<div className="footer submit-footer">
-				<button className="cancel-btn" onClick={() => navigate('/LessonsLibrary')}>{t('asg_cancel')}</button>
+				<button className="cancel-btn-pic" onClick={() => navigate('/LessonsLibrary')}>{t('asg_cancel')}</button>
 				<button className="upload-btn" disabled={!photos.length} onClick={submitPhotos}>{t('asg_upload')}</button>
 			</div>
 			<UserMenu />

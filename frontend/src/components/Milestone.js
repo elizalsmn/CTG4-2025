@@ -65,7 +65,7 @@ function Milestone() {
       {/* Header */}
 
       <div className="milestone-header">
-        <Back top="8px"/>
+        <Back to="/leaderboard" top="8px"/>
         <h1>Milestone Progress</h1>
       </div>
 
@@ -104,7 +104,13 @@ function Milestone() {
                 className={`milestone-reward ${achieved ? "unlocked" : ""} ${
                   isNext ? "highlight" : ""
                 }`}
-                onClick={() => achieved && setSelectedCoupon(coupon)} // 👈 only clickable if unlocked
+                onClick={() => {
+                    if (achieved) {
+                        setSelectedCoupon({ ...coupon, mode: "redeem" });
+                    } else if (isNext) {
+                        setSelectedCoupon({ ...coupon, mode: "preview" });
+                    }
+                    }}
               >
                 <div className="reward-icon">
                   <FaGift />
@@ -133,7 +139,6 @@ function Milestone() {
         <CouponDetail
           coupon={selectedCoupon}
           onClose={() => setSelectedCoupon(null)}
-          mode="redeem"
         />
       )}
     </div>

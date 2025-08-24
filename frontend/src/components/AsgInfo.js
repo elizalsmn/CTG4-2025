@@ -44,7 +44,7 @@ function AsgInfo({ status, lesson: propLesson }) {
   };
 
   const assignment = getAssignmentData();
-  console.log(lesson.status, "strawberry");
+  // console.log(lesson.status, "strawberry");
 
   return (
     <div

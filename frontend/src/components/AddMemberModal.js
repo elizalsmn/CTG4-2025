@@ -228,7 +228,7 @@ const AddMemberModal = ({ isOpen, onClose, onSave }) => {
         </div>
 
         <div className="modal-footer">
-          <button className="cancel-btn" onClick={onClose}>Cancel</button>
+          <button className="cancel-btn-add-member" onClick={onClose}>Cancel</button>
           <button className="save-btn" onClick={handleSave}>Save Member</button>
         </div>
       </div>
