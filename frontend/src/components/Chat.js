@@ -1,8 +1,11 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./Chat.css";
+import Back from "./Back";
+import GroupChat from "./GroupChat";
 
-const messages = [
+// Sample direct messages
+const directMessages = [
   { from: "me", text: "Hello! Did you enjoy story time today?", time: "9:02 PM" },
   { from: "other", text: "Yes! I loved the story about the caterpillar.", time: "9:03 PM" },
   { from: "me", text: "Which part was your favorite?", time: "9:04 PM" },
@@ -13,37 +16,57 @@ const messages = [
 ];
 
 function Chat() {
-  const navigate = useNavigate();
-  const chatPerson = {
+  const location = useLocation();
+  const chatData = location.state || {
     emoji: "🧑",
-    name: "Teacher Ling",
-    status: "online"
+    name: "Unknown",
+    status: "offline",
+    isGroup: false, // default to direct chat
   };
 
+  // If group chat → render GroupChat.js
+  if (chatData.isGroup) {
+    return <GroupChat chatData={chatData} />;
+  }
+
+  // Otherwise → render direct one-to-one chat
   return (
     <div className="chat-page-bg">
-      {/* HEADER with profile */}
+      {/* HEADER with profile + menu button */}
       <header className="chat-header">
-        <button
-          className="chat-back-btn"
-          aria-label="Back"
-          onClick={() => navigate('/community')}
-        >
-          <span className="chat-back-arrow">←</span>
-        </button>
+        <Back to="/community" />
 
         <div className="chat-header-profile">
-          <div className="chat-avatar">{chatPerson.emoji}</div>
+          <div className="chat-avatar">{chatData.emoji}</div>
           <div className="chat-header-info">
-            <span className="chat-header-name">{chatPerson.name}</span>
-            <span className="chat-header-status">{chatPerson.status}</span>
+            <span className="chat-header-name">{chatData.name}</span>
+            <span className="chat-header-status">
+              {chatData.status || "online"}
+            </span>
           </div>
         </div>
+
+        {/* Three-dot menu button */}
+        <button className="chat-menu-btn" aria-label="Menu">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <circle cx="12" cy="5" r="1" />
+            <circle cx="12" cy="12" r="1" />
+            <circle cx="12" cy="19" r="1" />
+          </svg>
+        </button>
       </header>
 
-      {/* MESSAGES */}
+      {/* Messages */}
       <div className="chat-message-list">
-        {messages.map((msg, idx) => (
+        {directMessages.map((msg, idx) => (
           <div
             key={idx}
             className={
@@ -60,7 +83,7 @@ function Chat() {
         ))}
       </div>
 
-      {/* INPUT */}
+      {/* Input */}
       <div className="chat-input-bar">
         <input className="chat-input" placeholder="Type a message..." disabled />
         <button className="chat-send-btn" disabled>

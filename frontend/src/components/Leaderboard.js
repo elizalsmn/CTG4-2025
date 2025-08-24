@@ -83,9 +83,16 @@ function Leaderboard() {
       </div>
 
       {/* Redeem Button */}
-      <button className="redeem-button" onClick={() => navigate("/RedeemCoupon")}>
-        {t('redeem_points')}
-      </button>
+      <button 
+          className="redeem-button" 
+          onClick={() => {
+            const myData = leaderboardData.find(user => user.name === "You");
+            const myPoints = myData ? myData.points : 0;
+            navigate("/Milestone", { state: { points: myPoints } });
+          }}
+        >
+          View Milestones
+        </button>
 
       <UserMenu />
     </div>

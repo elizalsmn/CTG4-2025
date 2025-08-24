@@ -1,0 +1,120 @@
+.performance-card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-family: system-ui, -apple-system, sans-serif;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+.performance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.performance-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.performance-chevron {
+  color: #9ca3af;
+}
+
+.performance-bars-container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.performance-speaking-bar {
+  height: 8px;
+  background-color: #10b981;
+  border-radius: 4px;
+  flex: 0 0 70%;
+}
+
+.performance-writing-bar {
+  height: 8px;
+  background-color: #f59e0b;
+  border-radius: 4px;
+  flex: 0 0 30%;
+}
+
+.performance-metrics-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.performance-metric-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.performance-metric-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.performance-color-indicator {
+  width: 4px;
+  height: 20px;
+  border-radius: 2px;
+}
+
+.performance-speaking-indicator {
+  background-color: #10b981;
+}
+
+.performance-writing-indicator {
+  background-color: #f59e0b;
+}
+
+.performance-percentage {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.performance-change-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.performance-positive-change {
+  color: #10b981;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.performance-negative-change {
+  color: #ef4444;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.performance-metric-right {
+  text-align: right;
+}
+
+.performance-metric-label {
+  font-size: 14px;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.performance-metric-value {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+  margin: 0;
+}

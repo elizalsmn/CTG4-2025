@@ -15,6 +15,11 @@ import TakePicture from './components/TakePicture';
 import AsgGraded from './components/AsgGraded';
 import Community from "./components/Community";
 import Chat from "./components/Chat";
+import GroupChat from "./components/GroupChat";
+import KindergardenGroupChat from "./components/KindergartenGroupChat";
+import Milestone from "./components/Milestone";import ClassesPage from "./components/ClassesPage";
+import NewAssignmentPage from './components/NewAssignmentPage';
+
 
 function App() {
   return (
@@ -36,8 +41,13 @@ function App() {
           <Route path="/SpeechLesson" element={<SpeechLesson />} />
           <Route path="/profile" element={<Profile />}/>
           <Route path="/AsgGraded" element={<AsgGraded />}/>
-          <Route path="/community" element={<Community />}/>
-          <Route path="/chat" element={<Chat />}/>
+          <Route path="/community" element={<Community />} />
+          <Route path="/chat" element={<Chat />} />
+          <Route path="/group-chat" element={<GroupChat />} />
+          <Route path="/kindergarden-chat" element={<KindergardenGroupChat />} />
+          <Route path="/Milestone" element={<Milestone />} />           
+          <Route path="/classes" element={<ClassesPage />} />
+          <Route path="/new-assignment" element={<NewAssignmentPage />} />        
         </Routes>
       </div>
     </Router>

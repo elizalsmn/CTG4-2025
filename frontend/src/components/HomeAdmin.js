@@ -114,7 +114,7 @@ const HomeAdmin = () => {
       </section>
 
       {/* Sticky Bottom Navbar */}
-      <AdminMenu />
+      <AdminMenu selectedTab="Home" />
     </div>
   );
 };

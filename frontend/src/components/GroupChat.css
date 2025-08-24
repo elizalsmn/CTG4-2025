@@ -212,3 +212,10 @@
   height: 20px;
   stroke: #fff;
 }
+
+.chat-sender {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: #5c9a81;
+}

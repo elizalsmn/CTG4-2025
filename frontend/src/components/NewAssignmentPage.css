@@ -1,0 +1,271 @@
+.new-assignment-page {
+  padding: 20px;
+  padding-bottom: 80px; /* Space for the menu */
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.assignment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.assignment-header h1 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 auto;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.assignment-form {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.form-section {
+  margin-bottom: 25px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.form-input, .form-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+}
+
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+}
+
+.toggle-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.toggle-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.toggle-description {
+  font-size: 12px;
+  color: #666;
+  margin-top: 3px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 24px;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #4fa07f;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.toggle-options {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  border: 1px solid #eee;
+}
+
+.file-upload-container {
+  margin-bottom: 15px;
+}
+
+.file-label {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: #f9f9f9;
+}
+
+.file-label:hover {
+  border-color: #4fa07f;
+  background-color: #f0f7f4;
+}
+
+.file-icon {
+  font-size: 24px;
+  margin-right: 15px;
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.file-info {
+  flex-grow: 1;
+  min-width: 0; /* Allow text to wrap properly */
+  margin-right: 15px; /* Add space between text and button */
+  overflow: hidden; /* Prevent text from overflowing */
+}
+
+.file-title {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 3px;
+  white-space: nowrap; /* Prevent title from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Show ellipsis for overflow text */
+}
+
+.file-description {
+  display: block;
+  font-size: 12px;
+  color: #666;
+  white-space: nowrap; /* Prevent description from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Show ellipsis for overflow text */
+}
+
+.file-button {
+  background-color: #4fa07f;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 12px;
+  flex-shrink: 0; /* Prevent button from shrinking */
+  white-space: nowrap; /* Prevent button text from wrapping */
+}
+
+.file-input {
+  display: none;
+}
+
+.file-name {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #333;
+  background-color: #eee;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Added gap between buttons */
+  margin-top: 30px;
+}
+
+.cancel-button {
+  padding: 12px 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  flex: 1; /* Make buttons take equal space */
+}
+
+.create-button {
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  background-color: #4fa07f;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  flex: 1; /* Make buttons take equal space */
+}
+
+.create-button:hover {
+  background-color: #428c6d;
+}
+
+h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .file-description {
+    display: none; /* Hide description on small screens */
+  }
+  
+  .file-label {
+    padding: 10px;
+  }
+  
+  .file-button {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+  
+  .form-actions {
+    flex-direction: column-reverse; /* Stack buttons vertically on mobile */
+    gap: 10px;
+  }
+  
+  .cancel-button, .create-button {
+    width: 100%;
+  }
+}

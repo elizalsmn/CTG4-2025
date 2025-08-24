@@ -22,11 +22,13 @@ const resources = {
   phone_label: 'Phone number',
   phone_placeholder: 'Enter phone number (optional)',
   language_label: 'Language',
-  save: 'Save'
-  ,lessons_library_title: 'Lessons Library'
+  save: 'Save',
+  lessons_library_title: 'Lesson Library'
   ,lesson_prefix: 'Lesson'
   ,writing_a: 'Writing A'
-  ,type_video: 'Video'
+  ,type_video: 'Video',
+  type_speaking: 'Speaking',
+  type_writing: 'Writing'
   ,type_photo: 'Photo'
   ,school_leaderboard: 'School Leaderboard'
   ,redeem_points: 'Redeem your Points'
@@ -47,7 +49,8 @@ const resources = {
   ,asg_details: 'Assignment Details'
   ,asg_grade: 'Grade'
   ,asg_due: 'Due'
-  ,asg_submission_type: 'Submission Type'
+  ,asg_submission_type: 'Submission Type',
+  asg_description: 'Description'
   ,asg_attachments: 'Attachments'
   ,asg_cancel: 'Cancel'
   ,asg_upload: 'Upload'
@@ -56,8 +59,8 @@ const resources = {
   ,asg_instruction_file: 'Instruction File'
   ,asg_lesson1_writingA: 'Lesson 1: Writing Syllabus A'
   ,asg_lesson1_speechB: 'Lesson 1: Speech Syllabus B'
-  ,asg_video_upload: 'Video Upload'
-  ,asg_photo_video_upload: 'Photo/Video Upload'
+  ,asg_video_upload: 'Voice Recording'
+  ,asg_photo_video_upload: 'Photo Upload'
   ,tv_assignment_details: 'Assignment Details'
   ,tv_lesson1_speechB: 'Lesson 1: Speech Syllabus B'
   ,tv_camera_check: 'Turn on your camera and microphone!'

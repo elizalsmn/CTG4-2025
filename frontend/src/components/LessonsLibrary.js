@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import LessonCard from "./LessonCard";
 import UserMenu from "./UserMenu";
 import Back from "./Back";
+import lessonsData from './lessons.json'
 
 function LessonsLibrary() {
   const [bubble, setBubble] = useState(null);
@@ -14,16 +15,12 @@ function LessonsLibrary() {
   const { t, i18n } = useTranslation();
 
   const navigate = useNavigate();
-
-  const lessons = [1,2,3,4].map(n => ({
-    id: n,
-    title: `${t('lesson_prefix')} ${n}: ${t('writing_a')}`,
-    type: n % 2 === 0 ? t('type_photo') : t('type_video'),
-    due: '25 Aug 2025, at 23:59',
-    desc: 'Writing materials for group A, age xx to xx',
-    translation: i18n.language === 'zh' ? `第 ${n} 课: 写作` : `${t('lesson_prefix')} ${n}: ${t('writing_a')}`,
-    path: n === 1 || n === 3 ? '/AsgUpVideo' + (n===3 ? 'Lesson3' : '') : (n===2 ? '/AsgUp' : '/AsgUpPhotoLesson4')
+  const lessons = lessonsData.lessons.map(lesson => ({
+    ...lesson,
+    title: lesson.translations[i18n.language] || lesson.translations.en,
+    type: t(lesson.typeKey)
   }));
+  
 
   const handlePressStart = (lesson, e) => {
     e.preventDefault();
@@ -39,6 +36,20 @@ function LessonsLibrary() {
         y: clientY,
       });
     }, 600);
+  };
+
+  const handleLessonClick = (lesson) => {
+  // Determine the route based on lesson type
+    let route;
+    if (lesson.typeKey === 'type_video') {
+      route = '/AsgUpVideo';
+    } else {
+      route = '/AsgUp';
+    }
+    
+    // Navigate with lesson data in state
+    console.log("lesson", lesson)
+    navigate(route, { state: { lesson } });
   };
 
   const handlePressEnd = () => {
@@ -63,7 +74,7 @@ function LessonsLibrary() {
   return (
     <div className="lessons-library">
         <div className="header">
-            <Back/>
+            <Back top="52px"/>
             <h2 className="page-title">{t('lessons_library_title')}</h2>
         </div>
       
@@ -72,7 +83,7 @@ function LessonsLibrary() {
           <LessonCard
             key={lesson.id}
             lesson={lesson}
-            onNavigate={() => navigate(lesson.path)}
+            onNavigate={() => handleLessonClick(lesson)} // Pass the lesson here
             onPressStart={handlePressStart}
             onPressEnd={handlePressEnd}
           />
