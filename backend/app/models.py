@@ -158,3 +158,89 @@ def log_user_login(sender, request, user, **kwargs):
     else:
         # For logins without a request object
         LoginLog.objects.create(user=user)
+
+
+class SightWordsWorksheet(models.Model):
+    """Template for sight words worksheets with answer keys."""
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    grade_level = models.PositiveSmallIntegerField(default=1)
+    
+    def __str__(self):
+        return f"{self.title} (Grade {self.grade_level})"
+
+
+class SightWordsQuestion(models.Model):
+    """Individual questions in a sight words worksheet."""
+    worksheet = models.ForeignKey(SightWordsWorksheet, on_delete=models.CASCADE, related_name='questions')
+    question_number = models.PositiveSmallIntegerField()
+    question_text = models.CharField(max_length=500)  # e.g., "Write the word for this picture:"
+    correct_answer = models.CharField(max_length=100)  # e.g., "cat", "dog", "the"
+    question_type = models.CharField(max_length=50, choices=[
+        ('word_recognition', 'Word Recognition'),
+        ('spelling', 'Spelling'),
+        ('matching', 'Matching'),
+        ('fill_blank', 'Fill in the Blank'),
+    ], default='word_recognition')
+    
+    class Meta:
+        ordering = ['question_number']
+        unique_together = ['worksheet', 'question_number']
+    
+    def __str__(self):
+        return f"Q{self.question_number}: {self.correct_answer}"
+
+
+class WrittenAssignment(models.Model):
+    """Student's submitted written assignment."""
+    STATUS_CHOICES = [
+        ('submitted', 'Submitted'),
+        ('processing', 'Processing'),
+        ('graded', 'Graded'),
+        ('error', 'Error'),
+    ]
+    
+    student = models.ForeignKey('Child', on_delete=models.CASCADE, related_name='written_assignments')
+    worksheet = models.ForeignKey(SightWordsWorksheet, on_delete=models.CASCADE, related_name='submissions')
+    file_path = models.FileField(upload_to='assignments/%Y/%m/%d/')
+    submitted_at = models.DateTimeField(auto_now_add=True)
+    processed_at = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='submitted')
+    
+    # OCR and processing results
+    extracted_text = models.TextField(blank=True)
+    confidence_score = models.FloatField(null=True, blank=True)  # Overall OCR confidence
+    
+    def __str__(self):
+        return f"{self.student.name} - {self.worksheet.title} ({self.status})"
+
+
+class AssignmentAnswer(models.Model):
+    """Individual answers extracted from a student's assignment."""
+    assignment = models.ForeignKey(WrittenAssignment, on_delete=models.CASCADE, related_name='answers')
+    question = models.ForeignKey(SightWordsQuestion, on_delete=models.CASCADE)
+    extracted_answer = models.CharField(max_length=200)  # What OCR detected
+    is_correct = models.BooleanField(default=False)
+    confidence = models.FloatField(default=0.0)  # OCR confidence for this answer
+    position_x = models.FloatField(null=True, blank=True)  # Position in PDF
+    position_y = models.FloatField(null=True, blank=True)  # Position in PDF
+    
+    class Meta:
+        unique_together = ['assignment', 'question']
+    
+    def __str__(self):
+        return f"{self.assignment.student.name} - Q{self.question.question_number}: {self.extracted_answer}"
+
+
+class AssignmentGrade(models.Model):
+    """Final grade for a written assignment."""
+    assignment = models.OneToOneField(WrittenAssignment, on_delete=models.CASCADE, related_name='grade')
+    total_questions = models.PositiveSmallIntegerField()
+    correct_answers = models.PositiveSmallIntegerField()
+    percentage = models.FloatField()
+    graded_at = models.DateTimeField(auto_now_add=True)
+    feedback = models.TextField(blank=True)
+    
+    def __str__(self):
+        return f"{self.assignment.student.name} - {self.percentage}% ({self.correct_answers}/{self.total_questions})"

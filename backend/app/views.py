@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, JsonResponse
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
+from django.utils import timezone
+from django.core.files.storage import default_storage
 import csv, io, json, os, uuid
-from .models import User, ClassRoom, Child, ParentProfile
+import json
 import logging
 from .utils.db_utils import user_to_db, add_batch_user
 from .utils.image_utils import start_ocr
