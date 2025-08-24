@@ -97,7 +97,7 @@ const resources = {
   ,coupon_points_suffix: '{{points}} points'
   ,coupon_use: 'Use'
   ,coupon_exp: 'Exp:'
-  ,coupon_redeem_btn: 'Redeem'
+  ,coupon_redeem_btn: 'Redeem Now'
   ,coupon_valid_until: 'Valid until {{date}}'
   ,coupon_qr_placeholder: '[QR]'
   ,hp_student_name: 'Shannon Sie 👧🏻'
