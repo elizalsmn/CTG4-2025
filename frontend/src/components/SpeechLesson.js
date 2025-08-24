@@ -6,7 +6,7 @@ import { Mic } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 // === List of words for the practice flow ===
-const practiceWords = ["banana", "apple", "orange", "grape"];
+const practiceWords = ["apple", "avocado", "animal", "alligator"];
 
 function TakeVoice() {
   const navigate = useNavigate();
@@ -297,7 +297,7 @@ function TakeVoice() {
       </div>
 
       {/* Footer */}
-      <div className="footer-buttons-sl">
+      <div className="footer-buttons">
         <button onClick={() => navigate("/homePage")} className="cancel-btn">{t('sl_cancel')}</button>
         <button
           onClick={handleStepButton}

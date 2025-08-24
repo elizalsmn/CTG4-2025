@@ -75,7 +75,7 @@ const resources = {
   ,s2_full_name_placeholder: 'Full Name'
   ,s2_login: 'Login'
   ,sl_assignment_details: 'Assignment Details'
-  ,sl_lesson1_speechB: 'Lesson 1: Speech Syllabus B',
+  ,sl_lesson1_speechB: 'Lesson 1: Letter A Sounds',
   sl_welcome_intro: "Welcome! Are you ready to jump in and practice some new words? Just hit Start, and let’s see how awesome you can be!",
   sl_welcome_block: 'Welcome word wanderers! Are you ready to start practicing your words? Click Start and let the adventure begin! 🎉'
   ,sl_you_said: 'You said:'
@@ -179,7 +179,7 @@ const resources = {
   ,s2_full_name_placeholder: '全名'
   ,s2_login: '登录'
   ,sl_assignment_details: '作业详情'
-  ,sl_lesson1_speechB: '第1课：演讲大纲 B'
+  ,sl_lesson1_speechB: '第 1 课: 字母A发音'
   ,sl_welcome_intro: '欢迎！点击开始来练习单词。'
   ,sl_welcome_block: '欢迎，词语探索者！\n准备好开始练习你的单词了吗？点击开始，让冒险启程！🎉'
   ,sl_you_said: '你说：'
@@ -265,7 +265,7 @@ const resources = {
     ,s2_full_name_placeholder: '全名'
     ,s2_login: '登录'
     ,sl_assignment_details: '作业详情'
-    ,sl_lesson1_speechB: '第1课：演讲大纲 B'
+    ,sl_lesson1_speechB: '第 1 课: 字母A发音'
     ,sl_welcome_intro: '欢迎！点击开始来练习单词。'
     ,sl_welcome_block: '欢迎，词语探索者！\n准备好开始练习你的单词了吗？点击开始，让冒险启程！🎉'
     ,sl_you_said: '你说：'
