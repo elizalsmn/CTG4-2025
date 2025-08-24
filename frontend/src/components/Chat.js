@@ -14,33 +14,68 @@ const messages = [
 
 function Chat() {
   const navigate = useNavigate();
+  const chatPerson = {
+    emoji: "🧑",
+    name: "Teacher Ling",
+    status: "online"
+  };
+
   return (
     <div className="chat-page-bg">
+      {/* HEADER with profile */}
       <header className="chat-header">
-        <button className="chat-back-btn" aria-label="Back" onClick={() => navigate('/community')}>
-          <span className="chat-back-arrow">&#8592;</span>
+        <button
+          className="chat-back-btn"
+          aria-label="Back"
+          onClick={() => navigate('/community')}
+        >
+          <span className="chat-back-arrow">←</span>
         </button>
-        <span className="chat-title">Chat</span>
+
+        <div className="chat-header-profile">
+          <div className="chat-avatar">{chatPerson.emoji}</div>
+          <div className="chat-header-info">
+            <span className="chat-header-name">{chatPerson.name}</span>
+            <span className="chat-header-status">{chatPerson.status}</span>
+          </div>
+        </div>
       </header>
+
+      {/* MESSAGES */}
       <div className="chat-message-list">
         {messages.map((msg, idx) => (
           <div
             key={idx}
             className={
-              msg.from === "me" ? "chat-message chat-message-me" : "chat-message chat-message-other"
+              msg.from === "me"
+                ? "chat-message chat-message-me"
+                : "chat-message chat-message-other"
             }
           >
             <div className="chat-message-bubble">
-              {msg.text}
+              <span className="chat-message-text">{msg.text}</span>
               <span className="chat-message-time">{msg.time}</span>
             </div>
           </div>
         ))}
       </div>
+
+      {/* INPUT */}
       <div className="chat-input-bar">
         <input className="chat-input" placeholder="Type a message..." disabled />
         <button className="chat-send-btn" disabled>
-          <span role="img" aria-label="send">📤</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="22" y1="2" x2="11" y2="13" />
+            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+          </svg>
         </button>
       </div>
     </div>
