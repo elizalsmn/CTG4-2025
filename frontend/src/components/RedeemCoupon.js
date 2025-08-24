@@ -71,7 +71,7 @@ function RedeemCoupon() {
   return (
     <div className="redeem-page">
       {/* Available Coupons */}
-      <Back/>
+      <Back top="48px"/>
       {/* <h2 className="page-title">
         {t('rc_available_coupons')}
         <p className="page-subtitle">{t('rc_available_to_redeem', { count: availableCoupons.length })}</p>

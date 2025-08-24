@@ -60,7 +60,7 @@ function Community() {
     <div className="community-page-bg">
       {/* Header */}
       <header className="community-header">
-        <Back to="/HomePage" top="36px" />
+        <Back to="/homePage" top="36px" />
         <h1 className="community-title">Community</h1>
         <button className="community-qr-btn" aria-label="QR Scanner" onClick={openCamera}>
           <FaQrcode size={28} />

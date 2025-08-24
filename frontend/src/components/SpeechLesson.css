@@ -13,10 +13,22 @@ body {
 }
 
 .container-text{
-    max-width: 280px;
+    width: 100%;
     align-items: center;
     justify-content: center;
     justify-items: center   ;
+}
+
+.container-text h2{
+    text-align: center;
+    font-size: 20px;
+}
+
+.word-spell{
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+
 }
 
 .takevideo-page {
@@ -33,14 +45,16 @@ body {
 .assignment-label {
   font-size: 12px;
   color: #888;
-  margin: 0;
+  margin: 0 0 0 0;
   text-align: center;
 }
-.assignment-title {
+
+.text-title {
   font-size: 16px;
   font-weight: 600;
   margin: 5px 0 20px;
   text-align: center;
+  background: "blue";
 }
 
 /* Camera box */

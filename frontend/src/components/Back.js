@@ -21,7 +21,7 @@ const Back = ({
   const navigate = useNavigate();
 
   const containerStyle = {
-    position: 'fixed',
+    // position: 'fixed',
     top,
     left,
     zIndex: 1000, // above page content

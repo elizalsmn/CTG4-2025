@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 import useTranslationBubble from "./UseTranslationBubble";
 import { useTranslation } from 'react-i18next';
 import PerformanceCard from "./PerformanceCard";
+import lessonsData from './lessons.json'
+import avatar from '../assets/Avatar.png'
 
-// Base lesson identifiers; titles/types translated at render to allow live switching
-const lessons = [
-  { id: 1, titleKey: 'hp_lesson1_title', typeKey: 'hp_type_video', due: '25 Aug 2025, 23:59', descKey: 'hp_writing_materials_desc', path: '/AsgUpVideo' },
-  { id: 2, titleKey: 'hp_lesson2_title', typeKey: 'hp_type_photo', due: '25 Aug 2025, 23:59', descKey: 'hp_writing_materials_desc', path: '/AsgUp' }
-];
+
+// Get only the first 2 lessons for latest submissions
+const latestLessons = lessonsData.lessons.slice(0, 2);
 
 const CircularProgress = ({ size = 100, strokeWidth = 8, percentage = 75, color, label = "" }) => {
   const radius = (size - strokeWidth) / 2;
@@ -62,10 +62,22 @@ const CircularProgress = ({ size = 100, strokeWidth = 8, percentage = 75, color,
 };
 
 const HomePage = () => {
-  // ✅ use the custom hook
   const { bubble, handlePressStart, handlePressEnd } = useTranslationBubble();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  // Handle lesson navigation with proper data passing
+  const handleLessonClick = (lesson) => {
+    let route;
+    if (lesson.typeKey === 'type_video') {
+      route = '/AsgUpVideo';
+    } else {
+      route = '/AsgUp';
+    }
+    
+    // Navigate with lesson data in state
+    navigate(route, { state: { lesson } });
+  };
 
   return (
     <div className="home-page">
@@ -76,14 +88,12 @@ const HomePage = () => {
         </div>
         <div className="profile-icon">
           <button onClick={() => navigate("/profile")} className="profile-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="28" height="28" fill="#4fa07f">
-            <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm89.6 
-            32h-11.8c-22.2 10.2-46.9 16-73.8 
-            16s-51.6-5.8-73.8-16h-11.8C64.5 
-            288 0 352.5 0 432c0 44.2 35.8 
-            80 80 80h288c44.2 0 80-35.8 
-            80-80 0-79.5-64.5-144-134.4-144z"/>
-          </svg>
+            <img
+              src={avatar}
+              alt="Profile avatar"
+              className="profile-avatar"
+              style={{ width: '50px', height: '50px' }}
+            />
           </button>
         </div>
       </header>
@@ -107,14 +117,13 @@ const HomePage = () => {
           </div>
         </div>
 
-        {/* Latest Submission */}
         <div className="PerformanceSummary">
-          <h2>{t('latest_submission')}</h2>
+          <h2>{t('due_soon')}</h2>
           <div className="lessons-list">
-            {lessons.map((lesson) => {
+            {latestLessons.map((lesson) => {
               const localized = {
                 ...lesson,
-                title: t(lesson.titleKey),
+                title: lesson.translations[i18n.language] || lesson.translations.en,
                 type: t(lesson.typeKey),
                 desc: t(lesson.descKey)
               };
@@ -122,7 +131,7 @@ const HomePage = () => {
                 <LessonCard
                   key={lesson.id}
                   lesson={localized}
-                  onNavigate={() => navigate(lesson.path)}
+                  onNavigate={() => handleLessonClick(lesson)}
                   onPressStart={handlePressStart}
                   onPressEnd={handlePressEnd}
                 />

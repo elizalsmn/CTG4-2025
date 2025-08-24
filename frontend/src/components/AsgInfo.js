@@ -57,7 +57,7 @@ function AsgInfo({ status, lesson: propLesson }) {
       }
     >
       {/* Always-visible back button in a consistent position */}
-      <Back to="/LessonsLibrary" />
+      <Back to="/LessonsLibrary" top="42px"/>
 
       {/* Header */}
       <p className="assignment-label">{t('asg_details')}</p>
@@ -121,10 +121,10 @@ function AsgInfo({ status, lesson: propLesson }) {
         <button onClick={() => navigate("/LessonsLibrary")} className="cancel-btn">
           {t('asg_cancel')}
         </button>
-        {status === "upload" && (
+        {!assignment.isVideo && (
           <button className="upload-btn">{t('asg_upload')}</button>
         )}
-        {status === "video" && (
+        {assignment.isVideo && (
           <button onClick={() => navigate("/SpeechLesson")} className="start-btn">
             {t('asg_start_video')}
           </button>

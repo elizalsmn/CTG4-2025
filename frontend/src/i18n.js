@@ -30,13 +30,14 @@ const resources = {
   type_speaking: 'Speaking',
   type_writing: 'Writing'
   ,type_photo: 'Photo'
-  ,school_leaderboard: 'School Leaderboard'
+  ,school_leaderboard: 'Leaderboard'
   ,redeem_points: 'Redeem your Points'
   ,points_suffix: '{{count}} pts'
   ,welcome_back_learn: "Welcome back, let's learn!"
   ,attendance: 'Attendance'
   ,submissions: 'Submissions'
-  ,performance_summary: 'Performance Summary'
+  ,performance_summary: 'Performance Summary',
+  due_soon: 'Due Soon'
   ,latest_submission: 'Latest Submission'
   ,classes_attended: 'Classes attended: {{done}}/{{total}}'
   ,assignments_submitted: 'Assignments submitted: {{done}}/{{total}}'
@@ -74,9 +75,9 @@ const resources = {
   ,s2_full_name_placeholder: 'Full Name'
   ,s2_login: 'Login'
   ,sl_assignment_details: 'Assignment Details'
-  ,sl_lesson1_speechB: 'Lesson 1: Speech Syllabus B'
-  ,sl_welcome_intro: 'Welcome! Click Start to begin practicing your words.'
-  ,sl_welcome_block: 'Welcome, Word Explorer!\nAre you ready to start practicing your words? Click Start and let the adventure begin! 🎉'
+  ,sl_lesson1_speechB: 'Lesson 1: Speech Syllabus B',
+  sl_welcome_intro: "Welcome! Are you ready to jump in and practice some new words? Just hit Start, and let’s see how awesome you can be!",
+  sl_welcome_block: 'Are you ready to start practicing your words? Click Start and let the adventure begin! 🎉'
   ,sl_you_said: 'You said:'
   ,sl_start: 'Start'
   ,sl_next: 'Next'

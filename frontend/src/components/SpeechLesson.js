@@ -16,6 +16,15 @@ function TakeVoice() {
   const [step, setStep] = useState(0); // 0 = "start", 1...N = words, N+1 = "finish"
   const [currentWord, setCurrentWord] = useState(practiceWords[0]);
 
+  // Attempt tracking
+  const [attempts, setAttempts] = useState(0);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [correctWords, setCorrectWords] = useState(new Set());
+
+    // Calculate score
+  const score = Math.round((correctWords.size / practiceWords.length) * 100);
+  const isFinished = step > practiceWords.length;
+
   // Audio recording & transcription states
   const [isAudioRecording, setIsAudioRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState(null);
@@ -32,16 +41,22 @@ function TakeVoice() {
 
   // Greeting helper
   function spellOutWord(word) {
-    return word.toUpperCase().split('').join('-');
+    return word.toUpperCase().split('').join('--');
   }
   const createGreeting = (word) => {
     const spelled = spellOutWord(word);
     const greetings = [
-      `The first word is ${word}! Can you try to pronounce it for me please? That's: ${spelled}.`,
-      `Hello! Ready to learn how to say ${word}? Let's spell it together: ${spelled}.`,
-      `Welcome! Today's special word is ${word}! It goes like this: ${spelled}.`,
-      `Hi! Let's have fun pronouncing ${word} together! Let's spell it: ${spelled}.`,
-    ];
+        `Guess what? The word for today is ${word}! Can you say it with me? Let's spell it out: ${spelled}.`,
+        `Ready for a challenge? Try pronouncing ${word}! Here's how we spell it: ${spelled}.`,
+        `Ooh, this is a fun one: ${word}! Want to try saying it? It's spelled like this: ${spelled}.`,
+        `Let's dive into a new word: ${word}. Can you pronounce it? Here's the spelling: ${spelled}.`,
+        `Here comes a cool word: ${word}. Say it out loud! The letters are: ${spelled}.`,
+        `Time to practice! The word is ${word}. Can you give it a try? Spelled: ${spelled}.`,
+        `Spotlight on: ${word}! Let's hear your best pronunciation. It's spelled: ${spelled}.`,
+        `I have a word for you: ${word}. Want to repeat after me? Here's how it's spelled: ${spelled}.`,
+        `Let's make learning fun! Today's word is ${word}--spelled: ${spelled}. Can you say it?`,
+        `Challenge time! Can you pronounce ${word}? The letters are: ${spelled}.`
+        ];
     return greetings[Math.floor(Math.random() * greetings.length)];
   };
 
@@ -49,6 +64,10 @@ function TakeVoice() {
   useEffect(() => {
     if (step > 0 && step <= practiceWords.length) {
       setCurrentWord(practiceWords[step - 1]);
+      // Reset attempt tracking for new word
+      setAttempts(0);
+      setIsCorrect(false);
+      
       const greeting = createGreeting(practiceWords[step - 1]);
       speakText(greeting);
     }
@@ -108,7 +127,7 @@ function TakeVoice() {
   // Only greet at the very beginning (before any step)
   useEffect(() => {
     if (step === 0) {
-  speakText(t('sl_welcome_intro'));
+      speakText(t('sl_welcome_intro'));
     }
     // eslint-disable-next-line
   }, [step]);
@@ -157,12 +176,17 @@ function TakeVoice() {
     const keywords = [currentWord];
     const textLower = text.toLowerCase();
     const containsKeyword = keywords.some(keyword => textLower.includes(keyword));
-    if (containsKeyword && confidence >= 70){
-  speakText(t('sl_good_job'));
+    
+    // Increment attempts
+    setAttempts(prev => prev + 1);
+    
+    if (containsKeyword && confidence >= 70) {
+      setIsCorrect(true);
+      setCorrectWords(prev => new Set([...prev, currentWord]));
+      speakText(t('sl_good_job'));
     } else {
-  speakText(t('sl_try_again'));
+      speakText(t('sl_try_again'));
     }
-    return;
   };
 
   // Upload logic (unchanged)
@@ -177,11 +201,14 @@ function TakeVoice() {
         method: "POST",
         body: formData,
       });
-  alert(t('sl_audio_upload_success'));
+      alert(t('sl_audio_upload_success'));
     } catch (err) {
-  alert(t('sl_upload_fail'));
+      alert(t('sl_upload_fail'));
     }
   };
+
+  // Button logic: can proceed if correct OR after 2 attempts
+  const canProceed = isCorrect || attempts >= 2;
 
   // Button label and logic
   let buttonLabel = t('sl_start');
@@ -189,58 +216,74 @@ function TakeVoice() {
   else if (step === practiceWords.length) buttonLabel = t('sl_finish');
 
   const handleStepButton = () => {
-    // If not started, begin with first word
     if (step < practiceWords.length) {
       setStep(step + 1);
+      setCurrentWord(practiceWords[step])
       setTranscript('');
       setConfidence(null);
     } else {
-      // Finished all words
-  speakText(t('sl_congrats_done'));
-      // Optionally upload, or go to next page:
-      // navigate("/done");
+      speakText(t('sl_congrats_done'));
+      console.log('Correct words:', Array.from(correctWords));
+      navigate("/doneSpeech", {
+      state: {
+        score: score,
+        totalQuestions: practiceWords.length,
+        correctAnswers: correctWords.size,
+      }
+    });
     }
   };
 
   const supportsSpeechRecognition = 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
 
+  // Disable mic if already correct
+  const micDisabled = isCorrect || isTranscribing;
+
   return (
     <div className="takevideo-page">
       {/* Header */}
-  <p className="assignment-label">{t('sl_assignment_details')}</p>
-  <h3 className="assignment-title">{t('sl_lesson1_speechB')}</h3>
+      <p className="assignment-label">{t('sl_assignment_details')}</p>
+      <h3 className="assignment-title">{t('sl_lesson1_speechB')}</h3>
 
       <AnimationBoxTemplate />
 
       <div className="max-w-2xl mx-auto p-6 flex flex-col bg-white rounded-lg shadow-lg items-center justify-center">
-        <div className="flex flex-col items-center space-y-4 justify-center">
+        <div className="container-text">
           {step === 0 && (
             <div className="container-text">
               <p className="assignment-label">{t('sl_welcome_block')}</p>
             </div>
           )}
           {step > 0 && step <= practiceWords.length && (
-            <div className="w-full flex flex-col items-center justify-center">
-              <p className="text-center">
-                {/* <strong>Practice word {step} of {practiceWords.length}:</strong> <span style={{fontWeight: "bold", color: "#1976d2"}}>{currentWord}</span> */}
-                <span style={{
-                fontWeight: "bold", 
-                color: "#ff7300ff", 
-                fontSize: "36px", 
-                padding: "16px"
-                }}>
+            <div className="container-text">
+              <p className="word-spell">
+         
                 {currentWord.charAt(0).toUpperCase() + currentWord.slice(1)}
-                </span>              
-                </p>
-              <p className="assignment-title">{transcript && <>{t('sl_you_said')} <strong>{transcript}</strong></>}</p>
+           
+              </p>
+              
+            <div >
+              <p className="text-title">
+                {transcript && <>{t('sl_you_said')} <strong>{transcript}</strong></>}
+              </p>
+            </div>
+              {/* Show attempt status */}
+              {/* <div style={{ marginTop: '10px', fontSize: '14px', color: '#666' }}>
+                {isCorrect ? (
+                  <span style={{ color: 'green', fontWeight: 'bold' }}>✓ Correct!</span>
+                ) : (
+                  <span></span>
+                )}
+              </div> */}
             </div>
           )}
           <div className="center-container">
             {supportsSpeechRecognition && step > 0 && step <= practiceWords.length && (
               <button
                 onClick={startTranscription}
-                disabled={isTranscribing}
-                className={`icon-btn enhanced-mic-btn ${isTranscribing ? 'transcribing' : 'ready'}`}
+                disabled={micDisabled}
+                className={`icon-btn enhanced-mic-btn ${micDisabled ? 'disabled' : isTranscribing ? 'transcribing' : 'ready'}`}
+                style={{ opacity: micDisabled ? 0.5 : 1 }}
               >
                 <Mic className="w-10 h-10" style={{ color: 'white' }} />
               </button>
@@ -251,10 +294,15 @@ function TakeVoice() {
 
       {/* Footer */}
       <div className="footer-buttons">
-  <button onClick={() => navigate("/AsgUpVideo")} className="cancel-btn">{t('sl_cancel')}</button>
+        <button onClick={() => navigate("/homePage")} className="cancel-btn">{t('sl_cancel')}</button>
         <button
           onClick={handleStepButton}
+          disabled={step > 0 && step <= practiceWords.length && !canProceed}
           className="start-btn"
+          style={{ 
+            opacity: (step > 0 && step <= practiceWords.length && !canProceed) ? 0.5 : 1,
+            cursor: (step > 0 && step <= practiceWords.length && !canProceed) ? 'not-allowed' : 'pointer'
+          }}
         >
           {buttonLabel}
         </button>

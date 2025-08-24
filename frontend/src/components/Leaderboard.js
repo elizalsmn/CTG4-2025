@@ -26,8 +26,8 @@ function Leaderboard() {
   return (
     <div className="leaderboard-container">
       {/* Header */}
+      <Back />
       <div className="leaderboard-header">
-        <Back />
         <h1>School Leaderboard</h1>
       </div>
 
