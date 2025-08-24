@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-import csv
-import io
+import csv, io
+from typing import Tuple, Dict, Any
 from app.models import User, ClassRoom, Child, ParentProfile
 import logging
 import pandas as pd
@@ -145,12 +145,92 @@ def user_to_db(role: str, data: dict) -> tuple[bool, str | None]:
         return False, str(e)
     
 
-def create_user_batch(df: pd.DataFrame):
-    for index, row in df.iterrows():
-        role = row.get('role', '').lower()
-        if role in ['teacher', 'parent']:
-            success = user_to_db(role, row)
-            if not success:
-                logging.error(f"Failed to create user for row {index}: {row.to_dict()}")
+def add_batch_user(df: pd.DataFrame) -> Tuple[bool, Dict[str, Any]]:
+    REQUIRED_HEADERS = {"child_name", "child_date_of_birth", "child_class_name"}
+    """
+    Partial-success batch: processes all rows and reports successes/failures.
+    Expected columns (case-insensitive):
+      - child_name (required)
+      - child_date_of_birth (required, YYYY-MM-DD)
+      - child_class_name (required)
+    Optional:
+      - parent_full_name
+      - parent_email
+      - parent_phone_number
+      - password
+    Returns (ok, report) where:
+      ok = (failed == 0)
+      report = { total, created, failed, errors: [ {row_index, child_name, error} ] }
+    """
+    total = 0
+    created = 0
+    errors = []
+
+    # Normalize headers
+    df = df.copy()
+    df.columns = [str(c).strip().lower() for c in df.columns]
+
+    missing = [h for h in REQUIRED_HEADERS if h not in df.columns]
+    if missing:
+        return False, {
+            "total": 0,
+            "created": 0,
+            "failed": 0,
+            "errors": [{"row_index": -1, "error": f"Missing required columns: {', '.join(missing)}"}],
+        }
+
+    for i, row in df.iterrows():
+        total += 1
+        child_name = str(row.get("child_name", "")).strip()
+        child_dob = str(row.get("child_date_of_birth", "")).strip()
+        class_name = str(row.get("child_class_name", "")).strip()
+
+        if not child_name or not child_dob or not class_name:
+            errors.append({
+                "row_index": int(i),
+                "child_name": child_name,
+                "error": "child_name, child_date_of_birth and child_class_name are required"
+            })
+            continue
+
+        payload = {
+            "role": "parent",
+            "child": {
+                "name": child_name,
+                "date_of_birth": child_dob,
+                "class_name": class_name,
+            }
+        }
+
+        # optional parent fields
+        full_name = str(row.get("parent_full_name", "") or "").strip()
+        email = str(row.get("parent_email", "") or "").strip()
+        phone = str(row.get("parent_phone_number", "") or "").strip()
+        password = str(row.get("password", "") or "").strip()
+
+        if full_name:
+            payload["full_name"] = full_name
+        if email:
+            payload["email"] = email
+        if phone:
+            payload["phone_number"] = phone
+        if password:
+            payload["password"] = password
+
+        ok, err = user_to_db("parent", payload)
+        if ok:
+            created += 1
         else:
-            logging.warning(f"Invalid role '{role}' for row {index}: {row.to_dict()}")
+            errors.append({
+                "row_index": int(i),
+                "child_name": child_name,
+                "error": err or "Unknown error"
+            })
+
+    report = {
+        "total": total,
+        "created": created,
+        "failed": len(errors),
+        "errors": errors,
+    }
+    return (len(errors) == 0), report

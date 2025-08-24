@@ -3,7 +3,7 @@
 0. download python3.11
 
 1. create a virtual environment
-python -m venv311 venv311
+python3.11 -m venv311 venv311
 1.1. start venv
 source .venv311/bin/activate
 
