@@ -1,0 +1,83 @@
+.coupon-card {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  margin: 12px 0;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  overflow: visible;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* inner flex container */
+.coupon-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 16px 20px;
+  box-sizing: border-box;
+}
+
+/* Left content */
+.coupon-left {
+  flex: 1;
+  text-align: center;
+}
+
+.coupon-left h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.coupon-title {
+  margin: 4px 0 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #222;
+}
+
+/* Divider */
+.coupon-divider {
+  border-left: 2px dashed #ccc;
+  height: 60px;         /* ✅ fixed height */
+  flex-shrink: 0;       /* ✅ don’t let flexbox collapse it */
+  margin: 0 20px;
+}
+
+/* Right content */
+.coupon-right {
+  flex: 1;
+  text-align: center;
+}
+
+.redeem-text {
+  margin: 0;
+  font-size: 13px;
+  color: #888;
+}
+
+/* "ticket cutouts" */
+.coupon-card::before,
+.coupon-card::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.coupon-card::before {
+  left: -12px;
+}
+
+.coupon-card::after {
+  right: -12px;
+}

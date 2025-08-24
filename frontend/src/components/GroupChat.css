@@ -1,0 +1,221 @@
+.chat-page-bg {
+  background: #F1F5E8;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+/* HEADER with profile */.chat-header {
+  background: #fff;
+  padding: 8% 2%;               /* equal left/right padding */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* spread left, middle, right */
+  border-bottom: 2px solid #e0e5d9;
+  height: 60px;                  /* fixed even height */
+  }
+
+.chat-header-profile {
+  flex: 1;                       /* profile fills center space */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Back button and menu button should look the same */
+.chat-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5% 2%;
+  margin-top: 2%;
+  border-radius: 50%;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-back-btn:hover,
+.chat-menu-btn:hover {
+  background: rgba(92, 154, 129, 0.1);
+}
+
+.chat-back-btn svg,
+.chat-menu-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: #444;
+}
+
+.chat-header-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 12%;
+}
+
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.chat-header-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-header-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #222;
+}
+
+.chat-header-status {
+  font-size: 0.8rem;
+  color: #5c9a81;
+}
+
+/* MESSAGES */
+.chat-message-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 14px 80px 14px;
+  overflow-y: auto;
+  background: #F1F5E8;
+}
+
+.chat-message {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.chat-message-me {
+  justify-content: flex-end;
+}
+
+.chat-message-other {
+  justify-content: flex-start;
+}
+
+/* BUBBLE with tighter padding */
+.chat-message-bubble {
+  max-width: 70%;
+  padding: 8px 12px 6px 12px;   /* 🔥 reduced bottom padding */
+  border-radius: 16px;
+  font-size: 0.95rem;
+  position: relative;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  word-break: break-word;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-message-me .chat-message-bubble {
+  background: #5c9a81;
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-message-other .chat-message-bubble {
+  background: #fff;
+  color: #222;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-message-text {
+  line-height: 1.4;
+}
+
+.chat-message-time {
+  font-size: 0.7rem;
+  margin-top: 2px;              /* tighter spacing */
+  align-self: flex-end;
+  opacity: 0.6;
+}
+
+.chat-message-me .chat-message-time {
+  color: rgba(255,255,255,0.8);
+}
+
+.chat-message-other .chat-message-time {
+  color: #888;
+}
+
+/* INPUT */
+.chat-input-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #e0e5d9;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 24px;
+  border: 1px solid #dde3d2;
+  font-size: 0.95rem;
+  outline: none;
+  background: #F9FBF5;
+  margin-right: 8px;
+  transition: all 0.2s;
+}
+
+.chat-input:focus {
+  border-color: #5c9a81;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(92, 154, 129, 0.2);
+}
+
+/* SEND BUTTON w/ SVG */
+.chat-send-btn {
+  background: #5c9a81;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.chat-send-btn:hover {
+  background: #4a7f6a;
+}
+
+.chat-send-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.chat-send-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: #fff;
+}
+
+.chat-sender {
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+  color: #5c9a81;
+}

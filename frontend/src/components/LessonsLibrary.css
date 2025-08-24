@@ -1,0 +1,20 @@
+.lessons-library {
+  background: #fff;
+  min-height: 100vh;
+  padding: 10% 5%;
+  padding-bottom: 75px;
+}
+
+.page-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding: 5% 5%;
+}
+
+.lessons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}

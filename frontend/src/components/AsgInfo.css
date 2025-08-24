@@ -1,0 +1,179 @@
+/* ==== Common Styles ==== */
+.assignment-label {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 4px;
+  padding-top: 32px;
+}
+
+.assignment-title {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.icon-circle {
+  margin-top: 16px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  margin-bottom: 28px;
+}
+
+.info-box {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 14px;
+}
+.info-label {
+  font-size: 13px;
+  color: #666;
+}
+.info-value {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+}
+
+.divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 18px 0;
+}
+
+.attachments {
+  width: 100%;
+}
+.attachment-item {
+  display: flex;
+  align-items: center;
+  background: #fbeaea;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 8px;
+}
+.pdf-icon {
+  font-size: 28px;
+  color: #d9534f;
+  margin-right: 10px;
+}
+.attachment-text {
+  display: flex;
+  flex-direction: column;
+}
+.attachment-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+.attachment-type {
+  font-size: 12px;
+  color: #777;
+}
+
+.footer {
+  margin-top: auto;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.cancel-btn {
+  background: #f5f5f5;
+  color: #bbb;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  flex: 1;
+}
+
+/* ==== Graded Page ==== */
+.graded-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10% 10%;
+  font-family: "Inter", sans-serif;
+  background: #fff;
+  min-height: 100vh;
+  margin-top: 46px;
+}
+.grade-box {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 16px;
+}
+.grade-label {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 3px;
+}
+.grade-value {
+  font-size: 18px;
+  font-weight: 600;
+}
+.grade-score {
+  color: #4FA07F;
+}
+.graded-page .footer {
+  justify-content: center;
+}
+.graded-page .cancel-btn {
+  max-width: 320px;
+}
+
+/* ==== Upload Page ==== */
+.upasg-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10% 10%;
+  font-family: "Inter", sans-serif;
+  background: #fff;
+  min-height: 100vh;
+}
+.upload-btn {
+  background: #4FA07F;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  flex: 1;
+}
+.upload-btn:active {
+  background: #6bc09a;
+}
+
+/* ==== Video Upload Page ==== */
+.asgupvid-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10% 10%;
+  font-family: "Inter", sans-serif;
+  background: #fff;
+  min-height: 100vh;
+}
+.start-btn {
+  background: #4FA07F;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  flex: 1;
+  transition: background 0.2s ease;
+}
+.start-btn:active {
+  background: #6bc09a;
+}
