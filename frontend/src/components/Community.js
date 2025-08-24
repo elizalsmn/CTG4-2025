@@ -29,7 +29,7 @@ function Community() {
     <div className="community-page-bg">
       {/* Header */}
       <header className="community-header">
-        <Back to="/" />
+        <Back to="/HomePage" />
         <h1 className="community-title">Community</h1>
         <button className="community-menu-btn" aria-label="Menu">
           <svg 

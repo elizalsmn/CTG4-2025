@@ -39,8 +39,6 @@ function App() {
           <Route path="/SpeechLesson" element={<SpeechLesson />} />
           <Route path="/profile" element={<Profile />}/>
           <Route path="/AsgGraded" element={<AsgGraded />}/>
-
-       
         <Route path="/community" element={<Community />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/group-chat" element={<GroupChat />} />
