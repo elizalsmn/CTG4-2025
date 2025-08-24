@@ -11,6 +11,7 @@ import RedeemCoupon from './components/RedeemCoupon';
 import HomeAdmin from './components/HomeAdmin';
 import Profile from './components/Profile';
 import SpeechLesson from './components/SpeechLesson';
+import TakePicture from './components/TakePicture';
 import AsgGraded from './components/AsgGraded';
 import Community from "./components/Community";
 import Chat from "./components/Chat";
@@ -28,6 +29,7 @@ function App() {
           <Route path="/AsgUp" element={<AsgInfo status="upload" />}/>
           <Route path="/AsgGrade" element={<AsgInfo status="graded" />}/>
           <Route path="/TakeVideo" element={<TakeVideo />} />
+          <Route path="/TakePicture" element={<TakePicture />} />
           <Route path="/" element={<Signup />} />
           <Route path="/signup2" element={<Signup2 />} />
           <Route path="/leaderboard" element={<Leaderboard />} />

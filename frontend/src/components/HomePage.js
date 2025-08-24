@@ -5,26 +5,12 @@ import TranslationBubble from "./TranslationBubble";
 import LessonCard from "./LessonCard";
 import { useNavigate } from "react-router-dom";
 import useTranslationBubble from "./UseTranslationBubble";
+import { useTranslation } from 'react-i18next';
 
+// Base lesson identifiers; titles/types translated at render to allow live switching
 const lessons = [
-  {
-    id: 1,
-    title: "Lesson 1: Writing A",
-    type: "Video",
-    due: "25 Aug 2025, at 23:59",
-    desc: "Writing materials for group A, age xx to xx",
-    translation: "第 1 课: 写作",
-    path: "/AsgUpVideo",
-  },
-  {
-    id: 2,
-    title: "Lesson 2: Writing A",
-    type: "Photo",
-    due: "25 Aug 2025, at 23:59",
-    desc: "Writing materials for group A, age xx to xx",
-    translation: "第 2 课: 写作",
-    path: "/AsgUp",
-  },
+  { id: 1, titleKey: 'hp_lesson1_title', typeKey: 'hp_type_video', due: '25 Aug 2025, 23:59', descKey: 'hp_writing_materials_desc', path: '/AsgUpVideo' },
+  { id: 2, titleKey: 'hp_lesson2_title', typeKey: 'hp_type_photo', due: '25 Aug 2025, 23:59', descKey: 'hp_writing_materials_desc', path: '/AsgUp' }
 ];
 
 const CircularProgress = ({ size = 100, strokeWidth = 8, percentage = 75, color, label = "" }) => {
@@ -36,7 +22,7 @@ const CircularProgress = ({ size = 100, strokeWidth = 8, percentage = 75, color,
     const progressOffset = circumference - (percentage / 100) * circumference;
     setTimeout(() => {
       setOffset(progressOffset);
-    }, 100);
+    }, 100);  
   }, [circumference, percentage]);
 
   return (
@@ -78,13 +64,14 @@ const HomePage = () => {
   // ✅ use the custom hook
   const { bubble, handlePressStart, handlePressEnd } = useTranslationBubble();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="home-page">
       <header className="home-header">
         <div className="home-text">
-          <h1> Shannon Sie 👧🏻 </h1>
-          <p style={{fontSize: "12px", color: "grey"}}> Pre Kindergaten (K2)  </p>
+          <h1> {t('hp_student_name')} </h1>
+          <p style={{fontSize: "12px", color: "grey"}}> {t('hp_grade_level')} </p>
         </div>
         <div className="profile-icon">
           <button onClick={() => navigate("/profile")} className="profile-icon">
@@ -104,42 +91,50 @@ const HomePage = () => {
         {/* Attendance + Submissions */}
         <div className="row-cards">
           <div className="info-card chart-card hover-card">
-            <CircularProgress percentage={85} color="#436448ff" label="Attendance" />
+            <CircularProgress percentage={85} color="#436448ff" label={t('attendance')} />
             <div className="hover-details">
-              <p>Classes attended: 17/20</p>
+              <p>{t('classes_attended', { done: 17, total: 20 })}</p>
             </div>
           </div>
 
           <div className="info-card-2 chart-card hover-card">
-            <CircularProgress percentage={(8 / 10) * 100} color="#a46131ff" label="Submissions" />
+            <CircularProgress percentage={(8 / 10) * 100} color="#a46131ff" label={t('submissions')} />
             <div className="hover-details">
-              <p>Assignments submitted: 8/10</p>
+              <p>{t('assignments_submitted', { done: 8, total: 10 })}</p>
             </div>
           </div>
         </div>
 
         {/* Performance Summary */}
         <div className="PerformanceSummary">
-          <h2>Performance Summary</h2>
+          <h2>{t('performance_summary')}</h2>
           <div className="performance-box">
-            <p>place holder for AI analytics :D</p>
-            <p>place holder for AI analytics :D</p>
+            <p>{t('ai_placeholder')}</p>
+            <p>{t('ai_placeholder')}</p>
           </div>
         </div>
 
         {/* Latest Submission */}
         <div className="PerformanceSummary">
-          <h2>Latest Submission</h2>
+          <h2>{t('latest_submission')}</h2>
           <div className="lessons-list">
-            {lessons.map((lesson) => (
-              <LessonCard
-                key={lesson.id}
-                lesson={lesson}
-                onNavigate={() => navigate(lesson.path)}
-                onPressStart={handlePressStart}
-                onPressEnd={handlePressEnd}
-              />
-            ))}
+            {lessons.map((lesson) => {
+              const localized = {
+                ...lesson,
+                title: t(lesson.titleKey),
+                type: t(lesson.typeKey),
+                desc: t(lesson.descKey)
+              };
+              return (
+                <LessonCard
+                  key={lesson.id}
+                  lesson={localized}
+                  onNavigate={() => navigate(lesson.path)}
+                  onPressStart={handlePressStart}
+                  onPressEnd={handlePressEnd}
+                />
+              );
+            })}
           </div>
         </div>
 
