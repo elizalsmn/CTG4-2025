@@ -264,7 +264,11 @@ function TakeVoice() {
               
             <div >
               <p className="text-title">
-                {transcript && <>{t('sl_you_said')} <strong>{transcript}</strong></>}
+                {transcript && <>{t('sl_you_said')}  {isCorrect ? (
+                  <span style={{ color: 'green', fontWeight: 'bold' }}>{transcript}</span>
+                ) : (
+                  <span style={{ color: 'red', fontWeight: 'bold' }}>{transcript}</span>
+                )}</>}
               </p>
             </div>
               {/* Show attempt status */}

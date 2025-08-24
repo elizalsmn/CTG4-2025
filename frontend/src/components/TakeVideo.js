@@ -213,7 +213,7 @@ function TakeVideo() {
 
       {/* Footer */}
       <div className="footer-buttons">
-  <button onClick={() => navigate("/AsgUpVideo")} className="cancel-btn">{t('tv_cancel')}</button>
+  <button onClick={() => navigate("/AsgUpVideo")} className="cancel-btn-ph">{t('tv_cancel')}</button>
   <button className="start-btn">{t('tv_start')}</button>
       </div>
     </div>
