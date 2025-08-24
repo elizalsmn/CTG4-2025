@@ -13,7 +13,7 @@ function Milestone() {
   const coupons = [
     {
       id: 1,
-      value: "$10",
+      value: "$5",
       title: "Kaibo",
       points: 20, // unlocks at 20 points
       desc: "Get $10 off at your next Grocery buy",
@@ -22,7 +22,7 @@ function Milestone() {
     },
     {
       id: 2,
-      value: "$10",
+      value: "$5",
       title: "Wellcome",
       points: 40,
       desc: "Save on your next grocery trip",
@@ -31,7 +31,7 @@ function Milestone() {
     },
     {
       id: 3,
-      value: "$10",
+      value: "$5",
       title: "Park N Shop",
       points: 60,
       desc: "Get extra groceries for free",
@@ -41,7 +41,7 @@ function Milestone() {
     {
       id: 4,
       value: "$10",
-      title: "Park N Shop",
+      title: "DS Groceries",
       points: 80,
       desc: "Get extra groceries for free",
       conditions: ["Valid only at Park N Shop.", "No cash value."],
@@ -50,7 +50,7 @@ function Milestone() {
     {
       id: 5,
       value: "$10",
-      title: "Park N Shop",
+      title: "Bestmart 360",
       points: 100,
       desc: "Get extra groceries for free",
       conditions: ["Valid only at Park N Shop.", "No cash value."],
