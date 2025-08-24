@@ -10,6 +10,7 @@ source .venv311/bin/activate
 
 2. install all the requirements
 pip install -r requirements.txt
+brew install uvicorn
 
 3. start the server
 python manage.py runserver

@@ -8,19 +8,7 @@ polar
 pandas
 numpy
 
-# AI/OCR Dependencies for Assignment Grading
-pytesseract
-opencv-python
-pillow
-pdf2image
 
-# Image processing
-scikit-image
-
-# Media & audio
-moviepy
-SpeechRecognition
-gTTS
 
 # Optional: handy for env vars
 python-decouple
@@ -29,4 +17,6 @@ django-cors-headers
 
 # File handling
 python-magic
+
+
 
