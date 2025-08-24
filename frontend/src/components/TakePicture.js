@@ -75,7 +75,7 @@ function TakePicture() {
             const blob = dataURLToBlob(ph.dataUrl);
             formData.append('files', blob, `photo_${idx + 1}.jpg`);
         });
-        await fetch('http://localhost:8000/app/start_ocr/', { method: 'POST', body: formData });
+        await fetch('http://localhost:8000/app/accept_picture/', { method: 'POST', body: formData });
 
         alert('Photos uploaded');
     } catch (e) {
