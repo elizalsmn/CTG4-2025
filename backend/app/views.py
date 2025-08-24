@@ -6,11 +6,14 @@ from .models import User, ClassRoom, Child, ParentProfile
 import logging
 from .utils.db_utils import user_to_db, add_batch_user
 from .utils.image_utils import start_ocr
+from .utils.leaderboard_utils import add_to_leaderboard,adjust_point, get_5_top_user
 import pandas as pd
 from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 from django.conf import settings
 from django.utils.text import get_valid_filename
+from app.models import LeaderBoardEntry
+
 
 
 # Create your views here.
@@ -266,5 +269,94 @@ def accept_picture(request):
             "path": rel_path,
             "bytes": len(content)
         })
+    
+def _json(request):
+    try:
+        return json.loads(request.body.decode("utf-8"))
+    except Exception:
+        return None
+
+
+@csrf_exempt
+def add_to_leaderboard_view(request):  # Rename the view function
+    """
+    POST JSON: { "user_id": <int>, "points": <int optional> }
+    Ensures the parent (by user_id) is present on the leaderboard. Optionally sets points.
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    payload = _payload(request) or {}  # Also change _json to _payload
+    user_id = payload.get("user_id")
+    points = payload.get("points", 0)
+
+    if not isinstance(user_id, int):
+        return JsonResponse({"error": "user_id must be an integer"}, status=400)
+
+    ok, err, data = add_to_leaderboard(user_id, points)  # This calls the utility function
+    if not ok:
+        return JsonResponse({"error": err or "Failed to add to leaderboard"}, status=400)
+    return JsonResponse({"message": "ok", "data": data}, status=201 if data.get("created") else 200)
+
+def top_leaderboard(request):
+    """
+    GET: returns the top 5 entries.
+    """
+    if request.method != "GET":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+    results = get_5_top_user()
+    return JsonResponse({"results": results}, status=200)
+
+
+@csrf_exempt
+def adjust_leaderboard_point(request):
+    """
+    POST JSON: { "user_id": <int>, "adjust": <int> }
+    Adjusts the parent's points (min 0).
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    payload = _payload(request) or {}
+    user_id = payload.get("user_id")
+    adjust = payload.get("adjust")
+    user_id = payload.get("user_id")
+    adjust = payload.get("adjust")
+
+    if not isinstance(user_id, int):
+        return JsonResponse({"error": "user_id must be an integer"}, status=400)
+    if not isinstance(adjust, int):
+        return JsonResponse({"error": "adjust must be an integer"}, status=400)
+
+    ok, err, data = adjust_point(user_id, adjust)
+    if not ok:
+        return JsonResponse({"error": err or "Failed to adjust points"}, status=400)
+    return JsonResponse({"message": "ok", "data": data}, status=200)
+
+@csrf_exempt
+def delete_leaderboard(request):
+    """
+    Delete a single leaderboard row by its id.
+
+    POST/DELETE JSON:
+      { "id": 123 }
+
+    Returns: { "deleted": 1 } or { "deleted": 0 }
+    """
+    if request.method not in ("POST", "DELETE"):
+        return JsonResponse({"error": "Method not allowed"}, status=405)
+
+    payload = _payload(request)
+    entry_id = payload.get("id")
+    if entry_id is None:
+        return JsonResponse({"error": "Provide 'id'."}, status=400)
+
+    try:
+        entry_id = int(entry_id)
+    except (TypeError, ValueError):
+        return JsonResponse({"error": "'id' must be an integer."}, status=400)
+
+    deleted, _ = LeaderBoardEntry.objects.filter(pk=entry_id).delete()
+    return JsonResponse({"deleted": deleted}, status=200)
 
         
