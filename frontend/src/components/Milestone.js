@@ -63,8 +63,9 @@ function Milestone() {
   return (
     <div className="milestone-container">
       {/* Header */}
+
       <div className="milestone-header">
-        <Back />
+        <Back top="8px"/>
         <h1>Milestone Progress</h1>
       </div>
 
