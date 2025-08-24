@@ -28,10 +28,10 @@ function LessonsLibrary() {
     const isTouch = e.type === "touchstart";
     const clientX = isTouch ? e.touches[0].clientX : e.clientX;
     const clientY = isTouch ? e.touches[0].clientY : e.clientY;
-
+ 
     timerRef.current = setTimeout(() => {
       setBubble({
-        text: lesson.translation,
+        text: lesson.translations.zh,
         x: clientX,
         y: clientY,
       });
