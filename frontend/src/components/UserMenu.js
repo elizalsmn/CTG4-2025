@@ -15,7 +15,7 @@ const menuItems = [
   { name: "Lesson", icon: <FontAwesomeIcon icon={faTasks} size="2x" />, path: "/LessonsLibrary" },
   { name: "Leaderboard", icon: <FontAwesomeIcon icon={faTrophy} size="2x" />, path: "/leaderboard" },
   { name: "Voucher", icon: <FontAwesomeIcon icon={faGift} size="2x" />, path: "/RedeemCoupon" },
-  { name: "Community", icon: <FontAwesomeIcon icon={faComments} size="2x" />, path: "/Communication" }
+  { name: "Community", icon: <FontAwesomeIcon icon={faComments} size="2x" />, path: "/community" }
 ];
 
 const UserMenu = () => {

@@ -13,6 +13,8 @@ import Profile from './components/Profile';
 import SpeechLesson from './components/SpeechLesson';
 import TakePicture from './components/TakePicture';
 import AsgGraded from './components/AsgGraded';
+import Community from "./components/Community";
+import Chat from "./components/Chat";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
           <Route path="/SpeechLesson" element={<SpeechLesson />} />
           <Route path="/profile" element={<Profile />}/>
           <Route path="/AsgGraded" element={<AsgGraded />}/>
+          <Route path="/community" element={<Community />}/>
+          <Route path="/chat" element={<Chat />}/>
         </Routes>
       </div>
     </Router>
