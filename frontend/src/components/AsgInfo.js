@@ -122,7 +122,7 @@ function AsgInfo({ status, lesson: propLesson }) {
           {t('asg_cancel')}
         </button>
         {!assignment.isVideo && (
-          <button className="upload-btn">{t('asg_upload')}</button>
+          <button onClick={() => navigate("/TakePicture")} className="upload-btn">{t('asg_upload')}</button>
         )}
         {assignment.isVideo && (
           <button onClick={() => navigate("/SpeechLesson")} className="start-btn">

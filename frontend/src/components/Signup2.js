@@ -13,7 +13,7 @@ function Signup2() {
         <div className='signup2-form-section'>
           {/* Title */}
           <div className="title-text">
-            <h1>{t('s2_enter_full_name')}</h1>
+            <h1>{t('s2_enter_date_of_birth')}</h1>
           </div>
 
           {/* Input Field */}
