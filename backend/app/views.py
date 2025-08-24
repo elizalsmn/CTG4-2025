@@ -5,6 +5,7 @@ import csv, io, json, os, uuid
 from .models import User, ClassRoom, Child, ParentProfile
 import logging
 from .utils.db_utils import user_to_db, add_batch_user
+from .utils.image_utils import start_ocr
 import pandas as pd
 from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
@@ -259,6 +260,7 @@ def accept_picture(request):
             f.write(content)
             
         rel_path = os.path.join(SUBDIR, safe_name)
+        start_ocr(file_path)
         return JsonResponse({
             "saved": True,
             "path": rel_path,
