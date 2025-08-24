@@ -1,0 +1,215 @@
+/* Community.css - WhatsApp inspired chat list */
+
+
+
+
+
+.community-page-bg {
+  background: #e6f9e6;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  width: 430px;
+  min-width: 430px;
+  max-width: 430px;
+  height: 932px;
+  margin: 0 auto;
+  box-shadow: 0 0 24px rgba(0,0,0,0.08);
+  border-radius: 32px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+.community-header {
+  background: #c6f7c6;
+  color: #222;
+  padding: 18px 18px 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.1rem;
+  border-bottom: 1px solid #b2e6b2;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+
+
+.community-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  flex: 1;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+
+
+.community-back-btn,
+.community-menu-btn {
+  background: none;
+  border: none;
+  font-size: 1.7rem;
+  color: #222;
+  cursor: pointer;
+  padding: 0 8px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.community-back-arrow {
+  font-size: 1.5rem;
+}
+
+.community-menu-icon {
+  font-size: 1.5rem;
+}
+
+
+
+
+
+.community-chat-list {
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+
+.community-chat-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px 14px 18px;
+  border-bottom: 1px solid #c6f7c6;
+  background: transparent;
+  transition: background 0.2s;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.community-chat-item:active {
+  background: #d2f5d2;
+}
+
+
+
+
+.community-avatar-wrapper {
+  margin: 0 16px 0 0;
+}
+
+
+
+
+.community-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #25d366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #222;
+}
+
+.community-avatar-emoji {
+  font-size: 2rem;
+  background: #fff;
+  border: 2px solid #25d366;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+.community-chat-info {
+  flex: 1;
+  min-width: 0;
+  padding-left: 4px;
+}
+
+
+
+.community-chat-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.community-chat-name {
+  font-weight: 600;
+  color: #222;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.community-chat-time {
+  font-size: 0.95rem;
+  color: #888;
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+
+
+.community-chat-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2px;
+}
+
+
+.community-chat-message {
+  color: #666;
+  font-size: 0.97rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+
+
+.community-chat-unread {
+  background: #25d366;
+  color: #fff;
+  border-radius: 50%;
+  padding: 2px 8px;
+  font-size: 0.9rem;
+  margin-left: 8px;
+  min-width: 24px;
+  text-align: center;
+  display: inline-block;
+}
+
+
+
+
+/* No media query needed, fixed size for iPhone 16 */
