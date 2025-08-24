@@ -17,7 +17,7 @@ import Community from "./components/Community";
 import Chat from "./components/Chat";
 import GroupChat from "./components/GroupChat";
 import KindergardenGroupChat from "./components/KindergartenGroupChat";
-
+import Milestone from "./components/Milestone";
 
 function App() {
   return (
@@ -43,7 +43,7 @@ function App() {
         <Route path="/chat" element={<Chat />} />
         <Route path="/group-chat" element={<GroupChat />} />
         <Route path="/kindergarden-chat" element={<KindergardenGroupChat />} />
-
+        <Route path="/Milestone" element={<Milestone />} /> 
         </Routes>
       </div>
     </Router>
