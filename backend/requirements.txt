@@ -24,6 +24,9 @@ gTTS
 
 # Optional: handy for env vars
 python-decouple
+django-cors-headers
+
 
 # File handling
 python-magic
+

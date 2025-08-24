@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, ClassRoom, Lesson, ParentProfile, Child
+from .models import User, ClassRoom, Lesson, ParentProfile, Child, LeaderBoardEntry
 
 
 class ChildInline(admin.TabularInline):
@@ -55,3 +55,13 @@ class ChildAdmin(admin.ModelAdmin):
     list_display = ("name", "parent", "class_room", "dob", "age_years")
     list_filter = ("class_room",)
     search_fields = ("name", "parent__username", "parent__full_name")
+
+@admin.register(LeaderBoardEntry)
+class LeaderBoardEntryAdmin(admin.ModelAdmin):
+    list_display = ("child_name", "points", "parent_user")
+    list_select_related = ("parent", "parent__user")
+    ordering = ("-points",)
+
+    @admin.display(ordering="parent__user__full_name", description="Parent")
+    def parent_user(self, obj):
+        return obj.parent.user.full_name

@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
+from django.db.models import Q
 
 
 class User(AbstractUser):
@@ -160,6 +161,41 @@ def log_user_login(sender, request, user, **kwargs):
         LoginLog.objects.create(user=user)
 
 
+class LeaderBoardEntry(models.Model):
+    parent = models.ForeignKey(
+        "ParentProfile",
+        on_delete=models.CASCADE,
+        related_name="leaderboard_entries",
+    )
+    points = models.IntegerField(default=0)
+
+    class Meta:
+        # If each parent should appear at most once:
+        constraints = [
+            models.UniqueConstraint(fields=["parent"], name="uniq_leaderboard_per_parent"),
+            models.CheckConstraint(check=Q(points__gte=0), name="leaderboard_points_nonnegative"),
+        ]
+        indexes = [
+            models.Index(fields=["-points"]),  # fast top-N
+        ]
+        ordering = ["-points", "pk"]
+
+    def clean(self):
+        super().clean()
+        # Enforce your rule at save-time: parent must have at least one child
+        if not self.parent.user.children.exists():
+            raise ValidationError({"parent": "Selected parent has no child."})
+
+    @property
+    def child_name(self) -> str:
+        # You’re displaying the first child’s name
+        c = self.parent.user.children.first()
+        return c.name if c else "(no child)"
+
+    def __str__(self):
+        return f"{self.child_name} — {self.points} pts"
+
+
 class SightWordsWorksheet(models.Model):
     """Template for sight words worksheets with answer keys."""
     title = models.CharField(max_length=200)
@@ -244,3 +280,4 @@ class AssignmentGrade(models.Model):
     
     def __str__(self):
         return f"{self.assignment.student.name} - {self.percentage}% ({self.correct_answers}/{self.total_questions})"
+
