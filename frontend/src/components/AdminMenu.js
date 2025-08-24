@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./AdminMenu.css";
+import { useNavigate } from "react-router-dom";
 
 const HomeIcon = ({ color = "#565D6D", size = 20 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width={size} height={size} fill={color}>
@@ -61,16 +62,22 @@ const CommunicateIcon = ({ color = "#565D6D", size = 20 }) => (
   </svg>
 );
 
-const AdminMenu = () => {
-  const [active, setActive] = useState("Home");
+const AdminMenu = ({ selectedTab = "Home" }) => {
+  const [active, setActive] = useState(selectedTab);
+  const navigate = useNavigate();
 
   const menuItems = [
-    { name: "Home", icon: <HomeIcon /> },
-    { name: "Students", icon: <StudentsIcon /> },
-    { name: "Assignments", icon: <AssignmentsIcon /> },
-    { name: "Classes", icon: <ClassesIcon /> },
-    { name: "Communicate", icon: <CommunicateIcon /> },
+    { name: "Home", icon: <HomeIcon />, path: "/admin" },
+    { name: "Students", icon: <StudentsIcon />, path: "/students" },
+    { name: "Assignments", icon: <AssignmentsIcon />, path: "/assignments" },
+    { name: "Classes", icon: <ClassesIcon />, path: "/classes" },
+    { name: "Communicate", icon: <CommunicateIcon />, path: "/communicate" },
   ];
+
+  const handleNavigation = (item) => {
+    setActive(item.name);
+    navigate(item.path);
+  };
 
   return (
     <nav className="footer-navbar">
@@ -79,7 +86,7 @@ const AdminMenu = () => {
           <li
             key={item.name}
             className={active === item.name ? "active" : ""}
-            onClick={() => setActive(item.name)}
+            onClick={() => handleNavigation(item)}
           >
             <span className="icon">{item.icon}</span>
             <p>{item.name}</p>

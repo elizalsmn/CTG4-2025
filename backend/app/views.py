@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
-import csv
-import io
+import csv, io, json, os, uuid
 from .models import User, ClassRoom, Child, ParentProfile
 import logging
-from .utils.db_utils import user_to_db, create_user_batch
-import polar as pl
+from .utils.db_utils import user_to_db, add_batch_user
+from .utils.image_utils import start_ocr
 import pandas as pd
 from django.views.decorators.csrf import csrf_exempt
+from django.db import transaction
+from django.conf import settings
+from django.utils.text import get_valid_filename
 
 
 # Create your views here.
@@ -117,29 +119,152 @@ def delete_user(request):
     except Exception as e:
         logging.exception("delete_user failed")
         return HttpResponse(f"Error deleting user: {str(e)}", status=500)
+  
+@csrf_exempt
+def create_batch_user(request):
+    REQUIRED_HEADERS = {"child_name", "child_date_of_birth", "child_class_name"}
+    """
+    POST JSON: { "path": "<absolute-or-relative-csv-path>" }
+      - If path missing/does not exist -> redirect back to request.path with error message.
+      - Validates headers: child_name, child_date_of_birth, child_class_name
+      - Calls utils.db_utils.add_batch_user(df)
+    Returns JSON summary if OK or partial OK.
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Method not allowed"}, status=405)
 
-def load_csv(request):
-    if request.method == "POST":
-        csv_file = request.FILES.get('csv_file')
+    payload = _payload(request)
+    if not isinstance(payload, dict) or not payload.get("path"):
+        # Return JSON error instead of redirecting
+        return JsonResponse({"error": "CSV path is required."}, status=400)
+
+    raw_path = payload["path"]
+    # Allow absolute or relative to BASE_DIR
+    path = raw_path if os.path.isabs(raw_path) else os.path.join(settings.BASE_DIR, raw_path)
+
+    if not os.path.exists(path):
+        # Return JSON error instead of redirecting
+        return JsonResponse({"error": f"CSV file not found: {raw_path}"}, status=404)
+
+    try:
+        df = pd.read_csv(path)
+    except Exception as e:
+        # Return JSON error instead of redirecting
+        return JsonResponse({"error": f"Failed to read CSV: {str(e)}"}, status=400)
+
+    # Validate headers
+    cols = {c.strip().lower() for c in df.columns}
+    missing = REQUIRED_HEADERS - cols
+    if missing:
+        # Return JSON error instead of redirecting
+        return JsonResponse({"error": f"CSV missing required columns: {', '.join(sorted(missing))}"}, status=400)
+
+    ok, report = add_batch_user(df)
+    status = 200 if ok else 207  # 207 for partial successes
+    return JsonResponse(report, status=status)
+
+
+def _ensure_dir(path: str) -> None:
+    os.makedirs(path, exist_ok=True)
+
+ALLOWED_PIC_EXTS = {".png", ".jpg", ".jpeg"}
+def _safe_filename(proposed: str, fallback_ext: str = ".png") -> str:
+    name = (proposed or "").strip()
+    name = get_valid_filename(name) or f"upload-{uuid.uuid4().hex}{fallback_ext}"
+    base, ext = os.path.splitext(name)
+    ext = ext.lower()
+    if ext not in ALLOWED_PIC_EXTS:
+        # force allowed extension if frontend sent something else / missing
+        ext = fallback_ext if fallback_ext in ALLOWED_PIC_EXTS else ".png"
+    return f"{base}-{uuid.uuid4().hex[:8]}{ext}"  # add short suffix to avoid collisions
+
+
+@csrf_exempt
+def accept_picture(request):
+    MAX_BYTES = 15 * 1024 * 1024  # 15 MB cap
+    SUBDIR = os.path.join("example_file", "assg")  # relative to BASE_DIR
+    """
+    Accepts an image (png/jpg/jpeg) and saves it to BASE_DIR/example_file/assg/.
+    Supports:
+      - multipart/form-data: file field named 'file' or 'image', optional 'filename'
+      - raw body (application/octet-stream or image/*) with required 'filename' query or JSON body
+    Returns JSON: { "saved": true, "path": "<relative_path>", "bytes": N }
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "Only POST method is allowed"}, status=405)
         
-        if not csv_file:
-            messages.error(request, "Please select a CSV file")
-            return redirect(request.path)
+    # Create the directory if it doesn't exist
+    full_dir = os.path.join(settings.BASE_DIR, SUBDIR)
+    _ensure_dir(full_dir)
+    
+    # Check Content-Type to determine how to handle the request
+    content_type = request.content_type or ""
+    
+    # Case 1: Multipart form data
+    if "multipart/form-data" in content_type:
+        # Handle form data upload
+        img_file = request.FILES.get('files') or request.FILES.get('image')
+        if not img_file:
+            return JsonResponse({"error": "No file found in request"}, status=400)
             
-        if not csv_file.name.endswith('.csv'):
-            messages.error(request, "File must be a CSV")
-            return redirect(request.path)
+        # Check file size
+        if img_file.size > MAX_BYTES:
+            return JsonResponse({"error": f"File too large (max {MAX_BYTES/1024/1024}MB)"}, status=413)
             
-        try:
-            # Read CSV into DataFrame
-            df = pd.read_csv(csv_file)
-            role = request.POST.get('role', None)
+        # Get filename from form or use the original name
+        filename = request.POST.get('filename') or img_file.name
+        safe_name = _safe_filename(filename)
+        
+        # Save the file
+        file_path = os.path.join(full_dir, safe_name)
+        with open(file_path, 'wb+') as destination:
+            for chunk in img_file.chunks():
+                destination.write(chunk)
+                
+        rel_path = os.path.join(SUBDIR, safe_name)
+        return JsonResponse({
+            "saved": True,
+            "path": rel_path,
+            "bytes": img_file.size
+        })
+        
+    # Case 2: Raw body upload
+    else:
+        # Get filename from query params or JSON body
+        filename = request.GET.get('filename')
+        
+        # If no filename in query params, try to parse body as JSON
+        if not filename and not content_type.startswith(('image/', 'application/octet-stream')):
+            try:
+                # Make a copy of the body since we can only read it once
+                body_copy = request.body
+                data = json.loads(body_copy)
+                filename = data.get('filename')
+            except (json.JSONDecodeError, ValueError):
+                pass
+                
+        if not filename:
+            return JsonResponse({"error": "Filename is required for raw uploads"}, status=400)
             
-            # Call your batch upload function
-            create_user_batch(df, role)
+        # Read raw body
+        content = request.body
+        
+        # Check size
+        if len(content) > MAX_BYTES:
+            return JsonResponse({"error": f"File too large (max {MAX_BYTES/1024/1024}MB)"}, status=413)
             
-            messages.success(request, "CSV uploaded and processed successfully.")
-            return redirect(request.path)
-        except Exception as e:
-            messages.error(request, f"Error processing CSV: {str(e)}")
-            return redirect(request.path)
+        # Save file
+        safe_name = _safe_filename(filename)
+        file_path = os.path.join(full_dir, safe_name)
+        with open(file_path, 'wb') as f:
+            f.write(content)
+            
+        rel_path = os.path.join(SUBDIR, safe_name)
+        start_ocr(file_path)
+        return JsonResponse({
+            "saved": True,
+            "path": rel_path,
+            "bytes": len(content)
+        })
+
+        

@@ -1,0 +1,7 @@
+child_name,child_date_of_birth,child_class_name,parent_full_name,parent_email,parent_phone_number
+Alice,2018-05-15,10-A,,,
+Bob,2017-09-02,4-B,Bobby Saputra,bob.parent@example.com,
+Cara,2019-01-20,2-A,,cara.parent@example.com,
+Daniel,2016-12-03,5-C,Susan Lee,,+65 8123 4567
+Eva,2018-07-11,3-A,,,
+Felix,2017-03-29,1-B,Jason Wong,felix.mum@example.com,+65 9000 1111

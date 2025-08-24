@@ -72,7 +72,7 @@ function RedeemCoupon() {
     <div className="redeem-page">
       {/* Available Coupons */}
       <Back/>
-      <h2 className="page-title">
+      {/* <h2 className="page-title">
         {t('rc_available_coupons')}
         <p className="page-subtitle">{t('rc_available_to_redeem', { count: availableCoupons.length })}</p>
       </h2>
@@ -86,11 +86,11 @@ function RedeemCoupon() {
         onSelect={(coupon) => setSelectedCoupon({ data: coupon, mode: "redeem" })}
         />
         ))}
-      </div>
+      </div> */}
 
-      <div className="points-footer">
+      {/* <div className="points-footer">
         <p>{t('rc_points_you_have', { points: 1500 })}</p>
-      </div>
+      </div> */}
 
       {/* My Coupons */}
       <h2 className="page-title">

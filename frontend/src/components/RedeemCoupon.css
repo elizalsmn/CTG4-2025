@@ -1,6 +1,6 @@
 .redeem-page {
   padding: 8% 16px;
-  background: #F88B47;
+  background: #ff995a;
   min-height: 100vh;
 }
 
@@ -11,9 +11,12 @@
 
 .page-subtitle {
   font-size: 13px;
-  color: #4d4d4d;
-  font-weight: 100;
-    
+  color: #000000;
+  font-weight: 300;
+  background-color: #fbbc95;
+  margin-left: 60px;
+  margin-right: 60px;
+  border-radius: 16px;
 }
 
 .coupons-list {

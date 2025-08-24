@@ -11,6 +11,11 @@
   overflow: hidden;
 }
 
+.community-qr-btn{
+  border: None;
+  background: #ffffff;
+}
+
 /* HEADER */
 .community-header {
   background: #fff;

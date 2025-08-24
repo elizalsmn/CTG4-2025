@@ -38,6 +38,20 @@ function LessonsLibrary() {
     }, 600);
   };
 
+  const handleLessonClick = (lesson) => {
+  // Determine the route based on lesson type
+    let route;
+    if (lesson.typeKey === 'type_video') {
+      route = '/AsgUpVideo';
+    } else {
+      route = '/AsgUp';
+    }
+    
+    // Navigate with lesson data in state
+    console.log("lesson", lesson)
+    navigate(route, { state: { lesson } });
+  };
+
   const handlePressEnd = () => {
     clearTimeout(timerRef.current);
     timerRef.current = null;
@@ -60,7 +74,7 @@ function LessonsLibrary() {
   return (
     <div className="lessons-library">
         <div className="header">
-            <Back/>
+            <Back top="52px"/>
             <h2 className="page-title">{t('lessons_library_title')}</h2>
         </div>
       
@@ -69,7 +83,7 @@ function LessonsLibrary() {
           <LessonCard
             key={lesson.id}
             lesson={lesson}
-            onNavigate={() => navigate(lesson.path)}
+            onNavigate={() => handleLessonClick(lesson)} // Pass the lesson here
             onPressStart={handlePressStart}
             onPressEnd={handlePressEnd}
           />
