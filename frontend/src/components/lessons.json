@@ -1,0 +1,100 @@
+{
+  "lessons": [
+    {
+      "id": 1,
+      "titleKey": "lesson_1_title",
+      "typeKey": "type_speaking",
+      "due": "28 Aug 2025, at 14:00",
+      "desc": "Say the letter A sound clearly and practice 'Aa' words like 'apple'",
+      "translations": {
+        "en": "Lesson 1: Letter A Sounds",
+        "zh": "第 1 课: 字母A发音"
+      },
+      "path": "/AsgUpVideo"
+    },
+    {
+      "id": 2,
+      "titleKey": "lesson_2_title",
+      "typeKey": "type_writing",
+      "due": "30 Aug 2025, at 14:00",
+      "desc": "Trace big letter A and write your name's first letter",
+      "translations": {
+        "en": "Lesson 1: Letter A Writing",
+        "zh": "第 2 课: 字母A书写"
+      },
+      "path": "/AsgUp"
+    },
+    {
+      "id": 3,
+      "titleKey": "lesson_3_title",
+      "typeKey": "type_speaking",
+      "due": "2 Sep 2025, at 14:00",
+      "desc": "Practice saying 'B' sound and words like 'ball', 'book'",
+      "translations": {
+        "en": "Lesson 2: Letter B Sounds",
+        "zh": "第 3 课: 字母B发音"
+      },
+      "path": "/AsgUpVideoLesson3"
+    },
+    {
+      "id": 4,
+      "titleKey": "lesson_4_title",
+      "typeKey": "type_writing",
+      "due": "5 Sep 2025, at 14:00",
+      "desc": "Write letter B and copy simple words like 'BIG'",
+      "translations": {
+        "en": "Lesson 2: Letter B Writing",
+        "zh": "第 4 课: 字母B书写"
+      },
+      "path": "/AsgUpPhotoLesson4"
+    },
+    {
+      "id": 5,
+      "titleKey": "lesson_5_title",
+      "typeKey": "type_speaking",
+      "due": "7 Sep 2025, at 14:00",
+      "desc": "Say 'C' sound clearly and practice 'cat', 'cup' words",
+      "translations": {
+        "en": "Lesson 3: Letter C Sounds",
+        "zh": "第 5 课: 字母C发音"
+      },
+      "path": "/AsgUpVideo"
+    },
+    {
+      "id": 6,
+      "titleKey": "lesson_6_title",
+      "typeKey": "type_writing",
+      "due": "9 Sep 2025, at 14:00",
+      "desc": "Practice writing letter C and trace simple 3-letter words",
+      "translations": {
+        "en": "Lesson 3: Letter C Writing",
+        "zh": "第 6 课: 字母C书写"
+      },
+      "path": "/AsgUp"
+    },
+    {
+      "id": 7,
+      "titleKey": "lesson_7_title",
+      "typeKey": "type_speaking",
+      "due": "12 Sep 2025, at 14:00",
+      "desc": "Speak simple sentences: 'I see a cat' with clear words",
+      "translations": {
+        "en": "Lesson 4: Simple Sentences",
+        "zh": "第 7 课: 简单句子"
+      },
+      "path": "/AsgUpVideoLesson3"
+    },
+    {
+      "id": 8,
+      "titleKey": "lesson_8_title",
+      "typeKey": "type_writing",
+      "due": "14 Sep 2025, at 14:00",
+      "desc": "Write your first name and copy 'I AM' words",
+      "translations": {
+        "en": "Lesson 4: My Name Writing",
+        "zh": "第 8 课: 写我的名字"
+      },
+      "path": "/AsgUpPhotoLesson4"
+    }
+  ]
+}

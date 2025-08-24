@@ -8,7 +8,7 @@ function LessonCard({ lesson, onNavigate, onPressStart, onPressEnd }) {
       <div className="lesson-header">
         <span
           className={`lesson-tag ${
-            lesson.type === "Video" ? "video" : "photo"
+            lesson.type === "Writing" ? "writing" : "speaking"
           }`}
         >
           {lesson.type}

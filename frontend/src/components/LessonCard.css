@@ -12,14 +12,24 @@
   gap: 6px;
 }
 
-.lesson-tag {
+.lesson-tag.writing {
   align-self: flex-start;
   font-size: 12px;
   font-weight: 500;
   padding: 4px 10px;
   border-radius: 12px;
-  background: #FFFFFF;
-  color: #4FA07F;
+  color: #FFFFFF;
+  background: #4FA07F;
+}
+
+.lesson-tag.speaking{
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 12px;
+  color: #FFFFFF;
+  background: #F88B47;
 }
 
 .lesson-title {

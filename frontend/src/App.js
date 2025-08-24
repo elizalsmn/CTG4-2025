@@ -17,7 +17,7 @@ import Community from "./components/Community";
 import Chat from "./components/Chat";
 import GroupChat from "./components/GroupChat";
 import KindergardenGroupChat from "./components/KindergartenGroupChat";
-import ClassesPage from "./components/ClassesPage";
+import Milestone from "./components/Milestone";import ClassesPage from "./components/ClassesPage";
 import NewAssignmentPage from './components/NewAssignmentPage';
 
 
@@ -45,8 +45,10 @@ function App() {
           <Route path="/chat" element={<Chat />} />
           <Route path="/group-chat" element={<GroupChat />} />
           <Route path="/kindergarden-chat" element={<KindergardenGroupChat />} />
+          <Route path="/Milestone" element={<Milestone />} />           
           <Route path="/classes" element={<ClassesPage />} />
-          <Route path="/new-assignment" element={<NewAssignmentPage />} />        </Routes>
+          <Route path="/new-assignment" element={<NewAssignmentPage />} />        
+        </Routes>
       </div>
     </Router>
   );

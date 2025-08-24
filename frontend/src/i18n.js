@@ -22,11 +22,13 @@ const resources = {
   phone_label: 'Phone number',
   phone_placeholder: 'Enter phone number (optional)',
   language_label: 'Language',
-  save: 'Save'
-  ,lessons_library_title: 'Lessons Library'
+  save: 'Save',
+  lessons_library_title: 'Lesson Library'
   ,lesson_prefix: 'Lesson'
   ,writing_a: 'Writing A'
-  ,type_video: 'Video'
+  ,type_video: 'Video',
+  type_speaking: 'Speaking',
+  type_writing: 'Writing'
   ,type_photo: 'Photo'
   ,school_leaderboard: 'School Leaderboard'
   ,redeem_points: 'Redeem your Points'
