@@ -8,8 +8,6 @@ polar
 pandas
 numpy
 
-
-
 # Optional: handy for env vars
 python-decouple
 django-cors-headers
