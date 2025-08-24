@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ClassesPage.css";
 import AdminMenu from "./AdminMenu";
 import AddMemberModal from "./AddMemberModal";
+import RegistrationType from "./RegistrationType";
 import { useNavigate } from "react-router-dom";
 
 // Icons
@@ -24,6 +25,7 @@ const AttendanceIcon = ({ color = "#4fa07f", size = 20 }) => (
 );
 
 const ClassesPage = () => {
+  const [isRegistrationTypeOpen, setIsRegistrationTypeOpen] = useState(false);
   const [isAddMemberModalOpen, setIsAddMemberModalOpen] = useState(false);
   const [members, setMembers] = useState([]);
   const navigate = useNavigate();
@@ -44,6 +46,17 @@ const ClassesPage = () => {
   const handleNavigateToNewAssignment = () => {
     navigate("/new-assignment");
   };
+  
+  const handleRegistrationTypeSelect = (type) => {
+    setIsRegistrationTypeOpen(false);
+    
+    if (type === "individual") {
+      setIsAddMemberModalOpen(true);
+    } else {
+      // For batch registration - just show an alert for now
+      alert("Batch registration feature is coming soon!");
+    }
+  };
 
   return (
     <div className="classes-page">
@@ -58,7 +71,7 @@ const ClassesPage = () => {
           <h2>Kindergarten Classes</h2>
           <button 
             className="add-member-btn"
-            onClick={() => setIsAddMemberModalOpen(true)}
+            onClick={() => setIsRegistrationTypeOpen(true)}
           >
             <span>+</span> Add Member
           </button>
@@ -92,6 +105,13 @@ const ClassesPage = () => {
           ))}
         </div>
       </section>
+
+      {/* Registration Type Selection Modal */}
+      <RegistrationType
+        onSelectType={handleRegistrationTypeSelect}
+        onClose={() => setIsRegistrationTypeOpen(false)}
+        isOpen={isRegistrationTypeOpen}
+      />
 
       {/* Add Member Modal */}
       <AddMemberModal

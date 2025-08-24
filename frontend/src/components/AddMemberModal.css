@@ -113,6 +113,7 @@ select.form-control {
   border-top: 1px solid #eee;
   display: flex;
   justify-content: space-between;
+  gap: 15px; /* Added gap between buttons */
 }
 
 .cancel-btn {
