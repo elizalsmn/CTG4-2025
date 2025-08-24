@@ -14,6 +14,9 @@ import SpeechLesson from './components/SpeechLesson';
 import AsgGraded from './components/AsgGraded';
 import Community from "./components/Community";
 import Chat from "./components/Chat";
+import GroupChat from "./components/GroupChat";
+import KindergardenGroupChat from "./components/KindergartenGroupChat";
+
 
 function App() {
   return (
@@ -34,8 +37,13 @@ function App() {
           <Route path="/SpeechLesson" element={<SpeechLesson />} />
           <Route path="/profile" element={<Profile />}/>
           <Route path="/AsgGraded" element={<AsgGraded />}/>
-          <Route path="/community" element={<Community />}/>
-          <Route path="/chat" element={<Chat />}/>
+
+       
+        <Route path="/community" element={<Community />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/group-chat" element={<GroupChat />} />
+        <Route path="/kindergarden-chat" element={<KindergardenGroupChat />} />
+
         </Routes>
       </div>
     </Router>

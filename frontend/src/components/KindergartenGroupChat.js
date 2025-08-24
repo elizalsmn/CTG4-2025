@@ -57,7 +57,7 @@ function Community() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button className="community-search-btn">Search</button>
+        <button className="community-search-btn">New</button>
       </div>
 
       {/* Chat List */}
@@ -81,20 +81,21 @@ function Community() {
                 <span className="community-chat-message">{chat.lastMessage}</span>
                 <div className="community-chat-meta">
                   {chat.pinned && (
-                    <svg className="community-pin"
+                    <svg
+                      className="community-pin"
                       xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="none"
                       viewBox="0 0 24 24"
+                      fill="none"
                       stroke="currentColor"
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <path d="M12 17v5" />
-                      <path d="M5 9h14l-3 8H8L5 9z" />
-                      <path d="M9 4h6v5H9z" />
+                      <path d="M12 2v8" />
+                      <path d="M12 22v-2" />
+                      <path d="M4.93 10.93l1.41 1.41" />
+                      <path d="M17.66 11.66l1.41-1.41" />
+                      <path d="M20 17.6c0-2.98-2.42-5.4-5.4-5.4-1.17 0-2.32.38-3.27 1.07L6.4 8.34A6 6 0 1 0 8.34 6.4l4.93 4.93a5.38 5.38 0 0 1 1.07-3.27c.69-.95 1.69-1.67 2.87-2.06" />
                     </svg>
                   )}
                   {chat.unread > 0 && (
