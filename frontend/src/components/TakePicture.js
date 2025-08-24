@@ -60,23 +60,28 @@ function TakePicture() {
 	const deletePhoto = (id) => setPhotos(p => p.filter(ph => ph.id !== id));
 
 	const submitPhotos = async () => {
-		if (!photos.length) return;
-		try {
-			// Convert data URLs to blobs & append to form
-			const formData = new FormData();
-			photos.forEach((ph, idx) => {
-				const blob = dataURLToBlob(ph.dataUrl);
-				formData.append('files', blob, `photo_${idx + 1}.jpg`);
-			});
-			formData.append('lesson_name', 'Lesson 1: Writing Syllabus A');
-			formData.append('due_date', '2025-08-25T23:59:00');
-			await fetch('http://localhost:8000/api/assignments/', { method: 'POST', body: formData });
-			alert('Photos uploaded');
-			navigate('/LessonsLibrary');
-		} catch (e) {
-			alert('Upload failed');
-		}
-	};
+    if (!photos.length) return;
+    try {
+		//1. uodate leaderboard points
+        await fetch('http://localhost:8000/app/update_leaderboard/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: "1", points: "3" })
+        });
+
+        // 2. send FormData
+        const formData = new FormData();
+        photos.forEach((ph, idx) => {
+            const blob = dataURLToBlob(ph.dataUrl);
+            formData.append('files', blob, `photo_${idx + 1}.jpg`);
+        });
+        await fetch('http://localhost:8000/app/start_ocr/', { method: 'POST', body: formData });
+
+        alert('Photos uploaded');
+    } catch (e) {
+        alert('Upload failed');
+    }
+};
 
 	const dataURLToBlob = (dataUrl) => {
 		const [meta, b64] = dataUrl.split(',');

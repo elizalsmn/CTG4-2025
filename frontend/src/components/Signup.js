@@ -40,10 +40,10 @@ const handleScan = (result) => {
         setCamError(null); // Clear any errors on success
         
         // Handle different user types
-        if (qrData.username && qrData.username.startsWith('admin')) {
+        if (qrData.role && qrData.role === 'admin') {
           console.log('Admin login:', qrData.username);
           navigate('/HomeAdmin');
-        } else if (qrData.username && qrData.username.startsWith('teacher')) {
+        } else if (qrData.role && qrData.role === 'teacher') {
           console.log('Teacher login:', qrData.username);
           // TODO: Navigate to teacher dashboard
         } else {
