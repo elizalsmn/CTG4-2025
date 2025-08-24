@@ -77,7 +77,7 @@ const resources = {
   ,sl_assignment_details: 'Assignment Details'
   ,sl_lesson1_speechB: 'Lesson 1: Speech Syllabus B',
   sl_welcome_intro: "Welcome! Are you ready to jump in and practice some new words? Just hit Start, and let’s see how awesome you can be!",
-  sl_welcome_block: 'Are you ready to start practicing your words? Click Start and let the adventure begin! 🎉'
+  sl_welcome_block: 'Welcome word wanderers! Are you ready to start practicing your words? Click Start and let the adventure begin! 🎉'
   ,sl_you_said: 'You said:'
   ,sl_start: 'Start'
   ,sl_next: 'Next'

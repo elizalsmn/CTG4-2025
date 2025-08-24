@@ -51,6 +51,7 @@ coverage.xml
 .pytest_cache/
 cover/
 
+
 # Translations
 *.mo
 *.pot
@@ -144,6 +145,10 @@ ENV/
 env.bak/
 venv.bak/
 venv311/
+
+./node-modules
+node-modules
+/node-modules
 
 # Spyder project settings
 .spyderproject
