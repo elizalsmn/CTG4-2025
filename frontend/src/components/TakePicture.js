@@ -63,10 +63,10 @@ function TakePicture() {
     if (!photos.length) return;
     try {
 		//1. uodate leaderboard points
-        await fetch('http://localhost:8000/app/update_leaderboard/', {
+        await fetch('http://localhost:8000/app/adjust_point/', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: "1", points: "3" })
+            body: JSON.stringify({ user_id: 10, adjust: 1 })
         });
 
         // 2. send FormData

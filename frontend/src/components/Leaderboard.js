@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {  FaCrown } from 'react-icons/fa';
 import './Leaderboard.css';
 import AvatarPlaceholder from '../assets/avatar-placeholder.jpg';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 import Back from "./Back"
 import UserMenu from "./UserMenu";
 
 function Leaderboard() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const leaderboardData = [
+  const [leaderboardData, setLeaderboardData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fallbackData = [
     { id: 1, name: "Bryan Wolf", points: 43, avatar: AvatarPlaceholder },
     { id: 2, name: "Meghan Jes", points: 40, avatar: AvatarPlaceholder },
     { id: 3, name: "Alex Turner", points: 38, avatar: AvatarPlaceholder },
@@ -22,6 +27,35 @@ function Leaderboard() {
     { id: 9, name: "Gary Sanford", points: 31, avatar: AvatarPlaceholder },
     { id: 10, name: "Becky Bartell", points: 30, avatar: AvatarPlaceholder }
   ];
+
+  useEffect(() => {
+    const fetchLeaderboard = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('http://127.0.0.1:8000/app/top_leaderboard/');
+        // Add hardcoded avatar to API response and map child_name to name
+        const dataWithAvatar = response.data.results.map((user, index) => ({
+          ...user,
+          id: user.parent_user_id || index,
+          name: user.child_name,
+          avatar: AvatarPlaceholder
+        }));
+        setLeaderboardData(dataWithAvatar);
+      } catch (err) {
+        console.error('Error fetching leaderboard:', err);
+        setError('Failed to load leaderboard data');
+        // Fallback to hardcoded data if API fails
+        setLeaderboardData(fallbackData);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLeaderboard();
+  }, []);
+
+  if (loading) return <div>Loading leaderboard...</div>;
+  if (error) console.warn(error);
 
   return (
     <div className="leaderboard-container">
@@ -69,7 +103,7 @@ function Leaderboard() {
       <div className="leaderboard-list">
         {leaderboardData.slice(3).map((user, index) => (
           <div 
-            key={user.id} 
+            key={user.id || index} 
             className={`leaderboard-item ${user.name === 'You' ? 'current-user' : ''}`}
           >
             <div className="rank">{index + 4}</div>
