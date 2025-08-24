@@ -6,11 +6,11 @@ polar
 pandas
 numpy
 
-# Media & audio
-moviepy
-SpeechRecognition
-gTTS
-opencv-python
+# # Media & audio
+# moviepy
+# SpeechRecognition
+# gTTS
+# opencv-python
 
 # Optional: handy for env vars
 python-decouple
