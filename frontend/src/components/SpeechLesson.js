@@ -297,7 +297,7 @@ function TakeVoice() {
       </div>
 
       {/* Footer */}
-      <div className="footer-buttons">
+      <div className="footer-buttons-sl">
         <button onClick={() => navigate("/homePage")} className="cancel-btn">{t('sl_cancel')}</button>
         <button
           onClick={handleStepButton}
