@@ -7,6 +7,7 @@ import qrImg from '../assets/qr.png';
 const CouponDetail = ({ coupon, onClose, mode = "redeem" }) => {
   const [redeemed, setRedeemed] = useState(false);
   const { t } = useTranslation();
+  const mode = coupon.mode || "redeem";
 
   if (!coupon) return null;
 
