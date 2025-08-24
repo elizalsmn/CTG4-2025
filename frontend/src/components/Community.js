@@ -1,11 +1,42 @@
 // Community.js
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Scanner } from '@yudiel/react-qr-scanner';
+import { FaQrcode } from "react-icons/fa";
 import "./Community.css";
 import Back from "./Back";
 
 function Community() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [showCamera, setShowCamera] = useState(false);
+  const [camLoading, setCamLoading] = useState(false);
+  const [camError, setCamError] = useState(null);
+  const navigate = useNavigate();
+
+  const handleScan = (result) => {
+    if (!result) return;
+    setShowCamera(false);
+    setCamError(null);
+    // You can add more logic here if needed
+  };
+
+  const handleError = (err) => {
+    setCamError('Camera error: ' + err);
+  };
+
+  const openCamera = async () => {
+    setCamError(null);
+    setCamLoading(true);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      stream.getTracks().forEach(t => t.stop());
+      setShowCamera(true);
+    } catch (e) {
+      setCamError('Camera error: ' + e.name);
+    } finally {
+      setCamLoading(false);
+    }
+  };
   
   // Using your provided chat list
   const chats = [
@@ -31,22 +62,53 @@ function Community() {
       <header className="community-header">
         <Back to="/HomePage" top="36px" />
         <h1 className="community-title">Community</h1>
-        <button className="community-menu-btn" aria-label="Menu">
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 24 24" 
-            fill="none" 
-            stroke="currentColor" 
-            strokeWidth="2" 
-            strokeLinecap="round" 
-            strokeLinejoin="round"
-          >
-            <circle cx="12" cy="5" r="1" />
-            <circle cx="12" cy="12" r="1" />
-            <circle cx="12" cy="19" r="1" />
-          </svg>
+        <button className="community-qr-btn" aria-label="QR Scanner" onClick={openCamera}>
+          <FaQrcode size={28} />
         </button>
       </header>
+
+      {showCamera && (
+        <div style={{
+          width: '100vw',
+          height: '100vh',
+          background: '#000',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          zIndex: 9999
+        }}>
+          <Scanner
+            onScan={handleScan}
+            onError={handleError}
+            constraints={{ facingMode: 'environment' }}
+            style={{ width: '100%', maxWidth: 500 }}
+          />
+          <button
+            onClick={() => {
+              setShowCamera(false);
+              setCamError(null);
+            }}
+            style={{
+              marginTop: 20,
+              padding: '12px 28px',
+              background: '#6b9b7a',
+              color: '#fff',
+              border: 'none',
+              borderRadius: 12,
+              fontSize: 16,
+              fontWeight: 600,
+              cursor: 'pointer'
+            }}
+          >
+            Close
+          </button>
+          {camError && <div style={{ color: 'red', marginTop: 10 }}>{camError}</div>}
+        </div>
+      )}
 
       {/* Search */}
       <div className="community-search-wrapper">
