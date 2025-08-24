@@ -63,6 +63,7 @@
   transition: background 0.2s ease;
   position: relative;
   height: 25%;
+  border: None;
 }
 
 .profile-icon:hover {

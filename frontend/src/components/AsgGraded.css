@@ -1,0 +1,188 @@
+/* Base layout similar to your graded page, but separate namespace */
+.graded-asg-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10% 10%;
+  font-family: "Inter", sans-serif;
+  background: #fff;
+  min-height: 100vh;
+}
+
+/* Reuse shared styles from your existing CSS if globally available:
+   .assignment-label, .assignment-title, .icon-circle, .info-box, .info-label,
+   .info-value, .divider, .attachments, .attachment-item, .pdf-icon,
+   .attachment-text, .attachment-name, .attachment-type, .footer, .cancel-btn,
+   .grade-box, .grade-label, .grade-value, .grade-score
+   If not global, keep them duplicated here. */
+
+/* Teacher Feedback */
+.teacher-feedback {
+  width: 100%;
+  background: #f7faf9;
+  border: 1px solid #e6f0ec;
+  border-radius: 12px;
+  padding: 14px;
+  margin: 8px 0 6px 0;
+}
+.tf-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.tf-icon {
+  color: #4FA07F;
+}
+.tf-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2a3b35;
+}
+.tf-body {
+  font-size: 14px;
+  color: #24332e;
+  line-height: 1.45;
+}
+
+/* Thread Section */
+.thread-section {
+  width: 100%;
+  margin-top: 10px;
+}
+.thread-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.thread-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.thread-item {
+  background: #f8f8f8;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 12px;
+}
+.thread-item.teacher {
+  background: #f2fbf6;
+  border-color: #e1f3e8;
+}
+.thread-item.student {
+  background: #f7f7ff;
+  border-color: #e6e6ff;
+}
+.thread-item.resolved {
+  opacity: 0.8;
+}
+
+.thread-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.thread-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #60706b;
+}
+.thread-meta .author {
+  font-weight: 600;
+  color: #2a3b35;
+}
+.thread-meta .dot {
+  opacity: 0.6;
+}
+.thread-text {
+  font-size: 14px;
+  color: #1f2b27;
+  line-height: 1.45;
+}
+
+/* Resolve Button */
+.resolve-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #eef5f1;
+  color: #3b7b62;
+  border: 1px solid #d7e9e0;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+}
+.resolve-btn.on {
+  background: #def1e8;
+  color: #2f6b54;
+  border-color: #cbe7d9;
+}
+
+/* Composer */
+.composer {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.composer-input {
+  flex: 1;
+  resize: vertical;
+  border-radius: 10px;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  font-size: 14px;
+  min-height: 44px;
+  outline: none;
+}
+.composer-input:focus {
+  border-color: #4FA07F;
+  box-shadow: 0 0 0 2px rgba(79,160,127,0.1);
+}
+.composer-send {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #4FA07F;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 12px;
+  height: 44px;
+  margin: auto;
+}
+.composer-send:disabled {
+  background: #bcd9cc;
+}
+
+/* Read pill for student-authored messages */
+.read-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  padding: 6px 10px;
+  font-size: 12px;
+  border: none;
+}
+
+
+/* Footer */
+.graded-asg-page .footer {
+  margin-top: 3%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.graded-asg-page .cancel-btn {
+  max-width: 320px;
+}

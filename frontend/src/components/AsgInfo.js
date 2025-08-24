@@ -4,7 +4,6 @@ import "./AsgInfo.css";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import Back from "./Back";
-import UserMenu from "./UserMenu";
 
 function AsgInfo({ status }) {
   // status: "graded" | "upload" | "video"
@@ -90,7 +89,7 @@ function AsgInfo({ status }) {
           <button className="upload-btn">{t('asg_upload')}</button>
         )}
         {status === "video" && (
-          <button onClick={() => navigate("/TakeVideo")} className="start-btn">
+          <button onClick={() => navigate("/SpeechLesson")} className="start-btn">
             {t('asg_start_video')}
           </button>
         )}

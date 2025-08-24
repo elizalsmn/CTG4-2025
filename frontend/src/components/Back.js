@@ -1,8 +1,7 @@
 // frontend/src/components/back.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 /**
  * Back button component
  * - Fixed position near the top-left
@@ -62,7 +61,7 @@ const handleClick = () => {
         onClick={handleClick}
         style={buttonStyle}
       >
-        <FaArrowLeft style={iconStyle} />
+        <ArrowBackIosIcon style={iconStyle} />
       </button>
     </div>
   );

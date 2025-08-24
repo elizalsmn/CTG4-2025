@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaChild, FaUserEdit, FaPhoneAlt, FaLanguage, FaChevronDown } from 'react-icons/fa';
 import avatarPlaceholder from '../assets/avatar-placeholder.jpg';
+import avatar from '../assets/Avatar.png'
+import Back from './Back';
 import './Profile.css';
 import UserMenu from "./UserMenu";
 
@@ -48,11 +50,12 @@ function Profile() {
 
   return (
     <div className="profile-page">
+    <Back />
       <form onSubmit={handleSubmit} className="profile-form">
         {/* Header */}
         <div className="profile-header">
           <img
-            src={avatarPlaceholder}
+            src={avatar}
             alt="Profile avatar"
             className="profile-avatar"
           />
@@ -60,7 +63,7 @@ function Profile() {
         </div>
 
         {/* Rows */}
-        <div>
+        <div className="input-container">
           {/* Child's Name */}
           <div className="profile-row">
             <div className="row-topline">
@@ -166,7 +169,7 @@ function Profile() {
           </div>
         </div>
       </form>
-      <UserMenu />
+      {/* <UserMenu /> */}
     </div>
   );
 

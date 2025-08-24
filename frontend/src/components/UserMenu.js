@@ -27,6 +27,7 @@ const UserMenu = () => {
   const active = activeMenu ? activeMenu.name : "Home"; // fallback to Home
 
   return (
+    <div className="user-footer-container">
     <nav className="user-footer-navbar">
       <ul>
         {menuItems.map((item) => (
@@ -41,6 +42,7 @@ const UserMenu = () => {
         ))}
       </ul>
     </nav>
+    </div>
   );
 };
 

@@ -13,7 +13,7 @@ const resources = {
       close: 'Close',
       signup_prompt: "Don't have an account?",
   signup_cta: 'Sign Up',
-  profile_header: "Arthur's Parent",
+  profile_header: "Shannon's Parent",
   child_name_label: "Child's Name",
   child_name_placeholder: "Enter child's name",
   child_name_required: "Child's name is required.",
@@ -117,7 +117,7 @@ const resources = {
       close: '关闭',
       signup_prompt: '还没有账号？',
       signup_cta: '注册',
-      profile_header: 'Arthur的家长',
+      profile_header: 'Shannon的家长',
       child_name_label: '孩子姓名',
       child_name_placeholder: '输入孩子姓名',
       child_name_required: '孩子姓名是必填项。',
@@ -201,8 +201,7 @@ const resources = {
       ,coupon_exp: '有效期:'
       ,coupon_redeem_btn: '兑换'
       ,coupon_valid_until: '有效期至 {{date}}'
-      ,coupon_qr_placeholder: '[二维码]'
-      ,hp_student_name: 'Shannon Sie 👧🏻'
+      ,coupon_qr_placeholder: '[二维码]' ,hp_student_name: 'Shannon Sie 👧🏻'
       ,hp_grade_level: '幼儿园中班 (K2)'
       ,hp_writing_materials_desc: '写作材料（A组，年龄 xx 至 xx）'
       ,hp_lesson1_title: '第1课：写作大纲 A'

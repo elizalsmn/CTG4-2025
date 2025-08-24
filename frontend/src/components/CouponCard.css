@@ -68,7 +68,6 @@
   position: absolute;
   width: 24px;
   height: 24px;
-  background: #e5f1e5; /* match page bg */
   border-radius: 50%;
   top: 50%;
   transform: translateY(-50%);
