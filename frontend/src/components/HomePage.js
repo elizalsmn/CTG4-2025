@@ -6,6 +6,7 @@ import LessonCard from "./LessonCard";
 import { useNavigate } from "react-router-dom";
 import useTranslationBubble from "./UseTranslationBubble";
 import { useTranslation } from 'react-i18next';
+import PerformanceCard from "./PerformanceCard";
 
 // Base lesson identifiers; titles/types translated at render to allow live switching
 const lessons = [
@@ -87,6 +88,7 @@ const HomePage = () => {
         </div>
       </header>
 
+      <PerformanceCard />
       <div className="content-container">
         {/* Attendance + Submissions */}
         <div className="row-cards">
@@ -102,15 +104,6 @@ const HomePage = () => {
             <div className="hover-details">
               <p>{t('assignments_submitted', { done: 8, total: 10 })}</p>
             </div>
-          </div>
-        </div>
-
-        {/* Performance Summary */}
-        <div className="PerformanceSummary">
-          <h2>{t('performance_summary')}</h2>
-          <div className="performance-box">
-            <p>{t('ai_placeholder')}</p>
-            <p>{t('ai_placeholder')}</p>
           </div>
         </div>
 
